@@ -9,26 +9,20 @@ package br.com.ld.model;
  *
  * @author Leonardo
  */
-public class Usuario {
+public class Farmacia {
 
     private int id;
-    private String nome;
-    private int idade;
-    private char sexo;
+    private String nomeFarmacia;
     private String telefone;
+    private String cnpj;
     private String senha;
 
-    protected Usuario(int id, String nome, int idade, char sexo, String telefone, String senha) {
+    public Farmacia(int id, String nomeFarmacia, String telefone, String cnpj, String senha) {
         this.id = id;
-        this.nome = nome;
-        this.idade = idade;
-        this.sexo = sexo;
+        this.nomeFarmacia = nomeFarmacia;
         this.telefone = telefone;
+        this.cnpj = cnpj;
         this.senha = senha;
-    }
-
-    protected Usuario() {
-        this(0, "", 0, ' ', "", "");
     }
 
     public int getId() {
@@ -39,28 +33,12 @@ public class Usuario {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNomeFarmacia() {
+        return nomeFarmacia;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public int getIdade() {
-        return idade;
-    }
-
-    public void setIdade(int idade) {
-        this.idade = idade;
-    }
-
-    public char getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(char sexo) {
-        this.sexo = sexo;
+    public void setNomeFarmacia(String nomeFarmacia) {
+        this.nomeFarmacia = nomeFarmacia;
     }
 
     public String getTelefone() {
@@ -69,6 +47,14 @@ public class Usuario {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
     }
 
     public String getSenha() {
