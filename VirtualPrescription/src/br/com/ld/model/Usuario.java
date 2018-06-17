@@ -14,11 +14,11 @@ public class Usuario {
     private int id;
     private String nome;
     private int idade;
-    private char sexo;
+    private String sexo;
     private String telefone;
     private String senha;
 
-    protected Usuario(int id, String nome, int idade, char sexo, String telefone, String senha) {
+    protected Usuario(int id, String nome, int idade, String sexo, String telefone, String senha) {
         this.id = id;
         this.nome = nome;
         this.idade = idade;
@@ -28,7 +28,7 @@ public class Usuario {
     }
 
     protected Usuario() {
-        this(0, "", 0, ' ', "", "");
+        this(0, "", 0, "", "", "");
     }
 
     public int getId() {
@@ -55,11 +55,11 @@ public class Usuario {
         this.idade = idade;
     }
 
-    public char getSexo() {
+    public String getSexo() {
         return sexo;
     }
 
-    public void setSexo(char sexo) {
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
 

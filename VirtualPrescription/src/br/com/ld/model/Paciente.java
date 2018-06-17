@@ -16,13 +16,14 @@ public class Paciente extends Usuario {
     private String cpf;
     private ArrayList<Consulta> consultas;
 
-    public Paciente(int id, String nome, int idade, char sexo, String telefone, String senha) {
+    public Paciente(int id, String nome, int idade, String sexo, String telefone, String senha, String cpf) {
         super(id, nome, idade, sexo, telefone, senha);
+        this.cpf = cpf;
         this.consultas = new ArrayList<Consulta>();
     }
 
     public Paciente() {
-        this(0, "", 0, ' ', "", "");
+        this(0, "", 0, "", "", "", "");
     }
 
     public ArrayList<Consulta> getConsultas() {

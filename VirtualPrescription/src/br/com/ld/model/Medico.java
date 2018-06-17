@@ -17,7 +17,7 @@ public class Medico extends Usuario {
     private String especializacao;
     private ArrayList<Consulta> consultas;
 
-    public Medico(String crm, String especializacao, int id, String nome, int idade, char sexo, String telefone, String senha) {
+    public Medico(String crm, String especializacao, int id, String nome, int idade, String sexo, String telefone, String senha) {
         super(id, nome, idade, sexo, telefone, senha);
         this.crm = crm;
         this.especializacao = especializacao;
