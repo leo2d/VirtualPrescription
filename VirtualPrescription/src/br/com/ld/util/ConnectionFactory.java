@@ -14,11 +14,17 @@ import java.sql.SQLException;
  * @author Leonardo
  */
 public class ConnectionFactory {
-    public static Connection getConnection() throws ClassNotFoundException, SQLException{
-    
+
+    private static Connection _instance = null;
+
+    public static Connection getConnection() throws ClassNotFoundException, SQLException {
+
         Class.forName("com.mysql.jdbc.Driver");
-        String  host = "jdbc:mysql://localhost/javadb";
+        String host = "jdbc:mysql://localhost/javadb";
         
-        return DriverManager.getConnection(host, "root@localhost", "");
+        if (_instance == null)
+            _instance = DriverManager.getConnection(host, "root@localhost", "");
+
+        return _instance;
     }
 }
