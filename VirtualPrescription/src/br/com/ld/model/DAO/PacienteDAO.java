@@ -107,7 +107,7 @@ public class PacienteDAO implements IGenericDAO<Paciente, Integer> {
 
     @Override
     public ArrayList<Paciente> buscarTodos() throws ClassNotFoundException, SQLException {
-       
+
         Connection Conect = ConnectionFactory.getConnection();
 
         PreparedStatement pst = Conect.prepareStatement(
@@ -118,7 +118,7 @@ public class PacienteDAO implements IGenericDAO<Paciente, Integer> {
 
         ResultSet rs = pst.executeQuery();
 
-        if (rs.next()) {
+        while (rs.next()) {
             Paciente paciente = new Paciente(rs.getInt("id_usuario_paciente"), rs.getString("nome"),
                     rs.getInt("idade"), rs.getString("sexo"), rs.getString("telefone"), rs.getString("senha"), rs.getString("cpf"));
 
@@ -127,6 +127,32 @@ public class PacienteDAO implements IGenericDAO<Paciente, Integer> {
 
         Conect.close();
         return pacientes;
+    }
+
+    public Paciente buscarPorCPFeSenha(String cpf, String senha) throws ClassNotFoundException, SQLException {
+
+        Connection Conect = ConnectionFactory.getConnection();
+
+        PreparedStatement pst = Conect.prepareStatement(
+                "SELECT * FROM usuario_paciente "
+                + " WHERE cpf = ? "
+                +" AND senha =  ? ;"
+        );
+
+        pst.setString(1, cpf);
+        pst.setString(2, senha);
+
+        Paciente paciente = null;
+
+        ResultSet rs = pst.executeQuery();
+
+        if (rs.next()) {
+            paciente = new Paciente(rs.getInt("id_usuario_paciente"), rs.getString("nome"),
+                    rs.getInt("idade"), rs.getString("sexo"), rs.getString("telefone"), rs.getString("senha"), rs.getString("cpf"));
+        }
+
+        //Conect.close();
+        return paciente;
     }
 
 }

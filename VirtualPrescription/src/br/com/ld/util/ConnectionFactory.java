@@ -20,11 +20,12 @@ public class ConnectionFactory {
     public static Connection getConnection() throws ClassNotFoundException, SQLException {
 
         Class.forName("com.mysql.jdbc.Driver");
-        String host = "jdbc:mysql://localhost/javadb";
+        String host = "jdbc:mysql://127.0.0.1/virtualprescription";
         
         if (_instance == null)
-            _instance = DriverManager.getConnection(host, "root@localhost", "");
+            _instance = DriverManager.getConnection(host, "root", "");
 
         return _instance;
     }
+    
 }

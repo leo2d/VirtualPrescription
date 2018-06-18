@@ -5,6 +5,13 @@
  */
 package br.com.ld.view;
 
+import br.com.ld.controller.LoginController;
+import br.com.ld.model.Farmacia;
+import br.com.ld.model.Medico;
+import br.com.ld.model.Paciente;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Leonardo
@@ -37,6 +44,11 @@ public class LoginView extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         LoginButton.setText("Entrar");
+        LoginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoginButtonActionPerformed(evt);
+            }
+        });
 
         DocumentoInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,9 +98,35 @@ public class LoginView extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    Farmacia farmacia = null;
+    Medico medico = null;
+    Paciente paciente = null;
     private void DocumentoInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DocumentoInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_DocumentoInputActionPerformed
+
+    private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
+        try {
+            LoginController loginController = LoginController.getInstance();
+            paciente = loginController.getPaciente(DocumentoInput.getText(), SenhaInput.getText());
+
+            if (paciente == null) {
+                medico = loginController.getMedico(DocumentoInput.getText(), SenhaInput.getText());
+                if (medico == null) {
+                    JOptionPane.showMessageDialog(null, "Nenhum usuario encontrado");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Deu bao: " + medico.getNome());
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Deu bao: " + paciente.getNome());
+            }
+
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Erro na Conexão, Classe não encontrada");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao conectar no banco " + ex.getMessage());
+        }
+    }//GEN-LAST:event_LoginButtonActionPerformed
 
     /**
      * @param args the command line arguments
