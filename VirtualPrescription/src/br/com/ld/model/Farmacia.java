@@ -12,14 +12,14 @@ package br.com.ld.model;
 public class Farmacia {
 
     private int id;
-    private String nomeFarmacia;
+    private String nome;
     private String telefone;
     private String cnpj;
     private String senha;
 
     public Farmacia(int id, String nomeFarmacia, String telefone, String cnpj, String senha) {
         this.id = id;
-        this.nomeFarmacia = nomeFarmacia;
+        this.nome = nomeFarmacia;
         this.telefone = telefone;
         this.cnpj = cnpj;
         this.senha = senha;
@@ -33,12 +33,12 @@ public class Farmacia {
         this.id = id;
     }
 
-    public String getNomeFarmacia() {
-        return nomeFarmacia;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeFarmacia(String nomeFarmacia) {
-        this.nomeFarmacia = nomeFarmacia;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getTelefone() {

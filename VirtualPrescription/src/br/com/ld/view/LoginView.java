@@ -96,6 +96,7 @@ public class LoginView extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     Farmacia farmacia = null;
@@ -113,12 +114,17 @@ public class LoginView extends javax.swing.JDialog {
             if (paciente == null) {
                 medico = loginController.getMedico(DocumentoInput.getText(), SenhaInput.getText());
                 if (medico == null) {
-                    JOptionPane.showMessageDialog(null, "Nenhum usuario encontrado");
+                    farmacia = loginController.getFarmacia(DocumentoInput.getText(), SenhaInput.getText());
+                    if (farmacia == null) {
+                        JOptionPane.showMessageDialog(null, "Nenhum usuario encontrado");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Bem vindo: " + farmacia.getNome());
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Deu bao: " + medico.getNome());
+                    JOptionPane.showMessageDialog(null, "Bem vindo: " + medico.getNome());
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Deu bao: " + paciente.getNome());
+                JOptionPane.showMessageDialog(null, "Bem vindo: " + paciente.getNome());
             }
 
         } catch (ClassNotFoundException ex) {
