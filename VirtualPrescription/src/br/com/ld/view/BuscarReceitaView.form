@@ -56,9 +56,9 @@
                           <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                           <Component id="PesquisaReceitaComboBox" min="-2" pref="180" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
-                          <Component id="jTextField1" min="-2" pref="342" max="-2" attributes="0"/>
+                          <Component id="PesquisaReceitaInput" min="-2" pref="342" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                          <Component id="jButton1" min="-2" pref="92" max="-2" attributes="0"/>
+                          <Component id="PesquisarReceitaButton" min="-2" pref="92" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
@@ -76,8 +76,8 @@
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField1" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                      <Component id="jButton1" alignment="3" max="32767" attributes="0"/>
+                      <Component id="PesquisaReceitaInput" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="PesquisarReceitaButton" alignment="3" max="32767" attributes="0"/>
                       <Component id="PesquisaReceitaComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
@@ -86,7 +86,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JTextField" name="jTextField1">
+        <Component class="javax.swing.JTextField" name="PesquisaReceitaInput">
         </Component>
         <Component class="javax.swing.JComboBox" name="PesquisaReceitaComboBox">
           <Properties>
@@ -103,7 +103,7 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="PesquisarReceitaButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Buscar"/>
           </Properties>

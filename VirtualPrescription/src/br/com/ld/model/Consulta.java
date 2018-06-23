@@ -88,4 +88,8 @@ public class Consulta {
         this.data = data;
     }
 
+    public void addReceita(Receita receita) {
+        this.receitas.add(receita);
+    }
+
 }

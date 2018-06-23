@@ -19,6 +19,9 @@ public class Receita {
     private String observacoes;
     private ArrayList<MedicamentoPrescrito> medicamentos;
 
+    public void addMedicamento(MedicamentoPrescrito medicamentoPrescrito){
+        this.medicamentos.add(medicamentoPrescrito);
+    }
     public void setMedicamentos(ArrayList<MedicamentoPrescrito> medicamentos) {
         this.medicamentos = medicamentos;
     }
