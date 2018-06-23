@@ -17,17 +17,14 @@ public class Pessoa extends Usuario{
     private String telefone;
 
 
-    protected Pessoa(int id, String nome, int idade, String sexo, String telefone, String senha) {
+    protected Pessoa(int id, String nome, int idade, String sexo, String telefone, String senha, String documento) {
         this.id = id;
         this.nome = nome;
         this.idade = idade;
         this.sexo = sexo;
         this.telefone = telefone;
         this.senha = senha;
-    }
-
-    protected Pessoa() {
-        this(0, "", 0, "", "", "");
+        this.documento = documento;
     }
 
     public int getId() {
@@ -68,14 +65,6 @@ public class Pessoa extends Usuario{
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
     }
 
 }

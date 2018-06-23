@@ -33,7 +33,7 @@ public class PacienteDAO implements IGenericDAO<Paciente, Integer> {
         pst.setString(3, object.getSexo());
         pst.setString(4, object.getTelefone());
         pst.setString(5, object.getSenha());
-        pst.setString(6, object.getCpf());
+        pst.setString(6, object.getDocumento());
 
         pst.executeUpdate();
     }
@@ -57,7 +57,7 @@ public class PacienteDAO implements IGenericDAO<Paciente, Integer> {
         pst.setString(3, object.getSexo());
         pst.setString(4, object.getTelefone());
         pst.setString(5, object.getSenha());
-        pst.setString(6, object.getCpf());
+        pst.setString(6, object.getDocumento());
         pst.setInt(7, object.getId());
 
         pst.executeUpdate();

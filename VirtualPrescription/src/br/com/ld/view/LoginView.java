@@ -9,6 +9,7 @@ import br.com.ld.controller.LoginController;
 import br.com.ld.model.Farmacia;
 import br.com.ld.model.Medico;
 import br.com.ld.model.Paciente;
+import br.com.ld.model.Usuario;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -16,7 +17,7 @@ import javax.swing.JOptionPane;
  *
  * @author Leonardo
  */
-public class LoginView<T> extends javax.swing.JDialog {
+public class LoginView extends javax.swing.JDialog {
 
     /**
      * Creates new form LoginView
@@ -172,7 +173,7 @@ public class LoginView<T> extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+/*
     private Farmacia farmacia = null;
     private Medico medico = null;
     private Paciente paciente = null;
@@ -188,14 +189,29 @@ public class LoginView<T> extends javax.swing.JDialog {
     public Farmacia getFarmacia() {
         return this.farmacia;
     }
-
+     */
     private void DocumentoInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DocumentoInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_DocumentoInputActionPerformed
 
+    private Usuario usuario;
+
+    public Usuario getUsuario() {
+        return this.usuario;
+    }
+
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
         try {
             LoginController loginController = LoginController.getInstance();
+            usuario = loginController.getUsuario(DocumentoInput.getText(), SenhaInput.getText());
+
+            if (usuario == null) {
+                JOptionPane.showMessageDialog(null, "Nenhum usuario encontrado");
+            } else {
+                JOptionPane.showMessageDialog(null, "Bem vindo: " + usuario.getNome());
+            }
+
+            /*
             paciente = loginController.getPaciente(DocumentoInput.getText(), SenhaInput.getText());
         
             if (paciente == null) {
@@ -213,14 +229,15 @@ public class LoginView<T> extends javax.swing.JDialog {
             } else {
                 JOptionPane.showMessageDialog(null, "Bem vindo: " + paciente.getNome());
             }
-
+             */
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, "Erro na Conexão, Classe não encontrada");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao conectar no banco " + ex.getMessage());
         }
-        
-        setVisible(medico == null && paciente == null &&  farmacia == null);
+
+        setVisible(usuario == null);
+        // setVisible(medico == null && paciente == null &&  farmacia == null);
     }//GEN-LAST:event_LoginButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -284,4 +301,5 @@ public class LoginView<T> extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
+
 }

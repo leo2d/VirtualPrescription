@@ -9,19 +9,16 @@ package br.com.ld.model;
  *
  * @author Leonardo
  */
-public class Farmacia {
+public class Farmacia extends Usuario{
 
     private int id;
-    private String nome;
     private String telefone;
-    private String cnpj;
-    private String senha;
 
     public Farmacia(int id, String nomeFarmacia, String telefone, String cnpj, String senha) {
         this.id = id;
         this.nome = nomeFarmacia;
         this.telefone = telefone;
-        this.cnpj = cnpj;
+        this.documento = cnpj;
         this.senha = senha;
     }
 
@@ -47,22 +44,6 @@ public class Farmacia {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
-    }
-
-    public String getCnpj() {
-        return cnpj;
-    }
-
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
     }
 
 }

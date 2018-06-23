@@ -13,7 +13,6 @@ import java.util.ArrayList;
  */
 public class Medico extends Pessoa {
 
-    private String crm;
     private String especializacao;
     private ArrayList<Consulta> consultas;
 
@@ -26,22 +25,13 @@ public class Medico extends Pessoa {
     }
 
     public Medico(String crm, String especializacao, int id, String nome, int idade, String sexo, String telefone, String senha) {
-        super(id, nome, idade, sexo, telefone, senha);
-        this.crm = crm;
+        super(id, nome, idade, sexo, telefone, senha, crm);
         this.especializacao = especializacao;
         this.consultas = new ArrayList<Consulta>();
     }
 
     public ArrayList<Consulta> getConsultas() {
         return consultas;
-    }
-
-    public String getCrm() {
-        return crm;
-    }
-
-    public void setCrm(String crm) {
-        this.crm = crm;
     }
 
     public String getEspecializacao() {
