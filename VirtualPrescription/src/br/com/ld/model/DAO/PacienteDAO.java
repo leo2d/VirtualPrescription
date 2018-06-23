@@ -24,7 +24,7 @@ public class PacienteDAO implements IGenericDAO<Paciente, Integer> {
         Connection Conect = ConnectionFactory.getConnection();
         PreparedStatement pst = Conect.prepareStatement(
                 "INSERT INTO usuario_paciente "
-                + " ( nome, idade, sexo, telefone, senha, cpf) "
+                + " ( nome_paciente, idade_paciente, sexo_paciente, telefone_paciente, senha_paciente, cpf_paciente) "
                 + " VALUES(?, ?, ?, ?, ?, ?);"
         );
 
@@ -43,13 +43,13 @@ public class PacienteDAO implements IGenericDAO<Paciente, Integer> {
         Connection Conect = ConnectionFactory.getConnection();
         PreparedStatement pst = Conect.prepareStatement(
                 "UPDATE usuario_paciente SET "
-                + "nome = ?, "
-                + "idade = ? , "
-                + "sexo = ? , "
-                + "telefone = ? , "
-                + "senha = ? , "
-                + "cpf = ? "
-                + " WHERE id_usuario_paciente = ?;"
+                + "nome_paciente = ?, "
+                + "idade_paciente = ? , "
+                + "sexo_paciente = ? , "
+                + "telefone_paciente = ? , "
+                + "senha_paciente = ? , "
+                + "cpf_paciente = ? "
+                + " WHERE id_paciente = ?;"
         );
 
         pst.setString(1, object.getNome());
@@ -70,7 +70,7 @@ public class PacienteDAO implements IGenericDAO<Paciente, Integer> {
         Connection Conect = ConnectionFactory.getConnection();
         PreparedStatement pst = Conect.prepareStatement(
                 "DELETE FROM usuario_paciente "
-                + " WHERE id_usuario_paciente = ?;"
+                + " WHERE id_paciente = ?;"
         );
 
         pst.setInt(1, object.getId());
@@ -87,7 +87,7 @@ public class PacienteDAO implements IGenericDAO<Paciente, Integer> {
 
         PreparedStatement pst = Conect.prepareStatement(
                 "SELECT * FROM usuario_paciente "
-                + " WHERE id_usuario_paciente = ?;"
+                + " WHERE id_paciente = ?;"
         );
 
         pst.setInt(1, key);
@@ -97,8 +97,8 @@ public class PacienteDAO implements IGenericDAO<Paciente, Integer> {
         ResultSet rs = pst.executeQuery();
 
         if (rs.next()) {
-            paciente = new Paciente(rs.getInt("id_usuario_paciente"), rs.getString("nome"),
-                    rs.getInt("idade"), rs.getString("sexo"), rs.getString("telefone"), rs.getString("senha"), rs.getString("cpf"));
+            paciente = new Paciente(rs.getInt("id_paciente"), rs.getString("nome_paciente"),
+                    rs.getInt("idade_paciente"), rs.getString("sexo_paciente"), rs.getString("telefone_paciente"), rs.getString("senha_paciente"), rs.getString("cpf_paciente"));
         }
 
         Conect.close();
@@ -114,13 +114,13 @@ public class PacienteDAO implements IGenericDAO<Paciente, Integer> {
                 "SELECT * FROM usuario_paciente; "
         );
 
-        ArrayList<Paciente> pacientes = null;
+        ArrayList<Paciente> pacientes = new ArrayList<Paciente>();
 
         ResultSet rs = pst.executeQuery();
 
         while (rs.next()) {
-            Paciente paciente = new Paciente(rs.getInt("id_usuario_paciente"), rs.getString("nome"),
-                    rs.getInt("idade"), rs.getString("sexo"), rs.getString("telefone"), rs.getString("senha"), rs.getString("cpf"));
+            Paciente paciente = new Paciente(rs.getInt("id_paciente"), rs.getString("nome_paciente"),
+                    rs.getInt("idade_paciente"), rs.getString("sexo_paciente"), rs.getString("telefone_paciente"), rs.getString("senha_paciente"), rs.getString("cpf_paciente"));
 
             pacientes.add(paciente);
         }
@@ -135,8 +135,8 @@ public class PacienteDAO implements IGenericDAO<Paciente, Integer> {
 
         PreparedStatement pst = Conect.prepareStatement(
                 "SELECT * FROM usuario_paciente "
-                + " WHERE cpf = ? "
-                +" AND senha =  ? ;"
+                + " WHERE cpf_paciente = ? "
+                + " AND senha_paciente =  ? ;"
         );
 
         pst.setString(1, cpf);
@@ -147,8 +147,8 @@ public class PacienteDAO implements IGenericDAO<Paciente, Integer> {
         ResultSet rs = pst.executeQuery();
 
         if (rs.next()) {
-            paciente = new Paciente(rs.getInt("id_usuario_paciente"), rs.getString("nome"),
-                    rs.getInt("idade"), rs.getString("sexo"), rs.getString("telefone"), rs.getString("senha"), rs.getString("cpf"));
+            paciente = new Paciente(rs.getInt("id_paciente"), rs.getString("nome_paciente"),
+                    rs.getInt("idade_paciente"), rs.getString("sexo_paciente"), rs.getString("telefone_paciente"), rs.getString("senha_paciente"), rs.getString("cpf_paciente"));
         }
 
         //Conect.close();

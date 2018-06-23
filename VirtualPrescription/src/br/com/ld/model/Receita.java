@@ -15,14 +15,28 @@ public class Receita {
 
     private int id;
     private Consulta consulta;
+    private String status;
     private String observacoes;
     private ArrayList<MedicamentoPrescrito> medicamentos;
 
-    public Receita(int id, Consulta consulta, String observacoes) {
+    public void setMedicamentos(ArrayList<MedicamentoPrescrito> medicamentos) {
+        this.medicamentos = medicamentos;
+    }
+
+    public Receita(int id, Consulta consulta, String status, String observacoes) {
         this.id = id;
         this.consulta = consulta;
+        this.status = status;
         this.observacoes = observacoes;
         this.medicamentos = new ArrayList<MedicamentoPrescrito>();
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public ArrayList<MedicamentoPrescrito> getMedicamentos() {

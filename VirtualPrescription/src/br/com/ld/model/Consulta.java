@@ -14,6 +14,10 @@ import java.util.Date;
  */
 public class Consulta {
 
+    public void setReceitas(ArrayList<Receita> receitas) {
+        this.receitas = receitas;
+    }
+
     private int id;
     private Paciente paciente;
     private Medico medico;

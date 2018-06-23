@@ -23,7 +23,7 @@ public class FarmaciaDAO {
         PreparedStatement pst = Conect.prepareStatement(
                 "SELECT * FROM farmacia "
                 + " WHERE cnpj = ? "
-                + " AND senha = ? ; "
+                + " AND senha_farmacia = ? ; "
         );
 
         pst.setString(1, cnpj);
@@ -34,8 +34,8 @@ public class FarmaciaDAO {
         ResultSet rs = pst.executeQuery();
 
         if (rs.next()) {
-            farmacia = new Farmacia(rs.getInt("id_farmacia"), rs.getString("nome"),
-                    rs.getString("telefone"), rs.getString("cnpj"), rs.getString("senha"));
+            farmacia = new Farmacia(rs.getInt("id_farmacia"), rs.getString("nome_farmacia"),
+                    rs.getString("telefone_farmacia"), rs.getString("cnpj"), rs.getString("senha_farmacia"));
         }
 
         //Conect.close();

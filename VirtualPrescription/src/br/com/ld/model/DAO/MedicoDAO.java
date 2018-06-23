@@ -50,7 +50,7 @@ public class MedicoDAO implements IGenericDAO<Medico, Integer> {
         PreparedStatement pst = Conect.prepareStatement(
                 "SELECT * FROM usuario_medico "
                 + " WHERE crm = ? "
-                + " AND senha = ? ; "
+                + " AND senha_medico = ? ; "
         );
 
         pst.setString(1, crm);
@@ -61,8 +61,8 @@ public class MedicoDAO implements IGenericDAO<Medico, Integer> {
         ResultSet rs = pst.executeQuery();
 
         if (rs.next()) {
-            medico = new Medico(rs.getString("crm"), rs.getString("especializacao"), rs.getInt("id_medico"), rs.getString("nome"),
-                    rs.getInt("idade"), rs.getString("sexo"), rs.getString("telefone"), rs.getString("senha"));
+            medico = new Medico(rs.getString("crm"), rs.getString("especializacao"), rs.getInt("id_medico"), rs.getString("nome_medico"),
+                    rs.getInt("idade_medico"), rs.getString("sexo_medico"), rs.getString("telefone_medico"), rs.getString("senha_medico"));
         }
 
         //Conect.close();
