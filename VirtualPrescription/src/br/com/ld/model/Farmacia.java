@@ -9,26 +9,20 @@ package br.com.ld.model;
  *
  * @author Leonardo
  */
-public class Usuario {
+public class Farmacia {
 
     private int id;
     private String nome;
-    private int idade;
-    private String sexo;
     private String telefone;
+    private String cnpj;
     private String senha;
 
-    protected Usuario(int id, String nome, int idade, String sexo, String telefone, String senha) {
+    public Farmacia(int id, String nomeFarmacia, String telefone, String cnpj, String senha) {
         this.id = id;
-        this.nome = nome;
-        this.idade = idade;
-        this.sexo = sexo;
+        this.nome = nomeFarmacia;
         this.telefone = telefone;
+        this.cnpj = cnpj;
         this.senha = senha;
-    }
-
-    protected Usuario() {
-        this(0, "", 0, "", "", "");
     }
 
     public int getId() {
@@ -47,28 +41,20 @@ public class Usuario {
         this.nome = nome;
     }
 
-    public int getIdade() {
-        return idade;
-    }
-
-    public void setIdade(int idade) {
-        this.idade = idade;
-    }
-
-    public String getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
-    }
-
     public String getTelefone() {
         return telefone;
     }
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
     }
 
     public String getSenha() {
