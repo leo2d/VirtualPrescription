@@ -9,34 +9,18 @@ package br.com.ld.model;
  *
  * @author Leonardo
  */
-public class Usuario {
+public abstract class Usuario {
 
-    private int id;
-    private String nome;
-    private int idade;
-    private String sexo;
-    private String telefone;
-    private String senha;
+    String senha;
+    String nome;
+    String documento;
 
-    protected Usuario(int id, String nome, int idade, String sexo, String telefone, String senha) {
-        this.id = id;
-        this.nome = nome;
-        this.idade = idade;
-        this.sexo = sexo;
-        this.telefone = telefone;
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    protected Usuario() {
-        this(0, "", 0, "", "", "");
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNome() {
@@ -47,36 +31,12 @@ public class Usuario {
         this.nome = nome;
     }
 
-    public int getIdade() {
-        return idade;
+    public String getDocumento() {
+        return documento;
     }
 
-    public void setIdade(int idade) {
-        this.idade = idade;
-    }
-
-    public String getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setDocumento(String documento) {
+        this.documento = documento;
     }
 
 }

@@ -67,7 +67,7 @@ public class ConsultaDAO {
         );
 
         pst.setInt(1, medico.getId());
-
+//TODO : adicionar receitas
         ArrayList<Consulta> consultas = new ArrayList<Consulta>();
         Paciente paciente = null;
 

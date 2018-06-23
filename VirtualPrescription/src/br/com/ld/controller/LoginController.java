@@ -11,7 +11,7 @@ import br.com.ld.model.DAO.PacienteDAO;
 import br.com.ld.model.Farmacia;
 import br.com.ld.model.Medico;
 import br.com.ld.model.Paciente;
-import br.com.ld.model.Usuario;
+import br.com.ld.model.Pessoa;
 import java.sql.SQLException;
 
 /**

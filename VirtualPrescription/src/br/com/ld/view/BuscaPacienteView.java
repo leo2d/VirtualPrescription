@@ -9,12 +9,12 @@ package br.com.ld.view;
  *
  * @author Leonardo
  */
-public class BuscaClienteView extends javax.swing.JPanel {
+public class BuscaPacienteView extends javax.swing.JPanel {
 
     /**
      * Creates new form CadastrarProntuario
      */
-    public BuscaClienteView() {
+    public BuscaPacienteView() {
         initComponents();
     }
 

@@ -11,11 +11,19 @@ import java.util.ArrayList;
  *
  * @author Leonardo
  */
-public class Medico extends Usuario {
+public class Medico extends Pessoa {
 
     private String crm;
     private String especializacao;
     private ArrayList<Consulta> consultas;
+
+    public void addConsulta(Consulta consulta) {
+        this.consultas.add(consulta);
+    }
+
+    public void setConsultas(ArrayList<Consulta> consultas) {
+        this.consultas = consultas;
+    }
 
     public Medico(String crm, String especializacao, int id, String nome, int idade, String sexo, String telefone, String senha) {
         super(id, nome, idade, sexo, telefone, senha);

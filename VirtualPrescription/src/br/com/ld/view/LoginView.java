@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  *
  * @author Leonardo
  */
-public class LoginView extends javax.swing.JDialog {
+public class LoginView<T> extends javax.swing.JDialog {
 
     /**
      * Creates new form LoginView
@@ -35,13 +35,31 @@ public class LoginView extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         LoginButton = new javax.swing.JButton();
         SenhaInput = new javax.swing.JPasswordField();
         DocumentoInput = new javax.swing.JTextField();
         SenhaLabel = new javax.swing.JLabel();
         DocumentoLabel = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        DocumentoLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
+
+        jPanel1.setBackground(new java.awt.Color(0, 153, 51));
+
+        jButton1.setText("Sair");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         LoginButton.setText("Entrar");
         LoginButton.addActionListener(new java.awt.event.ActionListener() {
@@ -56,33 +74,42 @@ public class LoginView extends javax.swing.JDialog {
             }
         });
 
+        SenhaLabel.setBackground(new java.awt.Color(255, 255, 255));
+        SenhaLabel.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        SenhaLabel.setForeground(new java.awt.Color(255, 255, 255));
         SenhaLabel.setText("Senha");
 
+        DocumentoLabel.setBackground(new java.awt.Color(255, 255, 255));
+        DocumentoLabel.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        DocumentoLabel.setForeground(new java.awt.Color(255, 255, 255));
         DocumentoLabel.setText("Documento");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(163, 163, 163)
-                        .addComponent(LoginButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(137, 137, 137)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(SenhaLabel)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(DocumentoInput)
-                                .addComponent(SenhaInput, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(DocumentoLabel))))
-                .addContainerGap(144, Short.MAX_VALUE))
+                            .addComponent(DocumentoLabel)
+                            .addComponent(DocumentoInput)
+                            .addComponent(SenhaInput, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(LoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(48, 48, 48))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(68, Short.MAX_VALUE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
                 .addComponent(DocumentoLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(DocumentoInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -92,16 +119,76 @@ public class LoginView extends javax.swing.JDialog {
                 .addComponent(SenhaInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addComponent(LoginButton)
-                .addGap(49, 49, 49))
+                .addGap(34, 34, 34)
+                .addComponent(jButton1)
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        DocumentoLabel1.setBackground(new java.awt.Color(255, 204, 204));
+        DocumentoLabel1.setFont(new java.awt.Font("Candara", 2, 36)); // NOI18N
+        DocumentoLabel1.setForeground(new java.awt.Color(153, 0, 0));
+        DocumentoLabel1.setText("Gerenciador de Receitas");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(181, Short.MAX_VALUE)
+                .addComponent(DocumentoLabel1)
+                .addGap(142, 142, 142))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(DocumentoLabel1)
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    Farmacia farmacia = null;
-    Medico medico = null;
-    Paciente paciente = null;
+    private Farmacia farmacia = null;
+    private Medico medico = null;
+    private Paciente paciente = null;
+
+    public Medico getMedico() {
+        return this.medico;
+    }
+
+    public Paciente getPaciente() {
+        return this.paciente;
+    }
+
+    public Farmacia getFarmacia() {
+        return this.farmacia;
+    }
+
     private void DocumentoInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DocumentoInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_DocumentoInputActionPerformed
@@ -110,7 +197,7 @@ public class LoginView extends javax.swing.JDialog {
         try {
             LoginController loginController = LoginController.getInstance();
             paciente = loginController.getPaciente(DocumentoInput.getText(), SenhaInput.getText());
-
+        
             if (paciente == null) {
                 medico = loginController.getMedico(DocumentoInput.getText(), SenhaInput.getText());
                 if (medico == null) {
@@ -132,7 +219,17 @@ public class LoginView extends javax.swing.JDialog {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao conectar no banco " + ex.getMessage());
         }
+        
+        setVisible(medico == null && paciente == null &&  farmacia == null);
     }//GEN-LAST:event_LoginButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        System.exit(1);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        System.exit(1);
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
@@ -179,8 +276,12 @@ public class LoginView extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField DocumentoInput;
     private javax.swing.JLabel DocumentoLabel;
+    private javax.swing.JLabel DocumentoLabel1;
     private javax.swing.JButton LoginButton;
     private javax.swing.JPasswordField SenhaInput;
     private javax.swing.JLabel SenhaLabel;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }
