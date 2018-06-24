@@ -5,8 +5,12 @@
  */
 package br.com.ld.controller;
 
+import br.com.ld.exception.CpfNaoPertenceAoUsuarioException;
+import br.com.ld.exception.NenhumaReceitaEncontradaException;
 import br.com.ld.model.DAO.ReceitaDAO;
+import br.com.ld.model.Paciente;
 import br.com.ld.model.Receita;
+import br.com.ld.model.Usuario;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -15,32 +19,63 @@ import java.util.ArrayList;
  * @author Leonardo
  */
 public class BuscaReceitaController {
-    
+
     private static BuscaReceitaController _instance = null;
-    
+
     private BuscaReceitaController() {
     }
-    
+
     public static BuscaReceitaController getInstance() {
-        
+
         if (_instance == null) {
             _instance = new BuscaReceitaController();
         }
-        
+
         return _instance;
     }
-    
-    public ArrayList<Receita> buscarReceitaPorCpfPaciente(String cpf) throws ClassNotFoundException, SQLException {
+
+    private ArrayList<Receita> buscarReceitaPorCpfPaciente(String cpf) throws ClassNotFoundException, SQLException {
         ReceitaDAO receitaDAO = new ReceitaDAO();
         ArrayList<Receita> receitas = receitaDAO.buscarPorCPFPaciente(cpf);
-        
+
         return receitas;
     }
-    
-    public Receita buscarReceitaPoeloCodigo(int codigo) throws ClassNotFoundException, SQLException {
+
+    private Receita buscarReceitaPeloCodigo(int codigo) throws ClassNotFoundException, SQLException {
         ReceitaDAO receitaDAO = new ReceitaDAO();
         Receita receita = receitaDAO.buscarPelaChave(codigo);
-        
+
         return receita;
+    }
+
+    private Receita buscarReceitaPeloCodigoEPaciente(int codigo, Usuario paciente) throws ClassNotFoundException, SQLException {
+        ReceitaDAO receitaDAO = new ReceitaDAO();
+        Receita receita = receitaDAO.buscarPelaChaveEPaciente(codigo, paciente);
+
+        return receita;
+    }
+
+    public ArrayList<Receita> BuscarReceitas(Usuario usuario, String documento, Object selectedItem) throws ClassNotFoundException, SQLException, CpfNaoPertenceAoUsuarioException, NenhumaReceitaEncontradaException {
+        {
+            ArrayList<Receita> receitas = new ArrayList<Receita>();
+            if (selectedItem.equals("CPF paciente")) {
+                String cpf = documento.trim();
+                if (usuario instanceof Paciente && !usuario.getDocumento().equalsIgnoreCase(cpf)) {
+                    throw new CpfNaoPertenceAoUsuarioException();
+                }
+                receitas = buscarReceitaPorCpfPaciente(cpf);
+            } else {
+                if (usuario instanceof Paciente) {
+                    Receita receita = (buscarReceitaPeloCodigoEPaciente(Integer.parseInt(documento), usuario));
+                    if (receita == null) {
+                        throw new NenhumaReceitaEncontradaException();
+                    }
+                    receitas.add(receita);
+                } else {
+                    receitas.add(buscarReceitaPeloCodigo(Integer.parseInt(documento)));
+                }
+            }
+            return receitas;
+        }
     }
 }

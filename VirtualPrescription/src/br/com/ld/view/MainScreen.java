@@ -17,6 +17,8 @@ import static com.sun.org.apache.bcel.internal.Repository.instanceOf;
  */
 public class MainScreen extends javax.swing.JFrame {
 
+    
+
     /**
      * Creates new form MainScreen
      */
@@ -24,10 +26,8 @@ public class MainScreen extends javax.swing.JFrame {
         initComponents();
     }
 
-    Medico medico = null;
-    Paciente paciente = null;
-    Farmacia farmacia = null;
-    Usuario usuario = null;
+    
+    private static Usuario usuario = null;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -262,6 +262,10 @@ public class MainScreen extends javax.swing.JFrame {
         System.exit(1);
     }//GEN-LAST:event_SairButtonActionPerformed
 
+    public static Usuario getUsuario() {
+        
+        return MainScreen.usuario;
+    }
     /**
      * @param args the command line arguments
      */
