@@ -10,8 +10,7 @@ package br.com.ld.model;
  * @author Leonardo
  */
 public class Farmacia extends Usuario{
-
-    private int id;
+    
     private String telefone;
 
     public Farmacia(int id, String nomeFarmacia, String telefone, String cnpj, String senha) {
@@ -21,15 +20,7 @@ public class Farmacia extends Usuario{
         this.documento = cnpj;
         this.senha = senha;
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    
     public String getNome() {
         return nome;
     }

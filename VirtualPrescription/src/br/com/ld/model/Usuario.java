@@ -11,9 +11,19 @@ package br.com.ld.model;
  */
 public abstract class Usuario {
 
+    int id;
     String senha;
     String nome;
     String documento;
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
 
     public String getSenha() {
         return senha;

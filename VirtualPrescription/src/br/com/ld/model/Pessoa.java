@@ -11,7 +11,7 @@ package br.com.ld.model;
  */
 public class Pessoa extends Usuario{
 
-    private int id;
+
     private int idade;
     private String sexo;
     private String telefone;
@@ -25,14 +25,6 @@ public class Pessoa extends Usuario{
         this.telefone = telefone;
         this.senha = senha;
         this.documento = documento;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNome() {
