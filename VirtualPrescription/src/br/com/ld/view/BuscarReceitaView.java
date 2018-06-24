@@ -5,6 +5,8 @@
  */
 package br.com.ld.view;
 
+import br.com.ld.exception.NenhumaLinhaSelecionadaException;
+import br.com.ld.exception.MaisDeUmaLinhaSelecionadaException;
 import br.com.ld.controller.BuscaReceitaController;
 import br.com.ld.exception.CpfNaoPertenceAoUsuarioException;
 import br.com.ld.exception.NenhumaReceitaEncontradaException;
@@ -12,6 +14,7 @@ import br.com.ld.model.Receita;
 import br.com.ld.model.Usuario;
 import br.com.ld.model.Paciente;
 import br.com.ld.util.FormatFactory;
+import java.awt.HeadlessException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -53,6 +56,8 @@ public class BuscarReceitaView extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelaReceitas = new javax.swing.JTable();
         VoltarParaMainButton = new javax.swing.JButton();
+        VerDetalheReceitaButton = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -101,7 +106,7 @@ public class BuscarReceitaView extends javax.swing.JDialog {
                         .addComponent(jLabel1)
                         .addGap(75, 75, 75)
                         .addComponent(jLabel2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(124, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,6 +143,18 @@ public class BuscarReceitaView extends javax.swing.JDialog {
             }
         });
 
+        VerDetalheReceitaButton.setText("Ver detalhes");
+        VerDetalheReceitaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VerDetalheReceitaButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 153, 51));
+        jLabel3.setText("Para mais informações, selecione a receita desejada e clique em \"Ver detalhes\".");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -150,19 +167,31 @@ public class BuscarReceitaView extends javax.swing.JDialog {
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 38, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 835, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(VoltarParaMainButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(41, 41, 41))))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 835, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(76, 76, 76)
+                        .addComponent(VoltarParaMainButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(VerDetalheReceitaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(85, 85, 85))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(88, 88, 88)
+                .addComponent(jLabel3)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(82, 82, 82)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
-                .addComponent(VoltarParaMainButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel3)
+                .addGap(32, 32, 32)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(VoltarParaMainButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(VerDetalheReceitaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -170,12 +199,14 @@ public class BuscarReceitaView extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    Usuario usuario = MainScreen.getUsuario();
-    ArrayList<Receita> receitas = new ArrayList<Receita>();
+    private static Receita receita;
+    //  private int idReceitaSelecionada = 0;
+    private Usuario usuario = MainScreen.getUsuario();
+    private ArrayList<Receita> receitas = new ArrayList<Receita>();
 
     private void PesquisarReceitaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisarReceitaButtonActionPerformed
         BuscaReceitaController brController = BuscaReceitaController.getInstance();
-        
+
         try {
             receitas = brController.BuscarReceitas(usuario, NumeroInput.getText(), PesquisaReceitaComboBox.getSelectedItem());
             RenderizarReceitas();
@@ -188,16 +219,16 @@ public class BuscarReceitaView extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_PesquisarReceitaButtonActionPerformed
-    
+
     private void RenderizarReceitas() {
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("Id");
+        modelo.addColumn("Codigo");
         modelo.addColumn("Data");
         modelo.addColumn("Status");
         modelo.addColumn("Medico");
         modelo.addColumn("Paciente");
         modelo.addColumn("Obs");
-        
+
         for (Receita r : receitas) {
             // Seta os valores do objeto para a tabela 
             modelo.addRow(new Object[]{r.getId(), FormatFactory.formatDate(r.getConsulta().getData()), r.getStatus(), r.getConsulta().getMedico().getNome(),
@@ -216,8 +247,9 @@ public class BuscarReceitaView extends javax.swing.JDialog {
         TabelaReceitas.getColumnModel().getColumn(4).setPreferredWidth(210);
         TabelaReceitas.getColumnModel().getColumn(5).setPreferredWidth(210);
     }
+
     private void NumeroInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NumeroInputKeyReleased
-        
+
         try {
             int x = Integer.parseInt(NumeroInput.getText());
         } catch (NumberFormatException nfe) {
@@ -226,8 +258,46 @@ public class BuscarReceitaView extends javax.swing.JDialog {
     }//GEN-LAST:event_NumeroInputKeyReleased
 
     private void VoltarParaMainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarParaMainButtonActionPerformed
-           setVisible(false);
+        setVisible(false);
     }//GEN-LAST:event_VoltarParaMainButtonActionPerformed
+
+    private void VerDetalheReceitaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerDetalheReceitaButtonActionPerformed
+        setIdReceitaSelecionada();
+        ReceitaDetalhadaView rdetalhadaview = new ReceitaDetalhadaView(null, true);
+        rdetalhadaview.setVisible(true);
+    }//GEN-LAST:event_VerDetalheReceitaButtonActionPerformed
+    /*
+    public int getIdReceitaSelecionada() {
+        return this.idReceitaSelecionada;
+    }
+     */
+    public static Receita getReceitaSelecionada() {
+
+        return receita;
+    }
+
+    private void setIdReceitaSelecionada() {
+
+        try {
+            int quantidadeLinhasSelecionadas = TabelaReceitas.getSelectedRowCount();
+            if (quantidadeLinhasSelecionadas > 1) {
+                throw new MaisDeUmaLinhaSelecionadaException();
+            } else if (quantidadeLinhasSelecionadas < 1) {
+                throw new NenhumaLinhaSelecionadaException();
+            }
+
+            int idReceitaSelecionada = (int) (TabelaReceitas.getValueAt(TabelaReceitas.getSelectedRow(), 0));
+
+            receita = receitas.stream()
+                    .filter(re -> re.getId() == idReceitaSelecionada)
+                    .findFirst().get();
+
+        } catch (MaisDeUmaLinhaSelecionadaException ex) {
+            JOptionPane.showMessageDialog(null, "Selecione apenas uma receita.");
+        } catch (NenhumaLinhaSelecionadaException e) {
+            JOptionPane.showMessageDialog(null, "Selecione uma receita para ver os detalhes.");
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -277,10 +347,13 @@ public class BuscarReceitaView extends javax.swing.JDialog {
     private javax.swing.JTextField PesquisaReceitaInput;
     private javax.swing.JButton PesquisarReceitaButton;
     private javax.swing.JTable TabelaReceitas;
+    private javax.swing.JButton VerDetalheReceitaButton;
     private javax.swing.JButton VoltarParaMainButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
 }
