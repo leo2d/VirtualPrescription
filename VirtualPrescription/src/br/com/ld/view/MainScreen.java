@@ -5,11 +5,9 @@
  */
 package br.com.ld.view;
 
-import br.com.ld.model.Farmacia;
 import br.com.ld.model.Medico;
 import br.com.ld.model.Paciente;
 import br.com.ld.model.Usuario;
-import static com.sun.org.apache.bcel.internal.Repository.instanceOf;
 
 /**
  *

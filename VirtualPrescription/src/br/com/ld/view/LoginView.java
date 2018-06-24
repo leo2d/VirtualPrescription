@@ -203,7 +203,8 @@ public class LoginView extends javax.swing.JDialog {
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
         try {
             LoginController loginController = LoginController.getInstance();
-            usuario = loginController.getUsuario(DocumentoInput.getText(), SenhaInput.getText());
+            String senha = String.valueOf(SenhaInput.getPassword());
+            usuario = loginController.getUsuario(DocumentoInput.getText(),senha );
 
             if (usuario == null) {
                 JOptionPane.showMessageDialog(null, "Nenhum usuario encontrado");

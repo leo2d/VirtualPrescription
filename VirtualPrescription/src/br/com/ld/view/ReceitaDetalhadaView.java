@@ -5,10 +5,14 @@
  */
 package br.com.ld.view;
 
+import br.com.ld.controller.ReceitaDetalhadaController;
 import br.com.ld.model.Medico;
 import br.com.ld.model.Receita;
 import br.com.ld.model.Usuario;
 import br.com.ld.util.FormatFactory;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 
 /**
  *
@@ -23,8 +27,9 @@ public class ReceitaDetalhadaView extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         PreecherCampos();
-        CancelarReceitaButton.setVisible(usuario instanceof Medico && 
-                usuario.getId()== receita.getConsulta().getMedico().getId());
+        CancelarReceitaButton.setVisible(usuario instanceof Medico
+                && usuario.getId() == receita.getConsulta().getMedico().getId());
+        HabilitarBotaoDeCancelamento();
     }
 
     /**
@@ -55,6 +60,8 @@ public class ReceitaDetalhadaView extends javax.swing.JDialog {
         jScrollPane2 = new javax.swing.JScrollPane();
         ObservacoesTextArea = new javax.swing.JTextArea();
         jLabel8 = new javax.swing.JLabel();
+        StatusTextField = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -156,6 +163,13 @@ public class ReceitaDetalhadaView extends javax.swing.JDialog {
         jLabel8.setForeground(new java.awt.Color(0, 153, 51));
         jLabel8.setText("Observações");
 
+        StatusTextField.setEditable(false);
+
+        jLabel9.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 153, 51));
+        jLabel9.setText("Status da receita");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -166,22 +180,27 @@ public class ReceitaDetalhadaView extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(VoltarParaBuscaReceitaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel7)
-                        .addComponent(jLabel6)
-                        .addComponent(DataTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4)
-                        .addComponent(MedicoTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-                        .addComponent(PacienteTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-                        .addComponent(CrmTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5)
-                        .addComponent(jScrollPane2)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(CancelarReceitaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel4)
+                            .addComponent(MedicoTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                            .addComponent(PacienteTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                            .addComponent(CrmTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(jScrollPane2)
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
-                                .addComponent(IdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(CancelarReceitaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(107, 107, 107))))
+                    .addComponent(IdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(DataTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(73, 73, 73)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(StatusTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -194,16 +213,17 @@ public class ReceitaDetalhadaView extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(IdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(CancelarReceitaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
+                .addComponent(IdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(DataTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(DataTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(StatusTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -220,7 +240,9 @@ public class ReceitaDetalhadaView extends javax.swing.JDialog {
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(CancelarReceitaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addComponent(VoltarParaBuscaReceitaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,13 +253,19 @@ public class ReceitaDetalhadaView extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private Usuario usuario = MainScreen.getUsuario();
     private Receita receita = BuscarReceitaView.getReceitaSelecionada();
 
+    private void HabilitarBotaoDeCancelamento() {
+        CancelarReceitaButton.setEnabled(!receita.getStatus().equals("Cancelada"));
+    }
+
     private void PreecherCampos() {
-        IdTextField.setText(receita.getId()+"");
+        IdTextField.setText(receita.getId() + "");
+        StatusTextField.setText(receita.getStatus());
         DataTextField.setText(FormatFactory.formatDate(receita.getConsulta().getData()));
         PacienteTextField.setText(receita.getConsulta().getPaciente().getNome());
         MedicoTextField.setText(receita.getConsulta().getMedico().getNome());
@@ -246,6 +274,22 @@ public class ReceitaDetalhadaView extends javax.swing.JDialog {
     }
 
     private void CancelarReceitaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarReceitaButtonActionPerformed
+
+        boolean confirma = JOptionPane.showConfirmDialog(null, "Você realmente quer cancelar esta receita? \n",
+                "Confirmar", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION;
+
+        if (confirma) {
+            try {
+                ReceitaDetalhadaController detalhadaController = ReceitaDetalhadaController.getInstance();
+                detalhadaController.CancelarReceita(receita);
+                PreecherCampos();
+                HabilitarBotaoDeCancelamento();
+                JOptionPane.showMessageDialog(null, "Receita cancelada com sucesso!");
+            } catch (ClassNotFoundException | SQLException e) {
+                JOptionPane.showMessageDialog(null, "Ocorreu um erro ao cancelar a receita: \n" + e.getMessage());
+            }
+        }
+
 
     }//GEN-LAST:event_CancelarReceitaButtonActionPerformed
 
@@ -303,6 +347,7 @@ public class ReceitaDetalhadaView extends javax.swing.JDialog {
     private javax.swing.JTextField MedicoTextField;
     private javax.swing.JTextArea ObservacoesTextArea;
     private javax.swing.JTextField PacienteTextField;
+    private javax.swing.JTextField StatusTextField;
     private javax.swing.JTable TabelaReceitas;
     private javax.swing.JButton VoltarParaBuscaReceitaButton;
     private javax.swing.JLabel jLabel1;
@@ -312,6 +357,7 @@ public class ReceitaDetalhadaView extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

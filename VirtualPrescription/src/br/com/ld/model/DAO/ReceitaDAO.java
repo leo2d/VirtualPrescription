@@ -205,4 +205,23 @@ public class ReceitaDAO {
 
         return receitas;
     }
+
+    public void alterar(Receita receita) throws SQLException, ClassNotFoundException {
+        Connection conect = ConnectionFactory.getConnection();
+
+        PreparedStatement pst = conect.prepareStatement(
+                "UPDATE receita "
+                + "SET id_consulta_receita = ? , "
+                + "status_receita = ? , "
+                + "observacoes_receita = ? "
+                + "WHERE id_receita = ? "
+        );
+
+        pst.setInt(1, receita.getConsulta().getId());
+        pst.setString(2, receita.getStatus());
+        pst.setString(3, receita.getObservacoes());
+        pst.setInt(4, receita.getId());
+
+        pst.executeUpdate();
+    }
 }

@@ -221,7 +221,13 @@ public class BuscarReceitaView extends javax.swing.JDialog {
     }//GEN-LAST:event_PesquisarReceitaButtonActionPerformed
 
     private void RenderizarReceitas() {
-        DefaultTableModel modelo = new DefaultTableModel();
+        DefaultTableModel modelo = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                //all cells false
+                return false;
+            }
+        };
         modelo.addColumn("Codigo");
         modelo.addColumn("Data");
         modelo.addColumn("Status");
