@@ -49,6 +49,7 @@ public class BuscarReceitaView extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         NumeroInput = new javax.swing.JFormattedTextField();
         PesquisarReceitaButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelaReceitas = new javax.swing.JTable();
         VoltarParaMainButton = new javax.swing.JButton();
@@ -62,7 +63,7 @@ public class BuscarReceitaView extends javax.swing.JDialog {
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Selecione o criterio de busca");
+        jLabel1.setText("Selecione o filtro de busca");
 
         NumeroInput.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -76,6 +77,11 @@ public class BuscarReceitaView extends javax.swing.JDialog {
                 PesquisarReceitaButtonActionPerformed(evt);
             }
         });
+
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Digite o valor do filtro ( apenas numeros )");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -92,17 +98,21 @@ public class BuscarReceitaView extends javax.swing.JDialog {
                         .addComponent(PesquisarReceitaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
-                        .addComponent(jLabel1)))
+                        .addComponent(jLabel1)
+                        .addGap(75, 75, 75)
+                        .addComponent(jLabel2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(PesquisaReceitaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PesquisaReceitaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(NumeroInput, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PesquisarReceitaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19))
@@ -189,7 +199,7 @@ public class BuscarReceitaView extends javax.swing.JDialog {
         modelo.addColumn("Obs");
         
         for (Receita r : receitas) {
-            // Seta os valores do objeto para o JTableModel 
+            // Seta os valores do objeto para a tabela 
             modelo.addRow(new Object[]{r.getId(), FormatFactory.formatDate(r.getConsulta().getData()), r.getStatus(), r.getConsulta().getMedico().getNome(),
                 r.getConsulta().getPaciente().getNome(), r.getObservacoes()});
         }
@@ -198,7 +208,7 @@ public class BuscarReceitaView extends javax.swing.JDialog {
         //Seta o modelo para a Grid 
         TabelaReceitas.setModel(modelo);
 
-        //Ajusta o tamanho da primeira coluna 
+        //Ajusta o tamanho das colunas
         TabelaReceitas.getColumnModel().getColumn(0).setPreferredWidth(60);
         TabelaReceitas.getColumnModel().getColumn(1).setPreferredWidth(80);
         TabelaReceitas.getColumnModel().getColumn(2).setPreferredWidth(100);
@@ -269,6 +279,7 @@ public class BuscarReceitaView extends javax.swing.JDialog {
     private javax.swing.JTable TabelaReceitas;
     private javax.swing.JButton VoltarParaMainButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

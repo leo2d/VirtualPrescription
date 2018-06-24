@@ -69,14 +69,13 @@ public class ReceitaDAO {
             }
             medicamento = new Medicamento(rs.getInt("id_medicamento"), rs.getString("nome_medicamento"));
             medicamentoPrescrito = new MedicamentoPrescrito(rs.getInt("id_associacao_medicamento_receita"), rs.getString("instrucoes_medicamento_prescrito"), rs.getBoolean("foi_vendido"), medicamento, receita);
-            medicamentos.add(medicamentoPrescrito);
-        }
+            receita.addMedicamento(medicamentoPrescrito);
 
-        receita.setMedicamentos(medicamentos);
-        receitas.add(receita);
-        consulta.setReceitas(receitas);
-        paciente.addConsulta(consulta);
-        medico.addConsulta(consulta);
+            receitas.add(receita);
+            consulta.addReceita(receita);
+            paciente.addConsulta(consulta);
+            medico.addConsulta(consulta);
+        }
 
         return receita;
     }
@@ -126,14 +125,13 @@ public class ReceitaDAO {
             }
             medicamento = new Medicamento(rs.getInt("id_medicamento"), rs.getString("nome_medicamento"));
             medicamentoPrescrito = new MedicamentoPrescrito(rs.getInt("id_associacao_medicamento_receita"), rs.getString("instrucoes_medicamento_prescrito"), rs.getBoolean("foi_vendido"), medicamento, receita);
-            medicamentos.add(medicamentoPrescrito);
-        }
+            receita.addMedicamento(medicamentoPrescrito);
 
-        receita.setMedicamentos(medicamentos);
-        receitas.add(receita);
-        consulta.setReceitas(receitas);
-        paciente.addConsulta(consulta);
-        medico.addConsulta(consulta);
+            receitas.add(receita);
+            consulta.addReceita(receita);
+            paciente.addConsulta(consulta);
+            medico.addConsulta(consulta);
+        }
 
         return receita;
     }

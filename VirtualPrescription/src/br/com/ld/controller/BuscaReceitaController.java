@@ -34,24 +34,31 @@ public class BuscaReceitaController {
         return _instance;
     }
 
-    private ArrayList<Receita> buscarReceitaPorCpfPaciente(String cpf) throws ClassNotFoundException, SQLException {
+    private ArrayList<Receita> buscarReceitaPorCpfPaciente(String cpf) throws ClassNotFoundException, SQLException, NenhumaReceitaEncontradaException {
         ReceitaDAO receitaDAO = new ReceitaDAO();
         ArrayList<Receita> receitas = receitaDAO.buscarPorCPFPaciente(cpf);
-
+        if (receitas.size() < 1) {
+            throw new NenhumaReceitaEncontradaException();
+        }
         return receitas;
     }
 
-    private Receita buscarReceitaPeloCodigo(int codigo) throws ClassNotFoundException, SQLException {
+    private Receita buscarReceitaPeloCodigo(int codigo) throws ClassNotFoundException, SQLException, NenhumaReceitaEncontradaException {
         ReceitaDAO receitaDAO = new ReceitaDAO();
         Receita receita = receitaDAO.buscarPelaChave(codigo);
 
+        if (receita == null) {
+            throw new NenhumaReceitaEncontradaException();
+        }
         return receita;
     }
 
-    private Receita buscarReceitaPeloCodigoEPaciente(int codigo, Usuario paciente) throws ClassNotFoundException, SQLException {
+    private Receita buscarReceitaPeloCodigoEPaciente(int codigo, Usuario paciente) throws ClassNotFoundException, SQLException, NenhumaReceitaEncontradaException {
         ReceitaDAO receitaDAO = new ReceitaDAO();
         Receita receita = receitaDAO.buscarPelaChaveEPaciente(codigo, paciente);
-
+        if (receita == null) {
+            throw new NenhumaReceitaEncontradaException();
+        }
         return receita;
     }
 
@@ -74,6 +81,9 @@ public class BuscaReceitaController {
                 } else {
                     receitas.add(buscarReceitaPeloCodigo(Integer.parseInt(documento)));
                 }
+            }
+            if (receitas.size() < 1) {
+                throw new NenhumaReceitaEncontradaException();
             }
             return receitas;
         }
