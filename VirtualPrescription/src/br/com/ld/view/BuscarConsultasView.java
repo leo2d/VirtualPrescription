@@ -5,12 +5,19 @@
  */
 package br.com.ld.view;
 
+import br.com.ld.exception.NenhumaConsultaEncontradaException;
+import br.com.ld.controller.BuscaConsultaController;
 import br.com.ld.model.Consulta;
 import br.com.ld.model.Medico;
+import br.com.ld.model.Paciente;
 import br.com.ld.model.Receita;
 import br.com.ld.model.Usuario;
 import br.com.ld.util.FormatFactory;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,6 +32,8 @@ public class BuscarConsultasView extends javax.swing.JDialog {
     public BuscarConsultasView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        infoLabel.setVisible(false);
+        VerDetalheConsultaButton.setVisible(false);
         HabilitarCamposdeBusca(usuario instanceof Medico);
     }
 
@@ -42,13 +51,18 @@ public class BuscarConsultasView extends javax.swing.JDialog {
         PesquisarConsultaButton = new javax.swing.JButton();
         InstrucoesBuscaReceitaLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        infoLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelaConsultas = new javax.swing.JTable();
         VoltarParaMainButton = new javax.swing.JButton();
         VerDetalheConsultaButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                aoAbrir(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 51));
 
@@ -79,38 +93,38 @@ public class BuscarConsultasView extends javax.swing.JDialog {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(InstrucoesBuscaReceitaLabel)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(324, 324, 324)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(232, 232, 232)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(InstrucoesBuscaReceitaLabel)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(CPFpacienteInput, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(PesquisarConsultaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(CPFpacienteInput, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(PesquisarConsultaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(382, 382, 382))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(556, 556, 556)
+                .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addGap(33, 33, 33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(InstrucoesBuscaReceitaLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CPFpacienteInput, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PesquisarConsultaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(PesquisarConsultaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
-        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 153, 51));
-        jLabel3.setText("Para mais informações, selecione a consulta desejada e clique em \"Ver detalhes\".");
+        infoLabel.setBackground(new java.awt.Color(255, 255, 255));
+        infoLabel.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        infoLabel.setForeground(new java.awt.Color(0, 153, 51));
+        infoLabel.setText("Para mais informações, selecione a consulta desejada e clique em \"Ver detalhes\".");
 
         TabelaConsultas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -147,35 +161,35 @@ public class BuscarConsultasView extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(91, 91, 91)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(93, 93, 93)
                 .addComponent(VoltarParaMainButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(VerDetalheConsultaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(108, 108, 108))
+                .addGap(70, 70, 70))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(124, 124, 124)
-                        .addComponent(jLabel3))
+                        .addGap(33, 33, 33)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1363, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 835, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(61, Short.MAX_VALUE))
+                        .addGap(320, 320, 320)
+                        .addComponent(infoLabel)))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
+                .addComponent(infoLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(VerDetalheConsultaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(VoltarParaMainButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -185,7 +199,7 @@ public class BuscarConsultasView extends javax.swing.JDialog {
     private Usuario usuario = MainScreen.getUsuario();
     private ArrayList<Consulta> consultas = new ArrayList<Consulta>();
 
-    private void RenderizarReceitas() {
+    private void RenderizarConsultas() {
         DefaultTableModel modelo = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -193,13 +207,15 @@ public class BuscarConsultasView extends javax.swing.JDialog {
             }
         };
 
-        modelo.addColumn("Consulta Nº");
+        modelo.addColumn("Codigo");
         modelo.addColumn("Data");
         modelo.addColumn("Medico");
         modelo.addColumn("Paciente");
+        modelo.addColumn("Sexo");
+        modelo.addColumn("Idade");
         modelo.addColumn("Exames");
         modelo.addColumn("Dieta");
-        modelo.addColumn("Codigo receitas");
+        modelo.addColumn("Cod. receitas emitidas");
 
         for (Consulta cons : consultas) {
             String codigosReceitas = "";
@@ -208,7 +224,8 @@ public class BuscarConsultasView extends javax.swing.JDialog {
             }
             // Seta os valores do objeto para a tabela 
             modelo.addRow(new Object[]{cons.getId(), FormatFactory.formatDate(cons.getData()), cons.getMedico().getNome(),
-                cons.getPaciente().getNome(), cons.getExames(), cons.getDieta(), codigosReceitas});
+                cons.getPaciente().getNome(), cons.getPaciente().getSexo(), cons.getPaciente().getIdade(),
+                cons.getExames(), cons.getDieta(), codigosReceitas});
 
         }
         //Limpa a JTable (Grid)
@@ -218,14 +235,33 @@ public class BuscarConsultasView extends javax.swing.JDialog {
 
         //Ajusta o tamanho das colunas
         TabelaConsultas.getColumnModel().getColumn(0).setPreferredWidth(30);
-        TabelaConsultas.getColumnModel().getColumn(1).setPreferredWidth(80);
-        TabelaConsultas.getColumnModel().getColumn(2).setPreferredWidth(200);
-        TabelaConsultas.getColumnModel().getColumn(3).setPreferredWidth(200);
-        TabelaConsultas.getColumnModel().getColumn(4).setPreferredWidth(100);
-        TabelaConsultas.getColumnModel().getColumn(5).setPreferredWidth(100);
+        TabelaConsultas.getColumnModel().getColumn(1).setPreferredWidth(38);
+        TabelaConsultas.getColumnModel().getColumn(2).setPreferredWidth(150);
+        TabelaConsultas.getColumnModel().getColumn(3).setPreferredWidth(150);
+        TabelaConsultas.getColumnModel().getColumn(4).setPreferredWidth(8);
+        TabelaConsultas.getColumnModel().getColumn(5).setPreferredWidth(8);
         TabelaConsultas.getColumnModel().getColumn(6).setPreferredWidth(200);
+        TabelaConsultas.getColumnModel().getColumn(7).setPreferredWidth(200);
+        TabelaConsultas.getColumnModel().getColumn(8).setPreferredWidth(100);
     }
-    
+
+    private void BuscarConsultas(String cpf) {
+        try {
+            BuscaConsultaController consultaController = BuscaConsultaController.getInstance();
+            consultas = consultaController.BuscarConsultas(cpf);
+            if (consultas == null) {
+                throw new NenhumaConsultaEncontradaException();
+            }
+            RenderizarConsultas();
+        } catch (ClassNotFoundException | SQLException e) {
+        } catch (NenhumaConsultaEncontradaException | NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "Este paciente ainda não possui consultas");
+            if (usuario instanceof Paciente) {
+                setVisible(false);
+            }
+        }
+    }
+
     private void CPFpacienteInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CPFpacienteInputKeyReleased
 
         try {
@@ -236,7 +272,7 @@ public class BuscarConsultasView extends javax.swing.JDialog {
     }//GEN-LAST:event_CPFpacienteInputKeyReleased
 
     private void PesquisarConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisarConsultaButtonActionPerformed
-
+        BuscarConsultas(CPFpacienteInput.getText());
     }//GEN-LAST:event_PesquisarConsultaButtonActionPerformed
 
     private void VoltarParaMainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarParaMainButtonActionPerformed
@@ -246,6 +282,12 @@ public class BuscarConsultasView extends javax.swing.JDialog {
     private void VerDetalheConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerDetalheConsultaButtonActionPerformed
 
     }//GEN-LAST:event_VerDetalheConsultaButtonActionPerformed
+
+    private void aoAbrir(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_aoAbrir
+        if (usuario instanceof Paciente) {
+            BuscarConsultas(usuario.getDocumento());
+        }
+    }//GEN-LAST:event_aoAbrir
 
     /**
      * @param args the command line arguments
@@ -296,8 +338,8 @@ public class BuscarConsultasView extends javax.swing.JDialog {
     private javax.swing.JTable TabelaConsultas;
     private javax.swing.JButton VerDetalheConsultaButton;
     private javax.swing.JButton VoltarParaMainButton;
+    private javax.swing.JLabel infoLabel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

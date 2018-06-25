@@ -5,6 +5,11 @@
  */
 package br.com.ld.controller;
 
+import br.com.ld.model.Consulta;
+import br.com.ld.model.DAO.ConsultaDAO;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 /**
  *
  * @author Leonardo
@@ -23,5 +28,10 @@ public class BuscaConsultaController {
         }
 
         return _instance;
+    }
+
+    public ArrayList<Consulta> BuscarConsultas(String Cpf) throws SQLException, ClassNotFoundException {
+        ConsultaDAO cdao = new ConsultaDAO();
+        return cdao.buscarPorCPFPaciente(Cpf);
     }
 }

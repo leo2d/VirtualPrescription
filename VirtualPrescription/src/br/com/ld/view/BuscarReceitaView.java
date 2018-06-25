@@ -204,7 +204,7 @@ public class BuscarReceitaView extends javax.swing.JDialog {
         try {
             receitas = brController.BuscarReceitas(usuario, NumeroInput.getText(), PesquisaReceitaComboBox.getSelectedItem());
             RenderizarReceitas();
-        } catch (ClassNotFoundException | NumberFormatException | SQLException e) {
+        } catch (ClassNotFoundException | NumberFormatException | SQLException | NullPointerException e) {
             JOptionPane.showMessageDialog(null, "Algo não deu certo. \n" + e.getMessage());
         } catch (CpfNaoPertenceAoUsuarioException ex) {
             JOptionPane.showMessageDialog(null, "Este CPF nao pertence ao paciente logado!" + ex.getMessage());
@@ -290,7 +290,7 @@ public class BuscarReceitaView extends javax.swing.JDialog {
 
         } catch (MaisDeUmaLinhaSelecionadaException ex) {
             JOptionPane.showMessageDialog(null, "Selecione apenas uma receita.");
-        } catch (NenhumaLinhaSelecionadaException e) {
+        } catch (NenhumaLinhaSelecionadaException | NullPointerException e) {
             JOptionPane.showMessageDialog(null, "Selecione uma receita para ver os detalhes.");
         }
     }

@@ -173,10 +173,10 @@ public class ReceitaDAO {
         while (rs.next()) {
 
             if (rs.getInt("id_receita") != idReceitaAnterior) {
-
-                paciente = new Paciente(rs.getInt("id_paciente"), rs.getString("nome_paciente"),
-                        rs.getInt("idade_paciente"), rs.getString("sexo_paciente"), rs.getString("telefone_paciente"), rs.getString("senha_paciente"), rs.getString("cpf_paciente"));
-
+                if (paciente == null) {
+                    paciente = new Paciente(rs.getInt("id_paciente"), rs.getString("nome_paciente"),
+                            rs.getInt("idade_paciente"), rs.getString("sexo_paciente"), rs.getString("telefone_paciente"), rs.getString("senha_paciente"), rs.getString("cpf_paciente"));
+                }
                 if (rs.getInt("id_medico") != medico.getId()) {
                     medico = new Medico(rs.getString("crm"), rs.getString("especializacao"), rs.getInt("id_medico"), rs.getString("nome_medico"),
                             rs.getInt("idade_medico"), rs.getString("sexo_medico"), rs.getString("telefone_medico"), rs.getString("senha_medico"));

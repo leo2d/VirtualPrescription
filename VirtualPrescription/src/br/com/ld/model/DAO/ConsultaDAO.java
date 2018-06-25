@@ -95,13 +95,20 @@ public class ConsultaDAO {
 
         // String sql = "SELECT * FROM receita "
         //        + " WHERE id_receita = ?;";
-        String sql = "SELECT * "
+        String sql
+                = "SELECT * "/*
                 + "FROM receita rec "
                 + "INNER JOIN consulta con ON con.id_consulta = rec.id_consulta_receita "
                 + "INNER JOIN usuario_medico usmed  ON usmed.id_medico = con.id_medico_consulta "
                 + "INNER JOIN usuario_paciente uspac ON uspac.id_paciente = con.id_paciente_consulta "
                 + "INNER JOIN associacao_medicamento_receita asrec ON asrec.id_receita_consulta = rec.id_receita "
-                + "INNER JOIN medicamento med ON asrec.id_medicamento_prescrito = med.id_medicamento "
+                + "INNER JOIN medicamento med ON asrec.id_medicamento_prescrito = med.id_medicamento "*/
+                + "FROM  usuario_paciente uspac "
+                + " LEFT JOIN consulta con ON uspac.id_paciente = con.id_paciente_consulta "
+                + " LEFT Join receita rec ON con.id_consulta = rec.id_consulta_receita "
+                + " LEFT JOIN usuario_medico usmed  ON usmed.id_medico = con.id_medico_consulta "
+                + " LEFT JOIN associacao_medicamento_receita asrec ON asrec.id_receita_consulta = rec.id_receita "
+                + " LEFT JOIN medicamento med ON asrec.id_medicamento_prescrito = med.id_medicamento "
                 + "WHERE uspac.cpf_paciente = ? ";
 
         PreparedStatement pst = Conect.prepareStatement(sql);
@@ -110,7 +117,7 @@ public class ConsultaDAO {
 
         Medico medico = new Medico(null, null, -99, null, -99, null, null, null);
         Paciente paciente = null;
-        Consulta consulta = new Consulta(-99, paciente, medico, "", "", new Date());;
+        Consulta consulta = new Consulta(0, paciente, medico, "", "", new Date());;
         Medicamento medicamento = null;
         MedicamentoPrescrito medicamentoPrescrito = null;
         ArrayList<MedicamentoPrescrito> medicamentos = new ArrayList<MedicamentoPrescrito>();
@@ -127,8 +134,10 @@ public class ConsultaDAO {
 
             if (rs.getInt("id_receita") != idReceitaAnterior) {
 
-                paciente = new Paciente(rs.getInt("id_paciente"), rs.getString("nome_paciente"),
-                        rs.getInt("idade_paciente"), rs.getString("sexo_paciente"), rs.getString("telefone_paciente"), rs.getString("senha_paciente"), rs.getString("cpf_paciente"));
+                if (paciente == null) {
+                    paciente = new Paciente(rs.getInt("id_paciente"), rs.getString("nome_paciente"),
+                            rs.getInt("idade_paciente"), rs.getString("sexo_paciente"), rs.getString("telefone_paciente"), rs.getString("senha_paciente"), rs.getString("cpf_paciente"));
+                }
 
                 if (rs.getInt("id_medico") != medico.getId()) {
                     medico = new Medico(rs.getString("crm"), rs.getString("especializacao"), rs.getInt("id_medico"), rs.getString("nome_medico"),
@@ -156,6 +165,6 @@ public class ConsultaDAO {
             idReceitaAnterior = rs.getInt("id_receita");
         }
 
-        return paciente.getConsultas();
+        return consulta.getId() > 0 ? paciente.getConsultas() : null;
     }
 }
