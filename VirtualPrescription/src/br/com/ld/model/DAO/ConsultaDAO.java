@@ -146,6 +146,7 @@ public class ConsultaDAO {
 
                 if (rs.getInt("id_consulta") != consulta.getId()) {
                     consulta = new Consulta(rs.getInt("id_consulta"), paciente, medico, rs.getString("dieta_consulta"), rs.getString("exame_consulta"), rs.getDate("data_consulta"));
+                    consulta.setSintomasPaciente(rs.getString("sintomas_paciente_consulta"));
 
                     paciente.addConsulta(consulta);
                     medico.addConsulta(consulta);
@@ -166,5 +167,27 @@ public class ConsultaDAO {
         }
 
         return consulta.getId() > 0 ? paciente.getConsultas() : null;
+    }
+
+    public void inserir(Consulta consulta) throws ClassNotFoundException, SQLException {
+        Connection Conect = ConnectionFactory.getConnection();
+
+        PreparedStatement pst = Conect.prepareStatement(
+                "INSERT INTO consulta "
+                + "(data_consulta, id_paciente_consulta, id_medico_consulta, "
+                + "dieta_consulta, exame_consulta, sintomas_paciente_consulta) "
+                + "VALUES ( ?, ?, ?, ?, ?, ?) "
+        );
+
+        java.sql.Date sqlDate = new java.sql.Date(consulta.getData().getTime());
+
+        pst.setDate(1, sqlDate);
+        pst.setInt(2, consulta.getPaciente().getId());
+        pst.setInt(3, consulta.getMedico().getId());
+        pst.setString(4, consulta.getDieta());
+        pst.setString(5, consulta.getExames());
+        pst.setString(6, consulta.getSintomasPaciente());
+
+        pst.executeUpdate();
     }
 }

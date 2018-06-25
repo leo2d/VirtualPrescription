@@ -64,6 +64,7 @@ public class ReceitaDAO {
                 paciente = new Paciente(rs.getInt("id_paciente"), rs.getString("nome_paciente"),
                         rs.getInt("idade_paciente"), rs.getString("sexo_paciente"), rs.getString("telefone_paciente"), rs.getString("senha_paciente"), rs.getString("cpf_paciente"));
                 consulta = new Consulta(rs.getInt("id_consulta"), paciente, medico, rs.getString("dieta_consulta"), rs.getString("exame_consulta"), rs.getDate("data_consulta"));
+                consulta.setSintomasPaciente(rs.getString("sintomas_paciente_consulta"));
 
                 receita = new Receita(rs.getInt("id_receita"), consulta, rs.getString("status_receita"), rs.getString("observacoes_receita"));
             }
@@ -120,6 +121,7 @@ public class ReceitaDAO {
                 paciente = new Paciente(rs.getInt("id_paciente"), rs.getString("nome_paciente"),
                         rs.getInt("idade_paciente"), rs.getString("sexo_paciente"), rs.getString("telefone_paciente"), rs.getString("senha_paciente"), rs.getString("cpf_paciente"));
                 consulta = new Consulta(rs.getInt("id_consulta"), paciente, medico, rs.getString("dieta_consulta"), rs.getString("exame_consulta"), rs.getDate("data_consulta"));
+                consulta.setSintomasPaciente(rs.getString("sintomas_paciente_consulta"));
 
                 receita = new Receita(rs.getInt("id_receita"), consulta, rs.getString("status_receita"), rs.getString("observacoes_receita"));
             }
@@ -184,6 +186,7 @@ public class ReceitaDAO {
 
                 if (rs.getInt("id_consulta") != consulta.getId()) {
                     consulta = new Consulta(rs.getInt("id_consulta"), paciente, medico, rs.getString("dieta_consulta"), rs.getString("exame_consulta"), rs.getDate("data_consulta"));
+                    consulta.setSintomasPaciente(rs.getString("sintomas_paciente_consulta"));
 
                     paciente.addConsulta(consulta);
                     medico.addConsulta(consulta);

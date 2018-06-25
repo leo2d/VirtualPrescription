@@ -5,6 +5,8 @@
  */
 package br.com.ld.controller;
 
+import br.com.ld.model.Consulta;
+import br.com.ld.model.DAO.ConsultaDAO;
 import br.com.ld.model.DAO.PacienteDAO;
 import br.com.ld.model.Paciente;
 import java.sql.SQLException;
@@ -32,5 +34,16 @@ public class CadastroConsultaController {
     public Paciente buscarPacientePorCpf(String cpf) throws ClassNotFoundException, SQLException {
         PacienteDAO pdao = new PacienteDAO();
         return pdao.buscarPorCPF(cpf);
+    }
+    
+    public void CadastrarPaciente(Paciente paciente) throws ClassNotFoundException, SQLException{
+        PacienteDAO pdao = new PacienteDAO();
+        pdao.inserir(paciente);
+    }
+
+    public void cadastrarConsulta(Consulta consulta) throws ClassNotFoundException, SQLException {
+        consulta.setPaciente(buscarPacientePorCpf(consulta.getPaciente().getDocumento()));
+        ConsultaDAO consultaDAO = new ConsultaDAO();
+        consultaDAO.inserir(consulta);
     }
 }

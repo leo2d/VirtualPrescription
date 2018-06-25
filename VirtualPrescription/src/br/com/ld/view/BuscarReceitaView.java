@@ -10,6 +10,7 @@ import br.com.ld.exception.MaisDeUmaLinhaSelecionadaException;
 import br.com.ld.controller.BuscaReceitaController;
 import br.com.ld.exception.CpfNaoPertenceAoUsuarioException;
 import br.com.ld.exception.NenhumaReceitaEncontradaException;
+import br.com.ld.model.Paciente;
 import br.com.ld.model.Receita;
 import br.com.ld.model.Usuario;
 import br.com.ld.util.FormatFactory;
@@ -102,7 +103,7 @@ public class BuscarReceitaView extends javax.swing.JDialog {
                         .addComponent(jLabel1)
                         .addGap(75, 75, 75)
                         .addComponent(jLabel2)))
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(125, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,7 +163,7 @@ public class BuscarReceitaView extends javax.swing.JDialog {
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 38, Short.MAX_VALUE)
+                        .addGap(0, 39, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 835, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(41, 41, 41))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -203,8 +204,12 @@ public class BuscarReceitaView extends javax.swing.JDialog {
         BuscaReceitaController brController = BuscaReceitaController.getInstance();
 
         try {
-            receitas = brController.BuscarReceitas(usuario, NumeroInput.getText(), PesquisaReceitaComboBox.getSelectedItem());
-            RenderizarReceitas();
+            if (ValidarCampoDeBusca()) {
+                String documento = NumeroInput.getText();
+                receitas = brController.BuscarReceitas(usuario, documento, PesquisaReceitaComboBox.getSelectedItem());
+                RenderizarReceitas();
+            }
+
         } catch (ClassNotFoundException | NumberFormatException | SQLException | NullPointerException e) {
             JOptionPane.showMessageDialog(null, "Algo não deu certo. \n" + e.getMessage());
         } catch (CpfNaoPertenceAoUsuarioException ex) {
@@ -214,6 +219,12 @@ public class BuscarReceitaView extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_PesquisarReceitaButtonActionPerformed
+
+    private boolean ValidarCampoDeBusca() {
+        ValidateScreen.ValidarCampoObrigatorio(NumeroInput, PesquisaReceitaComboBox.getSelectedItem().toString());
+
+        return ValidateScreen.isCamposCorretos();
+    }
 
     private void RenderizarReceitas() {
         DefaultTableModel modelo = new DefaultTableModel() {

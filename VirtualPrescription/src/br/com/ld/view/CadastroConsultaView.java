@@ -14,7 +14,11 @@ import br.com.ld.model.Paciente;
 import br.com.ld.model.Receita;
 import br.com.ld.model.Usuario;
 import br.com.ld.util.ValidateScreen;
+import java.awt.Component;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -30,6 +34,7 @@ public class CadastroConsultaView extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         PreencherCamposMedico();
+        gerenciarCamposConsulta(false);
     }
 
     /**
@@ -134,6 +139,12 @@ public class CadastroConsultaView extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        TelPacTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TelPacTextFieldKeyReleased(evt);
+            }
+        });
+
         CRMTextField.setEditable(false);
 
         NomeMedicoTextField.setEditable(false);
@@ -157,6 +168,12 @@ public class CadastroConsultaView extends javax.swing.JDialog {
         jLabel12.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 153, 51));
         jLabel12.setText("Sexo");
+
+        idadePacTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                idadePacTextFieldKeyReleased(evt);
+            }
+        });
 
         jLabel13.setBackground(new java.awt.Color(255, 255, 255));
         jLabel13.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -350,6 +367,7 @@ public class CadastroConsultaView extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private final Usuario usuario = MainScreen.getUsuario();
@@ -381,6 +399,14 @@ public class CadastroConsultaView extends javax.swing.JDialog {
         sexoPacComboBox.setEnabled(false);
     }
 
+    private void gerenciarCamposConsulta(boolean ativar) {
+        sintomasTextArea.setEnabled(ativar);
+        ExamesTextArea.setEnabled(ativar);
+        DietaTextArea.setEnabled(ativar);
+
+        SalvarConsultaButton.setEnabled(ativar);
+    }
+
     private void CPFpacienteInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CPFpacienteInputKeyReleased
         ValidateScreen.validarNumero(CPFpacienteInput);
     }//GEN-LAST:event_CPFpacienteInputKeyReleased
@@ -396,6 +422,7 @@ public class CadastroConsultaView extends javax.swing.JDialog {
             PreencherCamposPaciente();
             desabilitarEdicaoCamposPaciente();
             CadastrarPacienteButton1.setEnabled(false);
+            gerenciarCamposConsulta(true);
         } catch (ClassNotFoundException | SQLException e) {
         } catch (NenhumUsuarioEncontradoException ex) {
             JOptionPane.showMessageDialog(null, "Nenhum paciente encontrado com estes dados.");
@@ -407,16 +434,72 @@ public class CadastroConsultaView extends javax.swing.JDialog {
     }//GEN-LAST:event_VoltarParaMainButtonActionPerformed
 
     private void SalvarConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarConsultaButtonActionPerformed
-        // TODO add your handling code here:
+        try {
+            ValidateScreen.ValidarCampoObrigatorio(sintomasTextArea, "Sintomas");
+            if (ValidateScreen.isCamposCorretos()) {
+                consulta = new Consulta(0, paciente, medico, DietaTextArea.getText(), ExamesTextArea.getText(), (new Date()));
+                
+                CadastroConsultaController consultaController = CadastroConsultaController.getInstance();
+                consultaController.cadastrarConsulta(consulta);
+                
+                gerenciarCamposConsulta(false);
+                
+                JOptionPane.showMessageDialog(null, "Consulta cadastrada com sucesso");
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+        }
+
     }//GEN-LAST:event_SalvarConsultaButtonActionPerformed
 
     private void CadastrarPacienteButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarPacienteButton1ActionPerformed
-        // TODO add your handling code here:
+        try {
+            if (ValidarCamposPaciente()) {
+                CadastroConsultaController consultaController = CadastroConsultaController.getInstance();
+
+                GerarPaciente();
+                consultaController.CadastrarPaciente(paciente);
+                PreencherCamposPaciente();
+                desabilitarEdicaoCamposPaciente();
+                CadastrarPacienteButton1.setEnabled(false);
+                gerenciarCamposConsulta(true);
+                JOptionPane.showMessageDialog(null, "Paciente cadastrado com sucesso!");
+            }
+
+        } catch (ClassNotFoundException | SQLException e) {
+        }
     }//GEN-LAST:event_CadastrarPacienteButton1ActionPerformed
+
+    private boolean ValidarCamposPaciente() {
+
+        ValidateScreen.ValidarCampoObrigatorio(NomePacTextField, "Nome");
+        ValidateScreen.ValidarCampoObrigatorio(CPFpacienteCadastro, "CPF");
+        ValidateScreen.ValidarCampoObrigatorio(idadePacTextField, "Idade");
+        ValidateScreen.ValidarCampoObrigatorio(sexoPacComboBox, "Sexo");
+
+        return ValidateScreen.isCamposCorretos();
+    }
+
+    private void GerarPaciente() {
+        paciente = new Paciente();
+        paciente.setNome(NomePacTextField.getText());
+        paciente.setDocumento(CPFpacienteCadastro.getText());
+        paciente.setSenha(CPFpacienteCadastro.getText());
+        paciente.setIdade(Integer.parseInt(idadePacTextField.getText()));
+        paciente.setSexo((String) sexoPacComboBox.getSelectedItem());
+        paciente.setTelefone(TelPacTextField.getText());
+    }
 
     private void CPFpacienteCadastroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CPFpacienteCadastroKeyReleased
         ValidateScreen.validarNumero(CPFpacienteCadastro);
     }//GEN-LAST:event_CPFpacienteCadastroKeyReleased
+
+    private void idadePacTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_idadePacTextFieldKeyReleased
+        ValidateScreen.validarNumero(idadePacTextField);
+    }//GEN-LAST:event_idadePacTextFieldKeyReleased
+
+    private void TelPacTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TelPacTextFieldKeyReleased
+        ValidateScreen.validarNumero(TelPacTextField);
+    }//GEN-LAST:event_TelPacTextFieldKeyReleased
 
     /**
      * @param args the command line arguments
@@ -495,4 +578,5 @@ public class CadastroConsultaView extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> sexoPacComboBox;
     private javax.swing.JTextArea sintomasTextArea;
     // End of variables declaration//GEN-END:variables
+
 }

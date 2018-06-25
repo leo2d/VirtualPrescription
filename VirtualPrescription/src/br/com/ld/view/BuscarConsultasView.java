@@ -246,6 +246,12 @@ public class BuscarConsultasView extends javax.swing.JDialog {
         TabelaConsultas.getColumnModel().getColumn(8).setPreferredWidth(100);
     }
 
+    private boolean ValidarCampoDeBusca() {
+        ValidateScreen.ValidarCampoObrigatorio(CPFpacienteInput, "CPF Paciente");
+
+        return ValidateScreen.isCamposCorretos();
+    }
+
     private void BuscarConsultas(String cpf) {
         try {
             BuscaConsultaController consultaController = BuscaConsultaController.getInstance();
@@ -268,7 +274,9 @@ public class BuscarConsultasView extends javax.swing.JDialog {
     }//GEN-LAST:event_CPFpacienteInputKeyReleased
 
     private void PesquisarConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisarConsultaButtonActionPerformed
-        BuscarConsultas(CPFpacienteInput.getText());
+        if (ValidarCampoDeBusca()) {
+            BuscarConsultas(CPFpacienteInput.getText());
+        }
     }//GEN-LAST:event_PesquisarConsultaButtonActionPerformed
 
     private void VoltarParaMainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarParaMainButtonActionPerformed
