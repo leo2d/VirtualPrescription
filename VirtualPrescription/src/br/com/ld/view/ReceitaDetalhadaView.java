@@ -178,7 +178,7 @@ public class ReceitaDetalhadaView extends javax.swing.JDialog {
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 153, 51));
-        jLabel8.setText("Observações");
+        jLabel8.setText("Observações e instruções");
 
         StatusTextField.setEditable(false);
 

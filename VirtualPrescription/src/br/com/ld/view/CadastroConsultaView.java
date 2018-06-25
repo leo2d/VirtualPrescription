@@ -33,7 +33,8 @@ public class CadastroConsultaView extends javax.swing.JDialog {
     public CadastroConsultaView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        PreencherCamposMedico();
+        CadastrarReceitaButton.setToolTipText("Primeiro salve a consulta.");
+        SalvarConsultaButton.setToolTipText("Primeiro selecione um pacietne.");
         gerenciarCamposConsulta(false);
     }
 
@@ -79,8 +80,14 @@ public class CadastroConsultaView extends javax.swing.JDialog {
         CPFpacienteCadastro = new javax.swing.JFormattedTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
         DietaTextArea = new javax.swing.JTextArea();
+        CadastrarReceitaButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 51));
 
@@ -227,6 +234,8 @@ public class CadastroConsultaView extends javax.swing.JDialog {
         jLabel19.setForeground(new java.awt.Color(0, 153, 51));
         jLabel19.setText("Dieta recomendada");
 
+        SalvarConsultaButton.setBackground(new java.awt.Color(0, 153, 51));
+        SalvarConsultaButton.setForeground(new java.awt.Color(255, 255, 255));
         SalvarConsultaButton.setText("Salvar Consulta");
         SalvarConsultaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -253,6 +262,16 @@ public class CadastroConsultaView extends javax.swing.JDialog {
         DietaTextArea.setRows(5);
         jScrollPane4.setViewportView(DietaTextArea);
 
+        CadastrarReceitaButton.setBackground(new java.awt.Color(204, 51, 0));
+        CadastrarReceitaButton.setForeground(new java.awt.Color(255, 255, 255));
+        CadastrarReceitaButton.setText("Adicionar Receita");
+        CadastrarReceitaButton.setEnabled(false);
+        CadastrarReceitaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CadastrarReceitaButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -261,48 +280,52 @@ public class CadastroConsultaView extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addComponent(VoltarParaMainButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(SalvarConsultaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
-                    .addComponent(CRMTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(NomeMedicoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10)
-                    .addComponent(EspeciaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel15)
-                            .addComponent(TelPacTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel12)
-                                    .addComponent(sexoPacComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(69, 69, 69)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(idadePacTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel13)))
-                            .addComponent(jLabel14)
-                            .addComponent(NomePacTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11))
-                        .addComponent(CadastrarPacienteButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(CPFpacienteCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(91, 91, 91)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel17)
-                    .addComponent(jLabel19)
-                    .addComponent(jLabel18)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(VoltarParaMainButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(CadastrarReceitaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(SalvarConsultaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(CRMTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(NomeMedicoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10)
+                            .addComponent(EspeciaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel16))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel15)
+                                    .addComponent(TelPacTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel12)
+                                            .addComponent(sexoPacComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(69, 69, 69)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(idadePacTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel13)))
+                                    .addComponent(jLabel14)
+                                    .addComponent(NomePacTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel11))
+                                .addComponent(CadastrarPacienteButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(CPFpacienteCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(91, 91, 91)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel17)
+                            .addComponent(jLabel19)
+                            .addComponent(jLabel18)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(47, 47, 47))
         );
         layout.setVerticalGroup(
@@ -356,14 +379,16 @@ public class CadastroConsultaView extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TelPacTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)
-                        .addComponent(CadastrarPacienteButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(VoltarParaMainButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SalvarConsultaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17))
+                        .addComponent(TelPacTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(SalvarConsultaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CadastrarPacienteButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(VoltarParaMainButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CadastrarReceitaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14))
         );
 
         pack();
@@ -374,7 +399,11 @@ public class CadastroConsultaView extends javax.swing.JDialog {
     private final Medico medico = (Medico) usuario;
     private Paciente paciente = null;
     private Receita receita = null;
-    private Consulta consulta = null;
+    private static Consulta consulta = null;
+
+    static Consulta getConsulta() {
+        return consulta;
+    }
 
     private void PreencherCamposMedico() {
         NomeMedicoTextField.setText(medico.getNome());
@@ -434,38 +463,52 @@ public class CadastroConsultaView extends javax.swing.JDialog {
     }//GEN-LAST:event_VoltarParaMainButtonActionPerformed
 
     private void SalvarConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarConsultaButtonActionPerformed
-        try {
-            ValidateScreen.ValidarCampoObrigatorio(sintomasTextArea, "Sintomas");
-            if (ValidateScreen.isCamposCorretos()) {
-                consulta = new Consulta(0, paciente, medico, DietaTextArea.getText(), ExamesTextArea.getText(), (new Date()));
-                
-                CadastroConsultaController consultaController = CadastroConsultaController.getInstance();
-                consultaController.cadastrarConsulta(consulta);
-                
-                gerenciarCamposConsulta(false);
-                
-                JOptionPane.showMessageDialog(null, "Consulta cadastrada com sucesso");
+        boolean confirma = JOptionPane.showConfirmDialog(null, "Você realmente quer salvar esta consulta?"
+                + " \n OBS: Os dados não poderão ser alterados depois.",
+                "Confirmar", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION;
+
+        if (confirma) {
+            try {
+                ValidateScreen.ValidarCampoObrigatorio(sintomasTextArea, "Sintomas");
+                if (ValidateScreen.isCamposCorretos()) {
+                    consulta = new Consulta(0, paciente, medico, DietaTextArea.getText(), ExamesTextArea.getText(), (new Date()));
+                    consulta.setSintomasPaciente(sintomasTextArea.getText());
+
+                    CadastroConsultaController consultaController = CadastroConsultaController.getInstance();
+                    consultaController.cadastrarConsulta(consulta);
+
+                    gerenciarCamposConsulta(false);
+
+                    JOptionPane.showMessageDialog(null, "Consulta cadastrada com sucesso");
+                    CadastrarReceitaButton.setEnabled(true);
+                }
+            } catch (ClassNotFoundException | SQLException e) {
             }
-        } catch (ClassNotFoundException | SQLException e) {
         }
 
     }//GEN-LAST:event_SalvarConsultaButtonActionPerformed
 
     private void CadastrarPacienteButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarPacienteButton1ActionPerformed
-        try {
-            if (ValidarCamposPaciente()) {
-                CadastroConsultaController consultaController = CadastroConsultaController.getInstance();
+        boolean confirma = JOptionPane.showConfirmDialog(null, "Você realmente quer cadastrar este paciente?"
+                + " \n OBS: Os dados não poderão ser alterados depois.",
+                "Confirmar", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION;
 
-                GerarPaciente();
-                consultaController.CadastrarPaciente(paciente);
-                PreencherCamposPaciente();
-                desabilitarEdicaoCamposPaciente();
-                CadastrarPacienteButton1.setEnabled(false);
-                gerenciarCamposConsulta(true);
-                JOptionPane.showMessageDialog(null, "Paciente cadastrado com sucesso!");
+        if (confirma) {
+            try {
+                if (ValidarCamposPaciente()) {
+                    CadastroConsultaController consultaController = CadastroConsultaController.getInstance();
+
+                    GerarPaciente();
+                    consultaController.CadastrarPaciente(paciente);
+                    PreencherCamposPaciente();
+                    desabilitarEdicaoCamposPaciente();
+                    CadastrarPacienteButton1.setEnabled(false);
+                    gerenciarCamposConsulta(true);
+                    JOptionPane.showMessageDialog(null, "Paciente cadastrado com sucesso!");
+                }
+
+            } catch (ClassNotFoundException | SQLException e) {
             }
-
-        } catch (ClassNotFoundException | SQLException e) {
         }
     }//GEN-LAST:event_CadastrarPacienteButton1ActionPerformed
 
@@ -500,6 +543,15 @@ public class CadastroConsultaView extends javax.swing.JDialog {
     private void TelPacTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TelPacTextFieldKeyReleased
         ValidateScreen.validarNumero(TelPacTextField);
     }//GEN-LAST:event_TelPacTextFieldKeyReleased
+
+    private void CadastrarReceitaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarReceitaButtonActionPerformed
+        CadastroReceitaView receitaView = new CadastroReceitaView(null, true);
+        receitaView.setVisible(true);
+    }//GEN-LAST:event_CadastrarReceitaButtonActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        PreencherCamposMedico();
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -548,6 +600,7 @@ public class CadastroConsultaView extends javax.swing.JDialog {
     private javax.swing.JFormattedTextField CPFpacienteInput;
     private javax.swing.JTextField CRMTextField;
     private javax.swing.JButton CadastrarPacienteButton1;
+    private javax.swing.JButton CadastrarReceitaButton;
     private javax.swing.JTextArea DietaTextArea;
     private javax.swing.JTextField EspeciaTextField;
     private javax.swing.JTextArea ExamesTextArea;

@@ -94,32 +94,33 @@ public class BuscarConsultasView extends javax.swing.JDialog {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(InstrucoesBuscaReceitaLabel)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(CPFpacienteInput, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(PesquisarConsultaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(382, 382, 382))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(556, 556, 556)
-                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(581, 581, 581)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(InstrucoesBuscaReceitaLabel)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(CPFpacienteInput, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(PesquisarConsultaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(652, 652, 652)
+                        .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(15, 15, 15)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(InstrucoesBuscaReceitaLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CPFpacienteInput, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PesquisarConsultaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(14, 14, 14))
         );
 
         infoLabel.setBackground(new java.awt.Color(255, 255, 255));
@@ -169,22 +170,21 @@ public class BuscarConsultasView extends javax.swing.JDialog {
                 .addComponent(VerDetalheConsultaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(70, 70, 70))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1363, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(320, 320, 320)
-                        .addComponent(infoLabel)))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1572, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(infoLabel)
+                .addGap(459, 459, 459))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+                .addGap(18, 18, 18)
                 .addComponent(infoLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -214,19 +214,23 @@ public class BuscarConsultasView extends javax.swing.JDialog {
         modelo.addColumn("Paciente");
         modelo.addColumn("Sexo");
         modelo.addColumn("Idade");
+        modelo.addColumn("Sintomas");
         modelo.addColumn("Exames");
         modelo.addColumn("Dieta");
-        modelo.addColumn("Cod. receitas emitidas");
+        modelo.addColumn("Receitas emitidas");
 
         for (Consulta cons : consultas) {
-            String codigosReceitas = "";
+            String codigosReceitas = null;
             for (Receita r : cons.getReceitas()) {
-                codigosReceitas += r.getId() + ", ";
+                if (r.getId() > 1) {
+                    codigosReceitas += r.getId() + ", ";
+                }
+                break;
             }
             // Seta os valores do objeto para a tabela 
             modelo.addRow(new Object[]{cons.getId(), FormatFactory.formatDate(cons.getData()), cons.getMedico().getNome(),
-                cons.getPaciente().getNome(), cons.getPaciente().getSexo(), cons.getPaciente().getIdade(),
-                cons.getExames(), cons.getDieta(), codigosReceitas});
+                cons.getPaciente().getNome(), cons.getPaciente().getSexo(), cons.getPaciente().getIdade(), cons.getSintomasPaciente(),
+                cons.getExames(), cons.getDieta(), codigosReceitas != null ? codigosReceitas : "Nenhuma receita"});
 
         }
         //Limpa a JTable (Grid)
@@ -235,15 +239,16 @@ public class BuscarConsultasView extends javax.swing.JDialog {
         TabelaConsultas.setModel(modelo);
 
         //Ajusta o tamanho das colunas
-        TabelaConsultas.getColumnModel().getColumn(0).setPreferredWidth(30);
-        TabelaConsultas.getColumnModel().getColumn(1).setPreferredWidth(38);
+        TabelaConsultas.getColumnModel().getColumn(0).setPreferredWidth(15);
+        TabelaConsultas.getColumnModel().getColumn(1).setPreferredWidth(25);
         TabelaConsultas.getColumnModel().getColumn(2).setPreferredWidth(150);
         TabelaConsultas.getColumnModel().getColumn(3).setPreferredWidth(150);
         TabelaConsultas.getColumnModel().getColumn(4).setPreferredWidth(8);
         TabelaConsultas.getColumnModel().getColumn(5).setPreferredWidth(8);
         TabelaConsultas.getColumnModel().getColumn(6).setPreferredWidth(200);
-        TabelaConsultas.getColumnModel().getColumn(7).setPreferredWidth(200);
-        TabelaConsultas.getColumnModel().getColumn(8).setPreferredWidth(100);
+        TabelaConsultas.getColumnModel().getColumn(7).setPreferredWidth(150);
+        TabelaConsultas.getColumnModel().getColumn(8).setPreferredWidth(200);
+        TabelaConsultas.getColumnModel().getColumn(9).setPreferredWidth(90);
     }
 
     private boolean ValidarCampoDeBusca() {

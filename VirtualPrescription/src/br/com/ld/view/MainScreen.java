@@ -246,12 +246,7 @@ public class MainScreen extends javax.swing.JFrame {
         LoginView loginv = new LoginView(this, true);
         setVisible(false);//isso pode dar muito errado, validar melhor
         loginv.setVisible(true);
-        /*
-        medico = loginv.getMedico();
-        paciente = loginv.getPaciente();
-        farmacia = loginv.getFarmacia();
-         */
-        
+ 
         usuario = loginv.getUsuario();
         
         ButtonManager();
