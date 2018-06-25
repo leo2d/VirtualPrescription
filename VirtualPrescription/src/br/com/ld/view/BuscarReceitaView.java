@@ -12,14 +12,9 @@ import br.com.ld.exception.CpfNaoPertenceAoUsuarioException;
 import br.com.ld.exception.NenhumaReceitaEncontradaException;
 import br.com.ld.model.Receita;
 import br.com.ld.model.Usuario;
-import br.com.ld.model.Paciente;
 import br.com.ld.util.FormatFactory;
-import java.awt.HeadlessException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -200,7 +195,6 @@ public class BuscarReceitaView extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private static Receita receita;
-    //  private int idReceitaSelecionada = 0;
     private Usuario usuario = MainScreen.getUsuario();
     private ArrayList<Receita> receitas = new ArrayList<Receita>();
 
@@ -224,10 +218,10 @@ public class BuscarReceitaView extends javax.swing.JDialog {
         DefaultTableModel modelo = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
-                //all cells false
                 return false;
             }
         };
+
         modelo.addColumn("Codigo");
         modelo.addColumn("Data");
         modelo.addColumn("Status");
@@ -268,21 +262,17 @@ public class BuscarReceitaView extends javax.swing.JDialog {
     }//GEN-LAST:event_VoltarParaMainButtonActionPerformed
 
     private void VerDetalheReceitaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerDetalheReceitaButtonActionPerformed
-        setIdReceitaSelecionada();
+        setReceitaSelecionada();
         ReceitaDetalhadaView rdetalhadaview = new ReceitaDetalhadaView(null, true);
         rdetalhadaview.setVisible(true);
     }//GEN-LAST:event_VerDetalheReceitaButtonActionPerformed
-    /*
-    public int getIdReceitaSelecionada() {
-        return this.idReceitaSelecionada;
-    }
-     */
+
     public static Receita getReceitaSelecionada() {
 
         return receita;
     }
 
-    private void setIdReceitaSelecionada() {
+    private void setReceitaSelecionada() {
 
         try {
             int quantidadeLinhasSelecionadas = TabelaReceitas.getSelectedRowCount();

@@ -5,7 +5,9 @@
  */
 package br.com.ld.controller;
 
+import br.com.ld.model.DAO.MedicamentoPrescritoDAO;
 import br.com.ld.model.DAO.ReceitaDAO;
+import br.com.ld.model.MedicamentoPrescrito;
 import br.com.ld.model.Receita;
 import java.sql.SQLException;
 
@@ -27,8 +29,20 @@ public class ReceitaDetalhadaController {
         return _instance;
     }
 
-    public void CancelarReceita(Receita receita) throws SQLException,ClassNotFoundException {
+    public void CancelarReceita(Receita receita) throws SQLException, ClassNotFoundException {
         receita.setStatus("Cancelada");
+        ReceitaDAO receitaDAO = new ReceitaDAO();
+        receitaDAO.alterar(receita);
+    }
+
+    public void VenderMedicamento(MedicamentoPrescrito medPrescrito) throws SQLException, ClassNotFoundException {
+        medPrescrito.setFoiVendido(true);
+        MedicamentoPrescritoDAO medPresDAO = new MedicamentoPrescritoDAO();
+        medPresDAO.alterar(medPrescrito);
+    }
+
+    public void MarcarReceitaComoUtilizada(Receita receita) throws SQLException, ClassNotFoundException {
+        receita.setStatus("Utilizada");
         ReceitaDAO receitaDAO = new ReceitaDAO();
         receitaDAO.alterar(receita);
     }
