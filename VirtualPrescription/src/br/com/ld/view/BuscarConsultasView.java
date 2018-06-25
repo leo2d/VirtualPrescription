@@ -13,6 +13,7 @@ import br.com.ld.model.Paciente;
 import br.com.ld.model.Receita;
 import br.com.ld.model.Usuario;
 import br.com.ld.util.FormatFactory;
+import br.com.ld.util.ValidateScreen;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -263,12 +264,7 @@ public class BuscarConsultasView extends javax.swing.JDialog {
     }
 
     private void CPFpacienteInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CPFpacienteInputKeyReleased
-
-        try {
-            int x = Integer.parseInt(CPFpacienteInput.getText());
-        } catch (NumberFormatException nfe) {
-            CPFpacienteInput.setText("");
-        }
+        ValidateScreen.validarNumero(CPFpacienteInput);
     }//GEN-LAST:event_CPFpacienteInputKeyReleased
 
     private void PesquisarConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisarConsultaButtonActionPerformed

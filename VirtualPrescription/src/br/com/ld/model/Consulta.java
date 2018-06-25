@@ -25,6 +25,15 @@ public class Consulta {
     private String exames;
     private Date data;
     private ArrayList<Receita> receitas;
+    private String sintomasPaciente;
+
+    public String getSintomasPaciente() {
+        return sintomasPaciente;
+    }
+
+    public void setSintomasPaciente(String sintomasPaciente) {
+        this.sintomasPaciente = sintomasPaciente;
+    }
 
     public Consulta(int id, Paciente paciente, Medico medico, String dieta, String exames, Date data) {
         this.id = id;
@@ -34,6 +43,7 @@ public class Consulta {
         this.exames = exames;
         this.data = data;
         this.receitas = new ArrayList<Receita>();
+        this.sintomasPaciente = null;
     }
 
     public ArrayList<Receita> getReceitas() {

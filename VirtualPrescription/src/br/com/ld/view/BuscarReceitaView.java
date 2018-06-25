@@ -13,6 +13,7 @@ import br.com.ld.exception.NenhumaReceitaEncontradaException;
 import br.com.ld.model.Receita;
 import br.com.ld.model.Usuario;
 import br.com.ld.util.FormatFactory;
+import br.com.ld.util.ValidateScreen;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -249,12 +250,7 @@ public class BuscarReceitaView extends javax.swing.JDialog {
     }
 
     private void NumeroInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NumeroInputKeyReleased
-
-        try {
-            int x = Integer.parseInt(NumeroInput.getText());
-        } catch (NumberFormatException nfe) {
-            NumeroInput.setText("");
-        }
+        ValidateScreen.validarNumero(NumeroInput);
     }//GEN-LAST:event_NumeroInputKeyReleased
 
     private void VoltarParaMainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarParaMainButtonActionPerformed

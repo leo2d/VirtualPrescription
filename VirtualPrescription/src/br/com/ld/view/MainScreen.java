@@ -21,9 +21,9 @@ public class MainScreen extends javax.swing.JFrame {
      */
     public MainScreen() {
         initComponents();
-
+        
     }
-
+    
     private static Usuario usuario = null;
 
     /**
@@ -72,6 +72,7 @@ public class MainScreen extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(0, 153, 51));
 
+        buscarReceitaButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         buscarReceitaButton.setText("Buscar Receitas");
         buscarReceitaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,8 +86,8 @@ public class MainScreen extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(buscarReceitaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(285, 285, 285))
+                .addComponent(buscarReceitaButton)
+                .addGap(273, 273, 273))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,8 +137,15 @@ public class MainScreen extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(0, 153, 51));
 
+        CadastrarConsultaButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         CadastrarConsultaButton.setText("Cadastrar");
+        CadastrarConsultaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CadastrarConsultaButtonActionPerformed(evt);
+            }
+        });
 
+        VisualizarConsultasButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         VisualizarConsultasButton.setText("Visualizar");
         VisualizarConsultasButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,7 +160,7 @@ public class MainScreen extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(57, 57, 57)
                 .addComponent(CadastrarConsultaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(VisualizarConsultasButton, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(283, 283, 283))
         );
@@ -210,8 +218,7 @@ public class MainScreen extends javax.swing.JFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(SairButton, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addComponent(SairButton, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -225,8 +232,8 @@ public class MainScreen extends javax.swing.JFrame {
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(SairButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(SairButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -235,7 +242,7 @@ public class MainScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void aoAbir(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_aoAbir
-
+        
         LoginView loginv = new LoginView(this, true);
         setVisible(false);//isso pode dar muito errado, validar melhor
         loginv.setVisible(true);
@@ -244,13 +251,13 @@ public class MainScreen extends javax.swing.JFrame {
         paciente = loginv.getPaciente();
         farmacia = loginv.getFarmacia();
          */
-
+        
         usuario = loginv.getUsuario();
-
+        
         ButtonManager();
         setVisible(true);//isso pode dar muito errado, validar melhor
     }//GEN-LAST:event_aoAbir
-
+    
     private void ButtonManager() {
         CadastrarConsultaButton.setVisible(usuario instanceof Medico);
         VisualizarConsultasButton.setVisible(usuario instanceof Medico || usuario instanceof Paciente);
@@ -258,7 +265,7 @@ public class MainScreen extends javax.swing.JFrame {
             consultaImagem.setVisible(false);
             ConsultasLabel.setVisible(false);
         }
-
+        
     }
     private void buscarReceitaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarReceitaButtonActionPerformed
         BuscarReceitaView brv = new BuscarReceitaView(this, true);
@@ -275,8 +282,13 @@ public class MainScreen extends javax.swing.JFrame {
         bsConsultasView.setVisible(true);
     }//GEN-LAST:event_VisualizarConsultasButtonActionPerformed
 
+    private void CadastrarConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarConsultaButtonActionPerformed
+        CadastroConsultaView cadastroConsultaView = new CadastroConsultaView(this, true);
+        cadastroConsultaView.setVisible(true);
+    }//GEN-LAST:event_CadastrarConsultaButtonActionPerformed
+    
     public static Usuario getUsuario() {
-
+        
         return MainScreen.usuario;
     }
 
