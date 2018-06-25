@@ -5,12 +5,15 @@
  */
 package br.com.ld.view;
 
+import br.com.ld.exception.NenhumUsuarioEncontradoException;
 import br.com.ld.controller.LoginController;
 import br.com.ld.model.Farmacia;
 import br.com.ld.model.Medico;
 import br.com.ld.model.Paciente;
 import br.com.ld.model.Usuario;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -204,37 +207,19 @@ public class LoginView extends javax.swing.JDialog {
         try {
             LoginController loginController = LoginController.getInstance();
             String senha = String.valueOf(SenhaInput.getPassword());
-            usuario = loginController.getUsuario(DocumentoInput.getText(),senha );
+            usuario = loginController.getUsuario(DocumentoInput.getText(), senha);
 
             if (usuario == null) {
-                JOptionPane.showMessageDialog(null, "Nenhum usuario encontrado");
+                throw new NenhumUsuarioEncontradoException();
             } else {
                 JOptionPane.showMessageDialog(null, "Bem vindo: " + usuario.getNome());
             }
-
-            /*
-            paciente = loginController.getPaciente(DocumentoInput.getText(), SenhaInput.getText());
-        
-            if (paciente == null) {
-                medico = loginController.getMedico(DocumentoInput.getText(), SenhaInput.getText());
-                if (medico == null) {
-                    farmacia = loginController.getFarmacia(DocumentoInput.getText(), SenhaInput.getText());
-                    if (farmacia == null) {
-                        JOptionPane.showMessageDialog(null, "Nenhum usuario encontrado");
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Bem vindo: " + farmacia.getNome());
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Bem vindo: " + medico.getNome());
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Bem vindo: " + paciente.getNome());
-            }
-             */
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, "Erro na Conexão, Classe não encontrada");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao conectar no banco " + ex.getMessage());
+        } catch (NenhumUsuarioEncontradoException ex) {
+            JOptionPane.showMessageDialog(null, "Nenhum usuario encontrado");
         }
 
         setVisible(usuario == null);

@@ -5,12 +5,17 @@
  */
 package br.com.ld.view;
 
+import br.com.ld.controller.CadastroConsultaController;
+import br.com.ld.exception.NenhumUsuarioEncontradoException;
+import br.com.ld.exception.NenhumaConsultaEncontradaException;
 import br.com.ld.model.Consulta;
 import br.com.ld.model.Medico;
 import br.com.ld.model.Paciente;
 import br.com.ld.model.Receita;
 import br.com.ld.model.Usuario;
 import br.com.ld.util.ValidateScreen;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -56,8 +61,6 @@ public class CadastroConsultaView extends javax.swing.JDialog {
         EspeciaTextField = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         VoltarParaMainButton = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        DietaTextArea = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         sintomasTextArea = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -69,6 +72,8 @@ public class CadastroConsultaView extends javax.swing.JDialog {
         CadastrarPacienteButton1 = new javax.swing.JButton();
         sexoPacComboBox = new javax.swing.JComboBox<>();
         CPFpacienteCadastro = new javax.swing.JFormattedTextField();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        DietaTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -182,10 +187,6 @@ public class CadastroConsultaView extends javax.swing.JDialog {
             }
         });
 
-        DietaTextArea.setColumns(20);
-        DietaTextArea.setRows(5);
-        jScrollPane1.setViewportView(DietaTextArea);
-
         sintomasTextArea.setColumns(20);
         sintomasTextArea.setRows(5);
         jScrollPane2.setViewportView(sintomasTextArea);
@@ -231,6 +232,10 @@ public class CadastroConsultaView extends javax.swing.JDialog {
             }
         });
 
+        DietaTextArea.setColumns(20);
+        DietaTextArea.setRows(5);
+        jScrollPane4.setViewportView(DietaTextArea);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -275,13 +280,12 @@ public class CadastroConsultaView extends javax.swing.JDialog {
                     .addComponent(CPFpacienteCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(91, 91, 91)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17)
                     .addComponent(jLabel19)
                     .addComponent(jLabel18)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(47, 47, 47))
         );
         layout.setVerticalGroup(
@@ -301,8 +305,8 @@ public class CadastroConsultaView extends javax.swing.JDialog {
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel19)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -348,18 +352,18 @@ public class CadastroConsultaView extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private Usuario usuario = MainScreen.getUsuario();
-    private Medico medico = (Medico) usuario;
+    private final Usuario usuario = MainScreen.getUsuario();
+    private final Medico medico = (Medico) usuario;
     private Paciente paciente = null;
     private Receita receita = null;
     private Consulta consulta = null;
-    
+
     private void PreencherCamposMedico() {
         NomeMedicoTextField.setText(medico.getNome());
         CRMTextField.setText(medico.getDocumento());
         EspeciaTextField.setText(medico.getEspecializacao());
     }
-    
+
     private void PreencherCamposPaciente() {
         NomePacTextField.setText(paciente.getNome());
         CPFpacienteCadastro.setText(paciente.getDocumento());
@@ -367,12 +371,35 @@ public class CadastroConsultaView extends javax.swing.JDialog {
         idadePacTextField.setText(paciente.getIdade() + "");
         TelPacTextField.setText(paciente.getTelefone());
     }
+
+    private void desabilitarEdicaoCamposPaciente() {
+        NomePacTextField.setEditable(false);
+        CPFpacienteCadastro.setEditable(false);
+        sexoPacComboBox.setEditable(false);
+        idadePacTextField.setEditable(false);
+        TelPacTextField.setEditable(false);
+        sexoPacComboBox.setEnabled(false);
+    }
+
     private void CPFpacienteInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CPFpacienteInputKeyReleased
         ValidateScreen.validarNumero(CPFpacienteInput);
     }//GEN-LAST:event_CPFpacienteInputKeyReleased
 
     private void PesquisarPacienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisarPacienteButtonActionPerformed
 
+        try {
+            CadastroConsultaController cadsController = CadastroConsultaController.getInstance();
+            paciente = cadsController.buscarPacientePorCpf(CPFpacienteInput.getText());
+            if (paciente == null) {
+                throw new NenhumUsuarioEncontradoException();
+            }
+            PreencherCamposPaciente();
+            desabilitarEdicaoCamposPaciente();
+            CadastrarPacienteButton1.setEnabled(false);
+        } catch (ClassNotFoundException | SQLException e) {
+        } catch (NenhumUsuarioEncontradoException ex) {
+            JOptionPane.showMessageDialog(null, "Nenhum paciente encontrado com estes dados.");
+        }
     }//GEN-LAST:event_PesquisarPacienteButtonActionPerformed
 
     private void VoltarParaMainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarParaMainButtonActionPerformed
@@ -462,9 +489,9 @@ public class CadastroConsultaView extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JComboBox<String> sexoPacComboBox;
     private javax.swing.JTextArea sintomasTextArea;
     // End of variables declaration//GEN-END:variables

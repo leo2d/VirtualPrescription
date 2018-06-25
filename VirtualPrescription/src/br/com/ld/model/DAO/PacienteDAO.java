@@ -151,7 +151,29 @@ public class PacienteDAO implements IGenericDAO<Paciente, Integer> {
                     rs.getInt("idade_paciente"), rs.getString("sexo_paciente"), rs.getString("telefone_paciente"), rs.getString("senha_paciente"), rs.getString("cpf_paciente"));
         }
 
-        //Conect.close();
+        return paciente;
+    }
+
+    public Paciente buscarPorCPF(String cpf) throws ClassNotFoundException, SQLException {
+
+        Connection Conect = ConnectionFactory.getConnection();
+
+        PreparedStatement pst = Conect.prepareStatement(
+                "SELECT * FROM usuario_paciente "
+                + " WHERE cpf_paciente = ? "
+        );
+
+        pst.setString(1, cpf);
+
+        Paciente paciente = null;
+
+        ResultSet rs = pst.executeQuery();
+
+        if (rs.next()) {
+            paciente = new Paciente(rs.getInt("id_paciente"), rs.getString("nome_paciente"),
+                    rs.getInt("idade_paciente"), rs.getString("sexo_paciente"), rs.getString("telefone_paciente"), rs.getString("senha_paciente"), rs.getString("cpf_paciente"));
+        }
+
         return paciente;
     }
 
