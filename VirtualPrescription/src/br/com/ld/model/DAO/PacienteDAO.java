@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -25,7 +26,7 @@ public class PacienteDAO implements IGenericDAO<Paciente, Integer> {
         PreparedStatement pst = Conect.prepareStatement(
                 "INSERT INTO usuario_paciente "
                 + " ( nome_paciente, idade_paciente, sexo_paciente, telefone_paciente, senha_paciente, cpf_paciente) "
-                + " VALUES(?, ?, ?, ?, ?, ?);"
+                + " VALUES(?, ?, ?, ?, ?, ?);", Statement.RETURN_GENERATED_KEYS
         );
 
         pst.setString(1, object.getNome());
@@ -36,6 +37,12 @@ public class PacienteDAO implements IGenericDAO<Paciente, Integer> {
         pst.setString(6, object.getDocumento());
 
         pst.executeUpdate();
+
+        final ResultSet rs = pst.getGeneratedKeys();
+        if (rs.next()) {
+            final int lastId = rs.getInt(1);
+            object.setId(lastId);
+        }
     }
 
     @Override

@@ -436,10 +436,8 @@ public class ReceitaDetalhadaView extends javax.swing.JDialog {
         } catch (ClassNotFoundException | SQLException e) {
             JOptionPane.showMessageDialog(null, "Ocorreu ao realizae a operação: \n" + e.getMessage());
         } catch (MedicamentoJaFoiVendidoException ex) {
-            JOptionPane.showMessageDialog(null, "O medicamento selecionado jáfoi vendido!\n");
+            JOptionPane.showMessageDialog(null, "O medicamento selecionado já foi vendido!\n");
         }
-
-
     }//GEN-LAST:event_VenderMedicamentoButtonActionPerformed
 
     /**

@@ -42,7 +42,6 @@ public class CadastroConsultaController {
     }
 
     public void cadastrarConsulta(Consulta consulta) throws ClassNotFoundException, SQLException {
-        consulta.setPaciente(buscarPacientePorCpf(consulta.getPaciente().getDocumento()));
         ConsultaDAO consultaDAO = new ConsultaDAO();
         consultaDAO.inserir(consulta);
     }

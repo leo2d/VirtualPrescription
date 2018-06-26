@@ -35,7 +35,7 @@ public class CadastroConsultaView extends javax.swing.JDialog {
         initComponents();
         CadastrarReceitaButton.setToolTipText("Primeiro salve a consulta.");
         SalvarConsultaButton.setToolTipText("Primeiro selecione um pacietne.");
-        gerenciarCamposConsulta(false);
+        ativarCamposConsulta(false);
     }
 
     /**
@@ -427,12 +427,18 @@ public class CadastroConsultaView extends javax.swing.JDialog {
         sexoPacComboBox.setEnabled(false);
     }
 
-    private void gerenciarCamposConsulta(boolean ativar) {
+    private void ativarCamposConsulta(boolean ativar) {
         sintomasTextArea.setEnabled(ativar);
         ExamesTextArea.setEnabled(ativar);
         DietaTextArea.setEnabled(ativar);
 
         SalvarConsultaButton.setEnabled(ativar);
+    }
+
+    private void limparCamposReceita() {
+        sintomasTextArea.setText("");
+        ExamesTextArea.setText("");
+        DietaTextArea.setText("");
     }
 
     private void CPFpacienteInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CPFpacienteInputKeyReleased
@@ -450,7 +456,8 @@ public class CadastroConsultaView extends javax.swing.JDialog {
             PreencherCamposPaciente();
             desabilitarEdicaoCamposPaciente();
             CadastrarPacienteButton1.setEnabled(false);
-            gerenciarCamposConsulta(true);
+            limparCamposReceita();
+            ativarCamposConsulta(true);
         } catch (ClassNotFoundException | SQLException e) {
         } catch (NenhumUsuarioEncontradoException ex) {
             JOptionPane.showMessageDialog(null, "Nenhum paciente encontrado com estes dados.");
@@ -462,25 +469,25 @@ public class CadastroConsultaView extends javax.swing.JDialog {
     }//GEN-LAST:event_VoltarParaMainButtonActionPerformed
 
     private void SalvarConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarConsultaButtonActionPerformed
-        boolean confirma = JOptionPane.showConfirmDialog(null, "Você realmente quer salvar esta consulta?"
-                + " \n OBS: Os dados não poderão ser alterados depois.",
-                "Confirmar", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION;
+        ValidateScreen.ValidarCampoObrigatorio(sintomasTextArea, "Sintomas");
 
-        if (confirma) {
+        if (ValidateScreen.isCamposCorretos()
+                && JOptionPane.showConfirmDialog(null, "Você realmente quer salvar esta consulta?"
+                        + " \n OBS: Os dados não poderão ser alterados depois.",
+                        "Confirmar", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION) {
             try {
-                ValidateScreen.ValidarCampoObrigatorio(sintomasTextArea, "Sintomas");
-                if (ValidateScreen.isCamposCorretos()) {
-                    consulta = new Consulta(0, paciente, medico, DietaTextArea.getText(), ExamesTextArea.getText(), (new Date()));
-                    consulta.setSintomasPaciente(sintomasTextArea.getText());
 
-                    CadastroConsultaController consultaController = CadastroConsultaController.getInstance();
-                    consultaController.cadastrarConsulta(consulta);
+                consulta = new Consulta(0, paciente, medico, DietaTextArea.getText(), ExamesTextArea.getText(), (new Date()));
+                consulta.setSintomasPaciente(sintomasTextArea.getText());
 
-                    gerenciarCamposConsulta(false);
+                CadastroConsultaController consultaController = CadastroConsultaController.getInstance();
+                consultaController.cadastrarConsulta(consulta);
 
-                    JOptionPane.showMessageDialog(null, "Consulta cadastrada com sucesso");
-                    CadastrarReceitaButton.setEnabled(true);
-                }
+                ativarCamposConsulta(false);
+
+                JOptionPane.showMessageDialog(null, "Consulta cadastrada com sucesso");
+                CadastrarReceitaButton.setEnabled(true);
+
             } catch (ClassNotFoundException | SQLException e) {
             }
         }
@@ -502,8 +509,10 @@ public class CadastroConsultaView extends javax.swing.JDialog {
                     PreencherCamposPaciente();
                     desabilitarEdicaoCamposPaciente();
                     CadastrarPacienteButton1.setEnabled(false);
-                    gerenciarCamposConsulta(true);
+                    ativarCamposConsulta(true);
                     JOptionPane.showMessageDialog(null, "Paciente cadastrado com sucesso!");
+                    JOptionPane.showMessageDialog(null, "Seu paciente agora já tem acesso ao sistema "
+                            + "através de login usando o CPF nos campos \"Documento\" e \"Senha\"");
                 }
 
             } catch (ClassNotFoundException | SQLException e) {
@@ -544,8 +553,16 @@ public class CadastroConsultaView extends javax.swing.JDialog {
     }//GEN-LAST:event_TelPacTextFieldKeyReleased
 
     private void CadastrarReceitaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarReceitaButtonActionPerformed
-        CadastroReceitaView receitaView = new CadastroReceitaView(null, true);
-        receitaView.setVisible(true);
+
+        if (paciente.getId() == consulta.getPaciente().getId()) {
+            CadastroReceitaView receitaView = new CadastroReceitaView(null, true);
+            receitaView.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "O paciente selecioando é difernete "
+                    + "do cadastrado nesta consulta", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+
+
     }//GEN-LAST:event_CadastrarReceitaButtonActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

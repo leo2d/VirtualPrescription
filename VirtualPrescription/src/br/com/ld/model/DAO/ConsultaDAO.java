@@ -16,6 +16,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -176,7 +177,7 @@ public class ConsultaDAO {
                 "INSERT INTO consulta "
                 + "(data_consulta, id_paciente_consulta, id_medico_consulta, "
                 + "dieta_consulta, exame_consulta, sintomas_paciente_consulta) "
-                + "VALUES ( ?, ?, ?, ?, ?, ?) "
+                + "VALUES ( ?, ?, ?, ?, ?, ?) ", Statement.RETURN_GENERATED_KEYS
         );
 
         java.sql.Date sqlDate = new java.sql.Date(consulta.getData().getTime());
@@ -189,5 +190,11 @@ public class ConsultaDAO {
         pst.setString(6, consulta.getSintomasPaciente());
 
         pst.executeUpdate();
+
+        final ResultSet rs = pst.getGeneratedKeys();
+        if (rs.next()) {
+            final int lastId = rs.getInt(1);
+            consulta.setId(lastId);
+        }
     }
 }
