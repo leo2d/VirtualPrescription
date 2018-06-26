@@ -20,21 +20,27 @@ public class MedicamentoPrescritoDAO implements IGenericDAO<MedicamentoPrescrito
 
     @Override
     public void inserir(MedicamentoPrescrito object) throws ClassNotFoundException, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection conect = ConnectionFactory.getConnection();
+
+        PreparedStatement pst = conect.prepareStatement(
+                "INSERT INTO associacao_medicamento_receita "
+                + "(id_medicamento_prescrito, id_receita_consulta, "
+                + "instrucoes_medicamento_prescrito, foi_vendido) "
+                + "VALUES ( ?, ?, ?, ? )"
+        );
+
+        pst.setInt(1, object.getMedicamento().getId());
+        pst.setInt(2, object.getReceita().getId());
+        pst.setString(3, object.getInstrucoes());
+        pst.setInt(4, object.isFoiVendido() ? 1 : 0);
+
+        pst.executeUpdate();
     }
 
     @Override
     public void alterar(MedicamentoPrescrito object) throws ClassNotFoundException, SQLException {
         Connection conect = ConnectionFactory.getConnection();
-/*
-        int vendido = object.isFoiVendido() ? 1 : 0;
-        String sql = "UPDATE associacao_medicamento_receita SET "
-                + " id_medicamento_prescrito =  " + object.getMedicamento().getId() + ", "
-                + "id_receita_consulta =   " + object.getReceita().getId() + ", "
-                + "instrucoes_medicamento_prescrito =   " + object.getInstrucoes() + ", "
-                + "foi_vendido =  " + vendido + " "
-                + "WHERE id_associacao_medicamento_receita  " + object.getId();
-*/
+
         PreparedStatement pst = conect.prepareStatement(
                 "UPDATE associacao_medicamento_receita SET "
                 + " id_medicamento_prescrito = ? , "
@@ -42,15 +48,14 @@ public class MedicamentoPrescritoDAO implements IGenericDAO<MedicamentoPrescrito
                 + "instrucoes_medicamento_prescrito = ? , "
                 + "foi_vendido = ? "
                 + "WHERE id_associacao_medicamento_receita = ? "
-                 
         );
-        
+
         pst.setInt(1, object.getMedicamento().getId());
         pst.setInt(2, object.getReceita().getId());
         pst.setString(3, object.getInstrucoes());
         pst.setInt(4, object.isFoiVendido() ? 1 : 0);
         pst.setInt(5, object.getId());
-         
+
         pst.executeUpdate();
     }
 

@@ -5,9 +5,16 @@
  */
 package br.com.ld.view;
 
+import br.com.ld.controller.CadastroReceitaController;
 import br.com.ld.model.Consulta;
+import br.com.ld.model.Medicamento;
+import br.com.ld.model.MedicamentoPrescrito;
 import br.com.ld.model.Receita;
 import br.com.ld.util.FormatFactory;
+import br.com.ld.util.ValidateScreen;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,6 +30,8 @@ public class CadastroReceitaView extends javax.swing.JDialog {
         initComponents();
     }
 
+    private ArrayList<MedicamentoPrescrito> medicamentosPrescritos = new ArrayList<MedicamentoPrescrito>();
+    private ArrayList<Medicamento> medicamentos = null;
     private Consulta consulta = CadastroConsultaView.getConsulta();
     private Receita receita = null;
 
@@ -35,6 +44,7 @@ public class CadastroReceitaView extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         CrmTextField = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         MedicoTextField = new javax.swing.JTextField();
@@ -42,7 +52,7 @@ public class CadastroReceitaView extends javax.swing.JDialog {
         PacienteTextField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        ObservacoesTextArea = new javax.swing.JTextArea();
+        InstrucoesTextArea = new javax.swing.JTextArea();
         DataTextField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -52,7 +62,12 @@ public class CadastroReceitaView extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         VoltarParaCadastroConsultaButton = new javax.swing.JButton();
-        SalvarReceitaButton = new javax.swing.JButton();
+        ReceitarMedicamentoButton = new javax.swing.JButton();
+        MedicamentosComboBox = new javax.swing.JComboBox<>();
+        SalvarReceitaButton1 = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+
+        jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -82,9 +97,9 @@ public class CadastroReceitaView extends javax.swing.JDialog {
         jLabel5.setForeground(new java.awt.Color(0, 153, 51));
         jLabel5.setText("Paciente");
 
-        ObservacoesTextArea.setColumns(20);
-        ObservacoesTextArea.setRows(5);
-        jScrollPane2.setViewportView(ObservacoesTextArea);
+        InstrucoesTextArea.setColumns(20);
+        InstrucoesTextArea.setRows(5);
+        jScrollPane2.setViewportView(InstrucoesTextArea);
 
         DataTextField.setEditable(false);
 
@@ -109,7 +124,7 @@ public class CadastroReceitaView extends javax.swing.JDialog {
         jLabel10.setBackground(new java.awt.Color(255, 255, 255));
         jLabel10.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 153, 51));
-        jLabel10.setText("Medicamentos prescritos");
+        jLabel10.setText("Selecione o medicamento");
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 51));
 
@@ -123,22 +138,22 @@ public class CadastroReceitaView extends javax.swing.JDialog {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(487, 487, 487)
+                .addGap(414, 414, 414)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(16, 16, 16)
                 .addComponent(jLabel1)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 153, 51));
-        jLabel8.setText("Observações e instruções");
+        jLabel8.setText("Instruções de uso");
 
         VoltarParaCadastroConsultaButton.setText("Voltar");
         VoltarParaCadastroConsultaButton.addActionListener(new java.awt.event.ActionListener() {
@@ -147,14 +162,30 @@ public class CadastroReceitaView extends javax.swing.JDialog {
             }
         });
 
-        SalvarReceitaButton.setBackground(new java.awt.Color(0, 153, 51));
-        SalvarReceitaButton.setForeground(new java.awt.Color(255, 255, 255));
-        SalvarReceitaButton.setText("Salvar Receita");
-        SalvarReceitaButton.addActionListener(new java.awt.event.ActionListener() {
+        ReceitarMedicamentoButton.setBackground(new java.awt.Color(0, 153, 51));
+        ReceitarMedicamentoButton.setForeground(new java.awt.Color(255, 255, 255));
+        ReceitarMedicamentoButton.setText("Receitar Medicamento");
+        ReceitarMedicamentoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SalvarReceitaButtonActionPerformed(evt);
+                ReceitarMedicamentoButtonActionPerformed(evt);
             }
         });
+
+        MedicamentosComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {  }));
+
+        SalvarReceitaButton1.setBackground(new java.awt.Color(0, 153, 51));
+        SalvarReceitaButton1.setForeground(new java.awt.Color(255, 255, 255));
+        SalvarReceitaButton1.setText("Salvar Receita");
+        SalvarReceitaButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SalvarReceitaButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel12.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(0, 153, 51));
+        jLabel12.setText("Medicamentos prescritos");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -163,50 +194,56 @@ public class CadastroReceitaView extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(41, 41, 41)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(DataTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(MedicoTextField)
-                                        .addComponent(PacienteTextField)
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel7)
-                                        .addComponent(jLabel6)
-                                        .addComponent(jLabel4)
-                                        .addComponent(CrmTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel5))
-                                    .addComponent(jLabel8))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(9, 9, 9)
-                                        .addComponent(jLabel10))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(59, 59, 59)
-                                .addComponent(VoltarParaCadastroConsultaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(SalvarReceitaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(46, 46, 46))))
+                        .addGap(42, 42, 42)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(DataTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel7)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel4)
+                                .addComponent(CrmTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel5)
+                                .addComponent(PacienteTextField)
+                                .addComponent(MedicoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel10)
+                                        .addComponent(MedicamentosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(ReceitarMedicamentoButton))
+                                    .addGap(20, 20, 20)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(221, 221, 221)
+                                    .addComponent(jLabel8))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 291, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12))
+                        .addGap(40, 40, 40))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(VoltarParaCadastroConsultaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(SalvarReceitaButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(51, 51, 51))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(DataTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(DataTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(9, 9, 9)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(PacienteTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -218,19 +255,24 @@ public class CadastroReceitaView extends javax.swing.JDialog {
                         .addComponent(jLabel7)
                         .addGap(4, 4, 4)
                         .addComponent(CrmTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel10)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(MedicamentosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(ReceitarMedicamentoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(SalvarReceitaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(VoltarParaCadastroConsultaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29))
+                    .addComponent(VoltarParaCadastroConsultaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SalvarReceitaButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15))
         );
 
         pack();
@@ -238,16 +280,46 @@ public class CadastroReceitaView extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void aoAbrirTela(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_aoAbrirTela
+
+        BuscarMedicamentos();
         PreenceherCampos();
+
     }//GEN-LAST:event_aoAbrirTela
+
+    private void BuscarMedicamentos() {
+        try {
+            CadastroReceitaController receitaController = CadastroReceitaController.getInstance();
+            medicamentos = receitaController.getAllMedicamentos();
+        } catch (Exception e) {
+        }
+    }
 
     private void VoltarParaCadastroConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarParaCadastroConsultaButtonActionPerformed
         setVisible(false);
     }//GEN-LAST:event_VoltarParaCadastroConsultaButtonActionPerformed
 
-    private void SalvarReceitaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarReceitaButtonActionPerformed
-        
-    }//GEN-LAST:event_SalvarReceitaButtonActionPerformed
+    private void ReceitarMedicamentoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReceitarMedicamentoButtonActionPerformed
+        ValidateScreen.ValidarCampoObrigatorio(InstrucoesTextArea, "Instruções");
+        if (ValidateScreen.isCamposCorretos()
+                && JOptionPane.showConfirmDialog(null, "Você realmente quer receitar este medicamento?"
+                        + " \n OBS: Os dados não poderão ser alterados depois.",
+                        "Confirmar", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION) {
+            Medicamento medicamentoSelecionado = medicamentos.stream()
+                    .filter(m -> m.getNome().equalsIgnoreCase((String) (MedicamentosComboBox.getSelectedItem())))
+                    .findFirst().get();
+
+            medicamentosPrescritos.add(
+                    new MedicamentoPrescrito(0, InstrucoesTextArea.getText(), false, medicamentoSelecionado, null)
+            );
+
+            PopularTabelaMedicamentos();
+            InstrucoesTextArea.setText("");
+        }
+    }//GEN-LAST:event_ReceitarMedicamentoButtonActionPerformed
+
+    private void SalvarReceitaButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarReceitaButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SalvarReceitaButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -295,14 +367,18 @@ public class CadastroReceitaView extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CrmTextField;
     private javax.swing.JTextField DataTextField;
+    private javax.swing.JTextArea InstrucoesTextArea;
+    private javax.swing.JComboBox<String> MedicamentosComboBox;
     private javax.swing.JTextField MedicoTextField;
-    private javax.swing.JTextArea ObservacoesTextArea;
     private javax.swing.JTextField PacienteTextField;
-    private javax.swing.JButton SalvarReceitaButton;
+    private javax.swing.JButton ReceitarMedicamentoButton;
+    private javax.swing.JButton SalvarReceitaButton1;
     private javax.swing.JTable TabelaMedicamentosPrescritos;
     private javax.swing.JButton VoltarParaCadastroConsultaButton;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -318,6 +394,33 @@ public class CadastroReceitaView extends javax.swing.JDialog {
         PacienteTextField.setText(consulta.getPaciente().getNome());
         MedicoTextField.setText(consulta.getMedico().getNome());
         CrmTextField.setText(consulta.getMedico().getDocumento());
+         
+        for (Medicamento m : medicamentos) {
+            MedicamentosComboBox.addItem(m.getNome());
+        }
+        //  PopularTabelaMedicamentos();
+    }
+
+    private void PopularTabelaMedicamentos() {
+        DefaultTableModel modelo = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        modelo.addColumn("Codigo");
+        modelo.addColumn("Nome");
+
+        for (MedicamentoPrescrito mp : medicamentosPrescritos) {
+            modelo.addRow(new Object[]{mp.getMedicamento().getId(), mp.getMedicamento().getNome()});
+        }
+
+        TabelaMedicamentosPrescritos.removeAll();
+        TabelaMedicamentosPrescritos.setModel(modelo);
+
+        TabelaMedicamentosPrescritos.getColumnModel().getColumn(0).setPreferredWidth(5);
+        TabelaMedicamentosPrescritos.getColumnModel().getColumn(1).setPreferredWidth(95);
 
     }
 }

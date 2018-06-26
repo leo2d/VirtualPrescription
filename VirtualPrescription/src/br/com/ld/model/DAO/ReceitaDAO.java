@@ -17,6 +17,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -226,5 +227,28 @@ public class ReceitaDAO {
         pst.setInt(4, receita.getId());
 
         pst.executeUpdate();
+    }
+
+    public void inserir(Receita receita) throws ClassNotFoundException, SQLException {
+        Connection Conect = ConnectionFactory.getConnection();
+
+        PreparedStatement pst = Conect.prepareStatement(
+                "INSRT INTO receita "
+                + "(id_consulta_receita, status_receita, observacoes_receita) "
+                + "VALUES ( ?, ?, ? )", Statement.RETURN_GENERATED_KEYS
+        );
+
+        pst.setInt(1, receita.getConsulta().getId());
+        pst.setString(2, receita.getStatus());
+        pst.setString(3, receita.getObservacoes());
+
+        pst.executeUpdate();
+
+        final ResultSet rs = pst.getGeneratedKeys();
+        if (rs.next()) {
+            final int lastId = rs.getInt("id_receita");
+            receita.setId(lastId);
+        }
+
     }
 }
