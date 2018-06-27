@@ -156,6 +156,7 @@ public class CadastroReceitaView extends javax.swing.JDialog {
         jLabel8.setForeground(new java.awt.Color(0, 153, 51));
         jLabel8.setText("Instruções de uso");
 
+        VoltarParaCadastroConsultaButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         VoltarParaCadastroConsultaButton.setText("Voltar");
         VoltarParaCadastroConsultaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -163,7 +164,8 @@ public class CadastroReceitaView extends javax.swing.JDialog {
             }
         });
 
-        ReceitarMedicamentoButton.setBackground(new java.awt.Color(0, 153, 51));
+        ReceitarMedicamentoButton.setBackground(new java.awt.Color(204, 102, 0));
+        ReceitarMedicamentoButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         ReceitarMedicamentoButton.setForeground(new java.awt.Color(255, 255, 255));
         ReceitarMedicamentoButton.setText("Receitar Medicamento");
         ReceitarMedicamentoButton.addActionListener(new java.awt.event.ActionListener() {
@@ -175,6 +177,7 @@ public class CadastroReceitaView extends javax.swing.JDialog {
         MedicamentosComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {  }));
 
         SalvarReceitaButton1.setBackground(new java.awt.Color(0, 153, 51));
+        SalvarReceitaButton1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         SalvarReceitaButton1.setForeground(new java.awt.Color(255, 255, 255));
         SalvarReceitaButton1.setText("Salvar Receita");
         SalvarReceitaButton1.setEnabled(false);
@@ -224,7 +227,7 @@ public class CadastroReceitaView extends javax.swing.JDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(53, 53, 53)
                                 .addComponent(VoltarParaCadastroConsultaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(SalvarReceitaButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

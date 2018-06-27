@@ -78,6 +78,7 @@ public class BuscarReceitaView extends javax.swing.JDialog {
             }
         });
 
+        PesquisarReceitaButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         PesquisarReceitaButton.setText("Buscar");
         PesquisarReceitaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,6 +139,7 @@ public class BuscarReceitaView extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(TabelaReceitas);
 
+        VoltarParaMainButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         VoltarParaMainButton.setText("Voltar");
         VoltarParaMainButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,6 +147,7 @@ public class BuscarReceitaView extends javax.swing.JDialog {
             }
         });
 
+        VerDetalheReceitaButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         VerDetalheReceitaButton.setText("Ver detalhes");
         VerDetalheReceitaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

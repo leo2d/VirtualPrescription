@@ -73,6 +73,9 @@ public class TrocarSenhaView extends javax.swing.JDialog {
                     .addContainerGap(18, Short.MAX_VALUE)))
         );
 
+        salvarSenhaButton.setBackground(new java.awt.Color(0, 153, 51));
+        salvarSenhaButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        salvarSenhaButton.setForeground(new java.awt.Color(255, 255, 255));
         salvarSenhaButton.setText("Salvar");
         salvarSenhaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,6 +83,7 @@ public class TrocarSenhaView extends javax.swing.JDialog {
             }
         });
 
+        VoltarMainjButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         VoltarMainjButton.setText("Voltar");
         VoltarMainjButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

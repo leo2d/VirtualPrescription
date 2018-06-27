@@ -59,46 +59,52 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="228" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="jButton1" min="-2" pref="100" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="SenhaLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="DocumentoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="DocumentoInput" max="32767" attributes="0"/>
+                              <Component id="SenhaInput" min="-2" pref="210" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="SenhaLabel" min="-2" max="-2" attributes="0"/>
-                              <Component id="DocumentoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="DocumentoInput" alignment="0" max="32767" attributes="0"/>
-                              <Component id="SenhaInput" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                                  <Component id="LoginButton" min="-2" pref="100" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace min="-2" pref="244" max="-2" attributes="0"/>
+                          <Component id="LoginButton" min="-2" pref="100" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="jButton1" min="-2" pref="100" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                   <Component id="DocumentoLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="DocumentoInput" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="DocumentoInput" min="-2" pref="43" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="SenhaLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="SenhaInput" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                  <Component id="LoginButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="28" max="32767" attributes="0"/>
+                  <Component id="SenhaInput" min="-2" pref="40" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="LoginButton" min="-2" pref="40" max="-2" attributes="0"/>
+                  <EmptySpace pref="27" max="32767" attributes="0"/>
+                  <Component id="jButton1" min="-2" pref="40" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -107,7 +113,10 @@
         <Component class="javax.swing.JButton" name="jButton1">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="66" green="66" red="ff" type="rgb"/>
+              <Color blue="0" green="33" red="cc" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="14" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -120,6 +129,15 @@
         </Component>
         <Component class="javax.swing.JButton" name="LoginButton">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="14" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="99" red="0" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Entrar"/>
           </Properties>
           <Events>
@@ -166,7 +184,7 @@
     <Container class="javax.swing.JPanel" name="jPanel2">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+          <Color blue="66" green="66" red="ff" type="rgb"/>
         </Property>
       </Properties>
 
@@ -174,18 +192,18 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="181" max="32767" attributes="0"/>
+                  <EmptySpace pref="107" max="32767" attributes="0"/>
                   <Component id="DocumentoLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                   <Component id="DocumentoLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="28" max="32767" attributes="0"/>
+                  <EmptySpace pref="18" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -194,13 +212,13 @@
         <Component class="javax.swing.JLabel" name="DocumentoLabel1">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="cc" green="cc" red="ff" type="rgb"/>
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Candara" size="36" style="2"/>
+              <Font name="Candara" size="48" style="2"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="99" type="rgb"/>
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Gerenciador de Receitas"/>
           </Properties>

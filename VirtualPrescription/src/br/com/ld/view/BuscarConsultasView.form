@@ -122,6 +122,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="PesquisarConsultaButton">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="14" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Buscar"/>
           </Properties>
           <Events>
@@ -193,6 +196,9 @@
     </Container>
     <Component class="javax.swing.JButton" name="VoltarParaMainButton">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="14" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Voltar"/>
       </Properties>
       <Events>
@@ -201,6 +207,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="VerDetalheConsultaButton">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="14" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Ver detalhes"/>
       </Properties>
       <Events>

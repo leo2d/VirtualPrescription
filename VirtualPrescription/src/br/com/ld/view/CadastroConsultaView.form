@@ -50,44 +50,40 @@
                   </Group>
               </Group>
               <EmptySpace pref="106" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="TelPacTextField" alignment="0" min="-2" pref="249" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
-                                          <Component id="sexoPacComboBox" min="-2" pref="90" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="idadePacTextField" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
-                                          <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Component id="jLabel14" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="NomePacTextField" alignment="0" min="-2" pref="249" max="-2" attributes="0"/>
-                                  <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="CadastrarPacienteButton1" alignment="1" min="-2" pref="149" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="CadastrarPacienteButton1" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="TelPacTextField" alignment="0" min="-2" pref="249" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+                              <Component id="sexoPacComboBox" min="-2" pref="90" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="CPFpacienteCadastro" min="-2" pref="249" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="idadePacTextField" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                              <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane2" alignment="0" min="-2" pref="350" max="-2" attributes="0"/>
-                          <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPane3" min="-2" pref="350" max="-2" attributes="0"/>
-                          <Component id="jScrollPane4" min="-2" pref="350" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jLabel14" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="NomePacTextField" alignment="0" min="-2" pref="249" max="-2" attributes="0"/>
+                      <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="CPFpacienteCadastro" min="-2" pref="249" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                      <Component id="jScrollPane2" alignment="0" min="-2" pref="350" max="-2" attributes="0"/>
+                      <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
+                      <Component id="jScrollPane3" min="-2" pref="350" max="-2" attributes="0"/>
+                      <Component id="jScrollPane4" min="-2" pref="350" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="CadastrarReceitaButton" min="-2" pref="149" max="-2" attributes="0"/>
+                      <Component id="CadastrarReceitaButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                       <Component id="SalvarConsultaButton" min="-2" pref="149" max="-2" attributes="0"/>
                   </Group>
@@ -222,6 +218,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="PesquisarPacienteButton">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="14" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Buscar"/>
           </Properties>
           <Events>
@@ -399,6 +398,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="VoltarParaMainButton">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="14" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Voltar"/>
       </Properties>
       <Events>
@@ -482,6 +484,9 @@
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="33" green="99" red="0" type="rgb"/>
         </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog" size="14" style="1"/>
+        </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
@@ -493,6 +498,15 @@
     </Component>
     <Component class="javax.swing.JButton" name="CadastrarPacienteButton1">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="66" red="cc" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog" size="14" style="1"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Cadastrar Paciente"/>
       </Properties>
       <Events>
@@ -533,7 +547,10 @@
     <Component class="javax.swing.JButton" name="CadastrarReceitaButton">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="33" red="cc" type="rgb"/>
+          <Color blue="0" green="66" red="cc" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog" size="14" style="1"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>

@@ -92,6 +92,7 @@ public class ReceitaDetalhadaView extends javax.swing.JDialog {
         jLabel3.setForeground(new java.awt.Color(0, 153, 51));
         jLabel3.setText("Codigo da receita");
 
+        VoltarParaBuscaReceitaButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         VoltarParaBuscaReceitaButton.setText("Voltar");
         VoltarParaBuscaReceitaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,8 +100,8 @@ public class ReceitaDetalhadaView extends javax.swing.JDialog {
             }
         });
 
-        CancelarReceitaButton.setBackground(new java.awt.Color(255, 102, 102));
-        CancelarReceitaButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        CancelarReceitaButton.setBackground(new java.awt.Color(204, 51, 0));
+        CancelarReceitaButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         CancelarReceitaButton.setForeground(new java.awt.Color(255, 255, 255));
         CancelarReceitaButton.setText("Cancelar receita");
         CancelarReceitaButton.addActionListener(new java.awt.event.ActionListener() {
@@ -171,7 +172,7 @@ public class ReceitaDetalhadaView extends javax.swing.JDialog {
         jLabel9.setText("Status da receita");
 
         VenderMedicamentoButton.setBackground(new java.awt.Color(0, 153, 51));
-        VenderMedicamentoButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        VenderMedicamentoButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         VenderMedicamentoButton.setForeground(new java.awt.Color(255, 255, 255));
         VenderMedicamentoButton.setText("Marcar como vendido");
         VenderMedicamentoButton.addActionListener(new java.awt.event.ActionListener() {
@@ -199,27 +200,25 @@ public class ReceitaDetalhadaView extends javax.swing.JDialog {
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(VoltarParaBuscaReceitaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(DataTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(IdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(65, 65, 65)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel9)
-                                            .addComponent(StatusTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(CancelarReceitaButton))
-                            .addComponent(MedicoTextField)
-                            .addComponent(PacienteTextField)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel4)
-                            .addComponent(CrmTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(VoltarParaBuscaReceitaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(DataTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(IdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(65, 65, 65)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel9)
+                                        .addComponent(StatusTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(MedicoTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
+                                .addComponent(PacienteTextField)
+                                .addComponent(jLabel7)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel4)
+                                .addComponent(CrmTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel5))
+                            .addComponent(CancelarReceitaButton))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -270,14 +269,15 @@ public class ReceitaDetalhadaView extends javax.swing.JDialog {
                         .addComponent(jLabel7)
                         .addGap(4, 4, 4)
                         .addComponent(CrmTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(117, 117, 117))
+                        .addGap(18, 18, 18)
+                        .addComponent(CancelarReceitaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(61, 61, 61))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CancelarReceitaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(VenderMedicamentoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(VoltarParaBuscaReceitaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))

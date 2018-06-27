@@ -97,6 +97,7 @@ public class CadastroConsultaView extends javax.swing.JDialog {
             }
         });
 
+        PesquisarPacienteButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         PesquisarPacienteButton.setText("Buscar");
         PesquisarPacienteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,6 +205,7 @@ public class CadastroConsultaView extends javax.swing.JDialog {
         jLabel16.setForeground(new java.awt.Color(0, 153, 51));
         jLabel16.setText("Especialização");
 
+        VoltarParaMainButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         VoltarParaMainButton.setText("Voltar");
         VoltarParaMainButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -235,6 +237,7 @@ public class CadastroConsultaView extends javax.swing.JDialog {
         jLabel19.setText("Dieta recomendada");
 
         SalvarConsultaButton.setBackground(new java.awt.Color(0, 153, 51));
+        SalvarConsultaButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         SalvarConsultaButton.setForeground(new java.awt.Color(255, 255, 255));
         SalvarConsultaButton.setText("Salvar Consulta");
         SalvarConsultaButton.addActionListener(new java.awt.event.ActionListener() {
@@ -243,6 +246,9 @@ public class CadastroConsultaView extends javax.swing.JDialog {
             }
         });
 
+        CadastrarPacienteButton1.setBackground(new java.awt.Color(204, 102, 0));
+        CadastrarPacienteButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        CadastrarPacienteButton1.setForeground(new java.awt.Color(255, 255, 255));
         CadastrarPacienteButton1.setText("Cadastrar Paciente");
         CadastrarPacienteButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -262,7 +268,8 @@ public class CadastroConsultaView extends javax.swing.JDialog {
         DietaTextArea.setRows(5);
         jScrollPane4.setViewportView(DietaTextArea);
 
-        CadastrarReceitaButton.setBackground(new java.awt.Color(204, 51, 0));
+        CadastrarReceitaButton.setBackground(new java.awt.Color(204, 102, 0));
+        CadastrarReceitaButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         CadastrarReceitaButton.setForeground(new java.awt.Color(255, 255, 255));
         CadastrarReceitaButton.setText("Adicionar Receita");
         CadastrarReceitaButton.setEnabled(false);
@@ -295,36 +302,34 @@ public class CadastroConsultaView extends javax.swing.JDialog {
                         .addGap(66, 66, 66)
                         .addComponent(VoltarParaMainButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(CadastrarPacienteButton1)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel15)
+                        .addComponent(TelPacTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel15)
-                                    .addComponent(TelPacTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel12)
-                                            .addComponent(sexoPacComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(69, 69, 69)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(idadePacTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel13)))
-                                    .addComponent(jLabel14)
-                                    .addComponent(NomePacTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel11))
-                                .addComponent(CadastrarPacienteButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(CPFpacienteCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(80, 80, 80)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel17)
-                            .addComponent(jLabel19)
-                            .addComponent(jLabel18)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel12)
+                                .addComponent(sexoPacComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(69, 69, 69)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(idadePacTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel13)))
+                        .addComponent(jLabel14)
+                        .addComponent(NomePacTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel11)
+                        .addComponent(CPFpacienteCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(80, 80, 80)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel17)
+                        .addComponent(jLabel19)
+                        .addComponent(jLabel18)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(CadastrarReceitaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(CadastrarReceitaButton)
                         .addGap(31, 31, 31)
                         .addComponent(SalvarConsultaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(47, 47, 47))

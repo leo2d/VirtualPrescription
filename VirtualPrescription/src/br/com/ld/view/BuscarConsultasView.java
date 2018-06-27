@@ -73,6 +73,7 @@ public class BuscarConsultasView extends javax.swing.JDialog {
             }
         });
 
+        PesquisarConsultaButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         PesquisarConsultaButton.setText("Buscar");
         PesquisarConsultaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,6 +140,7 @@ public class BuscarConsultasView extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(TabelaConsultas);
 
+        VoltarParaMainButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         VoltarParaMainButton.setText("Voltar");
         VoltarParaMainButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,6 +148,7 @@ public class BuscarConsultasView extends javax.swing.JDialog {
             }
         });
 
+        VerDetalheConsultaButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         VerDetalheConsultaButton.setText("Ver detalhes");
         VerDetalheConsultaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
