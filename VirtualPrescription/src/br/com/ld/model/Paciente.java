@@ -11,14 +11,19 @@ import java.util.ArrayList;
  *
  * @author Leonardo
  */
-public class Paciente extends Usuario {
+public class Paciente extends Pessoa {
 
-    private String cpf;
     private ArrayList<Consulta> consultas;
 
+    public void addConsulta(Consulta consulta){
+        this.consultas.add(consulta);
+    }
+    public void setConsultas(ArrayList<Consulta> consultas) {
+        this.consultas = consultas;
+    }
+
     public Paciente(int id, String nome, int idade, String sexo, String telefone, String senha, String cpf) {
-        super(id, nome, idade, sexo, telefone, senha);
-        this.cpf = cpf;
+        super(id, nome, idade, sexo, telefone, senha, cpf);
         this.consultas = new ArrayList<Consulta>();
     }
 
@@ -28,14 +33,6 @@ public class Paciente extends Usuario {
 
     public ArrayList<Consulta> getConsultas() {
         return consultas;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
     }
 
 }

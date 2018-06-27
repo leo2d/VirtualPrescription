@@ -5,10 +5,11 @@
  */
 package br.com.ld.view;
 
+import br.com.ld.exception.NenhumUsuarioEncontradoException;
 import br.com.ld.controller.LoginController;
-import br.com.ld.model.Farmacia;
-import br.com.ld.model.Medico;
-import br.com.ld.model.Paciente;
+import br.com.ld.model.Usuario;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -24,6 +25,14 @@ public class LoginView extends javax.swing.JDialog {
     public LoginView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        SenhaInput.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    Logar();
+                }
+            }
+        });
     }
 
     /**
@@ -35,14 +44,38 @@ public class LoginView extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         LoginButton = new javax.swing.JButton();
         SenhaInput = new javax.swing.JPasswordField();
         DocumentoInput = new javax.swing.JTextField();
         SenhaLabel = new javax.swing.JLabel();
         DocumentoLabel = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        DocumentoLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
+        jPanel1.setBackground(new java.awt.Color(0, 153, 51));
+
+        jButton1.setBackground(new java.awt.Color(204, 51, 0));
+        jButton1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Sair");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        LoginButton.setBackground(new java.awt.Color(255, 255, 255));
+        LoginButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        LoginButton.setForeground(new java.awt.Color(0, 153, 51));
         LoginButton.setText("Entrar");
         LoginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -56,83 +89,150 @@ public class LoginView extends javax.swing.JDialog {
             }
         });
 
+        SenhaLabel.setBackground(new java.awt.Color(255, 255, 255));
+        SenhaLabel.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        SenhaLabel.setForeground(new java.awt.Color(255, 255, 255));
         SenhaLabel.setText("Senha");
 
+        DocumentoLabel.setBackground(new java.awt.Color(255, 255, 255));
+        DocumentoLabel.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        DocumentoLabel.setForeground(new java.awt.Color(255, 255, 255));
         DocumentoLabel.setText("Documento");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(228, 228, 228)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(SenhaLabel)
+                                .addComponent(DocumentoLabel))
+                            .addGap(109, 109, 109))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(DocumentoInput)
+                            .addComponent(SenhaInput, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(LoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(65, 65, 65)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(DocumentoLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(DocumentoInput, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(SenhaLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(SenhaInput, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(LoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
+        );
+
+        jPanel2.setBackground(new java.awt.Color(255, 102, 102));
+
+        DocumentoLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        DocumentoLabel1.setFont(new java.awt.Font("Candara", 2, 48)); // NOI18N
+        DocumentoLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        DocumentoLabel1.setText("Gerenciador de Receitas");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(107, Short.MAX_VALUE)
+                .addComponent(DocumentoLabel1)
+                .addGap(94, 94, 94))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(DocumentoLabel1)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(163, 163, 163)
-                        .addComponent(LoginButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(137, 137, 137)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(SenhaLabel)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(DocumentoInput)
-                                .addComponent(SenhaInput, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(DocumentoLabel))))
-                .addContainerGap(144, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(68, Short.MAX_VALUE)
-                .addComponent(DocumentoLabel)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(DocumentoInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addComponent(SenhaLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(SenhaInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(LoginButton)
-                .addGap(49, 49, 49))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    Farmacia farmacia = null;
-    Medico medico = null;
-    Paciente paciente = null;
     private void DocumentoInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DocumentoInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_DocumentoInputActionPerformed
 
+    private Usuario usuario;
+
+    public Usuario getUsuario() {
+        return this.usuario;
+    }
+
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
+        Logar();
+    }//GEN-LAST:event_LoginButtonActionPerformed
+
+    private void Logar() {
         try {
             LoginController loginController = LoginController.getInstance();
-            paciente = loginController.getPaciente(DocumentoInput.getText(), SenhaInput.getText());
+            String senha = String.valueOf(SenhaInput.getPassword());
+            usuario = loginController.getUsuario(DocumentoInput.getText(), senha);
 
-            if (paciente == null) {
-                medico = loginController.getMedico(DocumentoInput.getText(), SenhaInput.getText());
-                if (medico == null) {
-                    farmacia = loginController.getFarmacia(DocumentoInput.getText(), SenhaInput.getText());
-                    if (farmacia == null) {
-                        JOptionPane.showMessageDialog(null, "Nenhum usuario encontrado");
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Bem vindo: " + farmacia.getNome());
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Bem vindo: " + medico.getNome());
-                }
+            if (usuario == null) {
+                throw new NenhumUsuarioEncontradoException();
             } else {
-                JOptionPane.showMessageDialog(null, "Bem vindo: " + paciente.getNome());
+                JOptionPane.showMessageDialog(null, "Bem vindo: " + usuario.getNome());
             }
-
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, "Erro na Conexão, Classe não encontrada");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao conectar no banco " + ex.getMessage());
+        } catch (NenhumUsuarioEncontradoException ex) {
+            JOptionPane.showMessageDialog(null, "Nenhum usuario encontrado");
         }
-    }//GEN-LAST:event_LoginButtonActionPerformed
+
+        setVisible(usuario == null);
+    }
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        System.exit(1);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        System.exit(1);
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
@@ -179,8 +279,13 @@ public class LoginView extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField DocumentoInput;
     private javax.swing.JLabel DocumentoLabel;
+    private javax.swing.JLabel DocumentoLabel1;
     private javax.swing.JButton LoginButton;
     private javax.swing.JPasswordField SenhaInput;
     private javax.swing.JLabel SenhaLabel;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
+
 }

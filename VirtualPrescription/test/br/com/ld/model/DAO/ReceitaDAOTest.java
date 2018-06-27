@@ -6,6 +6,7 @@
 package br.com.ld.model.DAO;
 
 import br.com.ld.model.Receita;
+import java.util.ArrayList;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -25,6 +26,15 @@ public class ReceitaDAOTest {
     public void testBuscarPelaChave() throws Exception {
         ReceitaDAO receitaDAO = new ReceitaDAO();
         Receita receita = receitaDAO.buscarPelaChave(1);
+    }
+    
+     /**
+     * Test of testBuscarPorCpfPaciente method, of class ReceitaDAO.
+     */
+    @Test
+    public void testBuscarPorCpfPaciente() throws Exception {
+        ReceitaDAO receitaDAO = new ReceitaDAO();
+        ArrayList<Receita> receitas = receitaDAO.buscarPorCPFPaciente("123456");
     }
 
 }

@@ -69,4 +69,20 @@ public class MedicoDAO implements IGenericDAO<Medico, Integer> {
         return medico;
     }
 
+    public void alterarSenha(Medico medico) throws ClassNotFoundException, SQLException {
+
+        Connection Conect = ConnectionFactory.getConnection();
+
+        PreparedStatement pst = Conect.prepareStatement(
+                "UPDATE usuario_medico "
+                + "SET senha_medico = ? "
+                + "WHERE id_medico = ? "
+        );
+
+        pst.setString(1, medico.getSenha());
+        pst.setInt(2, medico.getId());
+
+        pst.executeUpdate();
+    }
+
 }

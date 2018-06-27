@@ -5,6 +5,13 @@
  */
 package br.com.ld.view;
 
+import br.com.ld.model.Farmacia;
+import br.com.ld.model.Medico;
+import br.com.ld.model.Paciente;
+import br.com.ld.model.Usuario;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Leonardo
@@ -16,7 +23,10 @@ public class MainScreen extends javax.swing.JFrame {
      */
     public MainScreen() {
         initComponents();
+        setIcon();
     }
+
+    private static Usuario usuario = null;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,128 +38,350 @@ public class MainScreen extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        CadastrarConsultaButton = new javax.swing.JButton();
+        VisualizarConsultasButton = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        ConsultasLabel = new javax.swing.JLabel();
+        CadastrarConsultaImage = new javax.swing.JLabel();
+        HistoricoConultaImage = new javax.swing.JLabel();
+        SairButton1 = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        ConsultasLabel1 = new javax.swing.JLabel();
+        buscarReceitaButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        ConsultasLabel2 = new javax.swing.JLabel();
+        TrocarSenhaButton = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-        jPanel1.setBackground(new java.awt.Color(0, 153, 102));
-
-        jLabel1.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Receitas");
-
-        jButton1.setText("Buscar Receitas");
-
-        jLabel4.setForeground(new java.awt.Color(255, 0, 51));
-        jLabel4.setText("IMAGEM AQUI");
+        jPanel1.setBackground(new java.awt.Color(0, 153, 51));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addGap(31, 31, 31)
-                .addComponent(jButton1)
-                .addGap(19, 19, 19))
+            .addGap(0, 494, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jLabel4))
-                .addContainerGap(28, Short.MAX_VALUE))
+            .addGap(0, 170, Short.MAX_VALUE)
         );
 
-        jPanel2.setBackground(new java.awt.Color(0, 153, 102));
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setSize(new java.awt.Dimension(0, 0));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                aoAbir(evt);
+            }
+        });
 
-        jLabel2.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Prontuarios");
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton2.setText("Cadastrar");
+        CadastrarConsultaButton.setBackground(new java.awt.Color(0, 153, 51));
+        CadastrarConsultaButton.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        CadastrarConsultaButton.setForeground(new java.awt.Color(255, 255, 255));
+        CadastrarConsultaButton.setText("Cadastrar");
+        CadastrarConsultaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CadastrarConsultaButtonActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Visualizar");
+        VisualizarConsultasButton.setBackground(new java.awt.Color(255, 153, 0));
+        VisualizarConsultasButton.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        VisualizarConsultasButton.setForeground(new java.awt.Color(255, 255, 255));
+        VisualizarConsultasButton.setText("Visualizar Histórico");
+        VisualizarConsultasButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VisualizarConsultasButtonActionPerformed(evt);
+            }
+        });
 
-        jLabel3.setForeground(new java.awt.Color(255, 0, 51));
-        jLabel3.setText("IMAGEM AQUI");
+        jPanel5.setBackground(new java.awt.Color(255, 102, 102));
+
+        ConsultasLabel.setBackground(new java.awt.Color(255, 204, 204));
+        ConsultasLabel.setFont(new java.awt.Font("Candara", 2, 48)); // NOI18N
+        ConsultasLabel.setForeground(new java.awt.Color(255, 255, 255));
+        ConsultasLabel.setText("Consultas");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ConsultasLabel)
+                .addGap(383, 383, 383))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(ConsultasLabel)
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+
+        CadastrarConsultaImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ld/images/cadastroConsulta.png"))); // NOI18N
+
+        HistoricoConultaImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ld/images/consultaHistorico.png"))); // NOI18N
+
+        SairButton1.setBackground(new java.awt.Color(204, 51, 0));
+        SairButton1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        SairButton1.setForeground(new java.awt.Color(255, 255, 255));
+        SairButton1.setText("Sair");
+        SairButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SairButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(SairButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(232, 232, 232)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(CadastrarConsultaImage)
+                    .addComponent(CadastrarConsultaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(128, 128, 128)
+                        .addComponent(HistoricoConultaImage))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addComponent(VisualizarConsultasButton)))
+                .addContainerGap(240, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(HistoricoConultaImage)
+                    .addComponent(CadastrarConsultaImage))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CadastrarConsultaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(VisualizarConsultasButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addComponent(SairButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel7.setBackground(new java.awt.Color(255, 102, 102));
+
+        ConsultasLabel1.setBackground(new java.awt.Color(255, 204, 204));
+        ConsultasLabel1.setFont(new java.awt.Font("Candara", 2, 48)); // NOI18N
+        ConsultasLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        ConsultasLabel1.setText("Receitas");
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ConsultasLabel1)
+                .addGap(249, 249, 249))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addComponent(ConsultasLabel1)
+                .addGap(14, 14, 14))
+        );
+
+        buscarReceitaButton.setBackground(new java.awt.Color(255, 153, 0));
+        buscarReceitaButton.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        buscarReceitaButton.setForeground(new java.awt.Color(255, 255, 255));
+        buscarReceitaButton.setText("Buscar Receitas");
+        buscarReceitaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarReceitaButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ld/images/buscaReceita.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(262, 262, 262)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buscarReceitaButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(buscarReceitaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel8.setBackground(new java.awt.Color(255, 102, 102));
+
+        ConsultasLabel2.setBackground(new java.awt.Color(255, 204, 204));
+        ConsultasLabel2.setFont(new java.awt.Font("Candara", 2, 48)); // NOI18N
+        ConsultasLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        ConsultasLabel2.setText("Usuário");
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(ConsultasLabel2)
+                .addContainerGap(55, Short.MAX_VALUE))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(ConsultasLabel2)
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        TrocarSenhaButton.setBackground(new java.awt.Color(255, 153, 102));
+        TrocarSenhaButton.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        TrocarSenhaButton.setForeground(new java.awt.Color(255, 255, 255));
+        TrocarSenhaButton.setText("Trocar senha");
+        TrocarSenhaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TrocarSenhaButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ld/images/editarUsuario.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(jLabel3)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3)
-                    .addComponent(jButton2))
-                .addGap(19, 19, 19))
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addComponent(TrocarSenhaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
-                .addGap(15, 15, 15))
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addComponent(TrocarSenhaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(68, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(36, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void aoAbir(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_aoAbir
+
+        LoginView loginv = new LoginView(this, true);
+        setVisible(false);//isso pode dar muito errado, validar melhor
+        loginv.setVisible(true);
+
+        usuario = loginv.getUsuario();
+        ButtonManager();
+        setVisible(true);//isso pode dar muito errado, validar melhor
+    }//GEN-LAST:event_aoAbir
+
+    private void ButtonManager() {
+        CadastrarConsultaButton.setVisible(usuario instanceof Medico);
+        CadastrarConsultaImage.setVisible(usuario instanceof Medico);
+        VisualizarConsultasButton.setVisible(usuario instanceof Medico || usuario instanceof Paciente);
+        if (usuario instanceof Farmacia) {
+            CadastrarConsultaImage.setVisible(false);
+            HistoricoConultaImage.setVisible(false);
+            ConsultasLabel.setVisible(false);
+        }
+
+    }
+    private void TrocarSenhaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrocarSenhaButtonActionPerformed
+        TrocarSenhaView trocarSenhaView = new TrocarSenhaView(this, true);
+        trocarSenhaView.setVisible(true);
+    }//GEN-LAST:event_TrocarSenhaButtonActionPerformed
+
+    private void VisualizarConsultasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VisualizarConsultasButtonActionPerformed
+        BuscarConsultasView bsConsultasView = new BuscarConsultasView(this, true);
+        bsConsultasView.setVisible(true);
+    }//GEN-LAST:event_VisualizarConsultasButtonActionPerformed
+
+    private void CadastrarConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarConsultaButtonActionPerformed
+        CadastroConsultaView cadastroConsultaView = new CadastroConsultaView(this, true);
+        cadastroConsultaView.setVisible(true);
+    }//GEN-LAST:event_CadastrarConsultaButtonActionPerformed
+
+    private void SairButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SairButton1ActionPerformed
+        System.exit(1);
+    }//GEN-LAST:event_SairButton1ActionPerformed
+
+    private void buscarReceitaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarReceitaButtonActionPerformed
+        BuscarReceitaView brv = new BuscarReceitaView(this, true);
+        brv.setVisible(true);
+    }//GEN-LAST:event_buscarReceitaButtonActionPerformed
+
+    public static Usuario getUsuario() {
+
+        return MainScreen.usuario;
+    }
 
     /**
      * @param args the command line arguments
@@ -187,14 +419,28 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton CadastrarConsultaButton;
+    private javax.swing.JLabel CadastrarConsultaImage;
+    private javax.swing.JLabel ConsultasLabel;
+    private javax.swing.JLabel ConsultasLabel1;
+    private javax.swing.JLabel ConsultasLabel2;
+    private javax.swing.JLabel HistoricoConultaImage;
+    private javax.swing.JButton SairButton1;
+    private javax.swing.JButton TrocarSenhaButton;
+    private javax.swing.JButton VisualizarConsultasButton;
+    private javax.swing.JButton buscarReceitaButton;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     // End of variables declaration//GEN-END:variables
+
+    private void setIcon() {
+        setIconImage(new ImageIcon("src/br/com/ld/images/iconeJframe.png").getImage());
+    }
 }

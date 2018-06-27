@@ -25,7 +25,7 @@ public class PacienteDAOTest {
      */
     @Test
     public void testInserir() throws Exception {
-        Paciente paciente = new Paciente(0, "Dante", 39, "M", "254545", "555", "555");
+        Paciente paciente = new Paciente(0, "Dante", 39, "M", "254545", "666", "666");
         PacienteDAO instance = new PacienteDAO();
 
         instance.inserir(paciente);
@@ -36,7 +36,7 @@ public class PacienteDAOTest {
      */
     @Test
     public void testApagar() throws Exception {
-        Paciente paciente = new Paciente(0, "Dante", 39, "M", "254545", "555", "555");
+        Paciente paciente = new Paciente(6, "Dante", 39, "M", "254545", "666", "666");
 
         PacienteDAO instance = new PacienteDAO();
 
@@ -51,7 +51,7 @@ public class PacienteDAOTest {
      */
     @Test
     public void testAlterar() throws Exception {
-        Paciente paciente = new Paciente(5, "Kratos", 39, "M", "254545", "555", "555");
+        Paciente paciente = new Paciente(5, "Kratos", 40, "M", "222222", "555", "555");
 
         PacienteDAO instance = new PacienteDAO();
 

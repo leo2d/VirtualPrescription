@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -25,7 +26,7 @@ public class PacienteDAO implements IGenericDAO<Paciente, Integer> {
         PreparedStatement pst = Conect.prepareStatement(
                 "INSERT INTO usuario_paciente "
                 + " ( nome_paciente, idade_paciente, sexo_paciente, telefone_paciente, senha_paciente, cpf_paciente) "
-                + " VALUES(?, ?, ?, ?, ?, ?);"
+                + " VALUES(?, ?, ?, ?, ?, ?);", Statement.RETURN_GENERATED_KEYS
         );
 
         pst.setString(1, object.getNome());
@@ -33,9 +34,15 @@ public class PacienteDAO implements IGenericDAO<Paciente, Integer> {
         pst.setString(3, object.getSexo());
         pst.setString(4, object.getTelefone());
         pst.setString(5, object.getSenha());
-        pst.setString(6, object.getCpf());
+        pst.setString(6, object.getDocumento());
 
         pst.executeUpdate();
+
+        final ResultSet rs = pst.getGeneratedKeys();
+        if (rs.next()) {
+            final int lastId = rs.getInt(1);
+            object.setId(lastId);
+        }
     }
 
     @Override
@@ -57,7 +64,7 @@ public class PacienteDAO implements IGenericDAO<Paciente, Integer> {
         pst.setString(3, object.getSexo());
         pst.setString(4, object.getTelefone());
         pst.setString(5, object.getSenha());
-        pst.setString(6, object.getCpf());
+        pst.setString(6, object.getDocumento());
         pst.setInt(7, object.getId());
 
         pst.executeUpdate();
@@ -151,8 +158,46 @@ public class PacienteDAO implements IGenericDAO<Paciente, Integer> {
                     rs.getInt("idade_paciente"), rs.getString("sexo_paciente"), rs.getString("telefone_paciente"), rs.getString("senha_paciente"), rs.getString("cpf_paciente"));
         }
 
-        //Conect.close();
         return paciente;
+    }
+
+    public Paciente buscarPorCPF(String cpf) throws ClassNotFoundException, SQLException {
+
+        Connection Conect = ConnectionFactory.getConnection();
+
+        PreparedStatement pst = Conect.prepareStatement(
+                "SELECT * FROM usuario_paciente "
+                + " WHERE cpf_paciente = ? "
+        );
+
+        pst.setString(1, cpf);
+
+        Paciente paciente = null;
+
+        ResultSet rs = pst.executeQuery();
+
+        if (rs.next()) {
+            paciente = new Paciente(rs.getInt("id_paciente"), rs.getString("nome_paciente"),
+                    rs.getInt("idade_paciente"), rs.getString("sexo_paciente"), rs.getString("telefone_paciente"), rs.getString("senha_paciente"), rs.getString("cpf_paciente"));
+        }
+
+        return paciente;
+    }
+
+    public void alterarSenha(Paciente paciente) throws SQLException, SQLException, ClassNotFoundException {
+
+        Connection Conect = ConnectionFactory.getConnection();
+
+        PreparedStatement pst = Conect.prepareStatement(
+                "UPDATE usuario_paciente "
+                + "SET senha_paciente = ? "
+                + "WHERE id_paciente = ? "
+        );
+
+        pst.setString(1, paciente.getSenha());
+        pst.setInt(2, paciente.getId());
+
+        pst.executeUpdate();
     }
 
 }

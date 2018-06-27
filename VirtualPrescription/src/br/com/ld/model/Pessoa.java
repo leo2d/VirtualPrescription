@@ -9,24 +9,46 @@ package br.com.ld.model;
  *
  * @author Leonardo
  */
-public class Farmacia extends Usuario{
-    
+public class Pessoa extends Usuario{
+
+
+    private int idade;
+    private String sexo;
     private String telefone;
 
-    public Farmacia(int id, String nomeFarmacia, String telefone, String cnpj, String senha) {
+
+    protected Pessoa(int id, String nome, int idade, String sexo, String telefone, String senha, String documento) {
         this.id = id;
-        this.nome = nomeFarmacia;
+        this.nome = nome;
+        this.idade = idade;
+        this.sexo = sexo;
         this.telefone = telefone;
-        this.documento = cnpj;
         this.senha = senha;
+        this.documento = documento;
     }
-    
+
     public String getNome() {
         return nome;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 
     public String getTelefone() {
