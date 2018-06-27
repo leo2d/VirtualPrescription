@@ -39,6 +39,9 @@ public class ReceitaDetalhadaView extends javax.swing.JDialog {
         CancelarReceitaButton.setVisible(usuario instanceof Medico
                 && usuario.getId() == receita.getConsulta().getMedico().getId());
         GerenciarBotaoDeCancelamento();
+        
+        //ObsLabel.setVisible(false);
+        //ObservacoesTextArea.setVisible(false);
 
         InstrucoesDeVendaLabel.setVisible(usuario instanceof Farmacia);
         VenderMedicamentoButton.setVisible(usuario instanceof Farmacia);
@@ -70,9 +73,6 @@ public class ReceitaDetalhadaView extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        ObservacoesTextArea = new javax.swing.JTextArea();
-        jLabel8 = new javax.swing.JLabel();
         StatusTextField = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         VenderMedicamentoButton = new javax.swing.JButton();
@@ -170,16 +170,6 @@ public class ReceitaDetalhadaView extends javax.swing.JDialog {
         jLabel7.setForeground(new java.awt.Color(0, 153, 51));
         jLabel7.setText("CRM Medico");
 
-        ObservacoesTextArea.setEditable(false);
-        ObservacoesTextArea.setColumns(20);
-        ObservacoesTextArea.setRows(5);
-        jScrollPane2.setViewportView(ObservacoesTextArea);
-
-        jLabel8.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 153, 51));
-        jLabel8.setText("Observações e instruções");
-
         StatusTextField.setEditable(false);
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
@@ -219,7 +209,6 @@ public class ReceitaDetalhadaView extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
                                     .addComponent(VoltarParaBuscaReceitaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,7 +222,6 @@ public class ReceitaDetalhadaView extends javax.swing.JDialog {
                                 .addComponent(CancelarReceitaButton))
                             .addComponent(MedicoTextField)
                             .addComponent(PacienteTextField)
-                            .addComponent(jScrollPane2)
                             .addComponent(jLabel7)
                             .addComponent(jLabel6)
                             .addComponent(jLabel4)
@@ -289,10 +277,7 @@ public class ReceitaDetalhadaView extends javax.swing.JDialog {
                         .addComponent(jLabel7)
                         .addGap(4, 4, 4)
                         .addComponent(CrmTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(117, 117, 117))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addGap(18, 18, 18)
@@ -332,7 +317,7 @@ public class ReceitaDetalhadaView extends javax.swing.JDialog {
         PacienteTextField.setText(receita.getConsulta().getPaciente().getNome());
         MedicoTextField.setText(receita.getConsulta().getMedico().getNome());
         CrmTextField.setText(receita.getConsulta().getMedico().getDocumento());
-        ObservacoesTextArea.setText(receita.getObservacoes());
+       // ObservacoesTextArea.setText(receita.getObservacoes());
 
         RenderizarMedicamentos();
     }
@@ -489,7 +474,6 @@ public class ReceitaDetalhadaView extends javax.swing.JDialog {
     private javax.swing.JTextField IdTextField;
     private javax.swing.JLabel InstrucoesDeVendaLabel;
     private javax.swing.JTextField MedicoTextField;
-    private javax.swing.JTextArea ObservacoesTextArea;
     private javax.swing.JTextField PacienteTextField;
     private javax.swing.JTextField StatusTextField;
     private javax.swing.JTable TabelaMedicamentosPrescritos;
@@ -502,11 +486,9 @@ public class ReceitaDetalhadaView extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 
 }

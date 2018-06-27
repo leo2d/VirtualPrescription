@@ -229,11 +229,11 @@ public class ReceitaDAO {
         pst.executeUpdate();
     }
 
-    public void inserir(Receita receita) throws ClassNotFoundException, SQLException {
+    public void inserir(Receita receita) throws ClassNotFoundException, SQLException, NullPointerException {
         Connection Conect = ConnectionFactory.getConnection();
 
         PreparedStatement pst = Conect.prepareStatement(
-                "INSRT INTO receita "
+                "INSERT INTO receita "
                 + "(id_consulta_receita, status_receita, observacoes_receita) "
                 + "VALUES ( ?, ?, ? )", Statement.RETURN_GENERATED_KEYS
         );
@@ -246,7 +246,7 @@ public class ReceitaDAO {
 
         final ResultSet rs = pst.getGeneratedKeys();
         if (rs.next()) {
-            final int lastId = rs.getInt("id_receita");
+            final int lastId = rs.getInt(1);
             receita.setId(lastId);
         }
 

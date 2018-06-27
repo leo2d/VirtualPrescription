@@ -34,7 +34,7 @@ public class BuscaReceitaController {
         return _instance;
     }
 
-    private ArrayList<Receita> buscarReceitaPorCpfPaciente(String cpf) throws ClassNotFoundException, SQLException, NenhumaReceitaEncontradaException {
+    public ArrayList<Receita> buscarReceitaPorCpfPaciente(String cpf) throws ClassNotFoundException, SQLException, NenhumaReceitaEncontradaException {
         ReceitaDAO receitaDAO = new ReceitaDAO();
         ArrayList<Receita> receitas = receitaDAO.buscarPorCPFPaciente(cpf);
         if (receitas.size() < 1) {

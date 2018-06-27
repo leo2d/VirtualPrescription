@@ -218,17 +218,17 @@ public class BuscarConsultasView extends javax.swing.JDialog {
         modelo.addColumn("Receitas emitidas");
 
         for (Consulta cons : consultas) {
-            String codigosReceitas = null;
+            String codigosReceitas = "";
             for (Receita r : cons.getReceitas()) {
-                if (r.getId() > 1) {
-                    codigosReceitas += r.getId() + ", ";
+                if (r.getId() < 1) {
+                    break;   
                 }
-                break;
+                codigosReceitas += r.getId() + ", ";
             }
             // Seta os valores do objeto para a tabela 
             modelo.addRow(new Object[]{cons.getId(), FormatFactory.formatDate(cons.getData()), cons.getMedico().getNome(),
                 cons.getPaciente().getNome(), cons.getPaciente().getSexo(), cons.getPaciente().getIdade(), cons.getSintomasPaciente(),
-                cons.getExames(), cons.getDieta(), codigosReceitas != null ? codigosReceitas : "Nenhuma receita"});
+                cons.getExames(), cons.getDieta(), !codigosReceitas.isEmpty() ? codigosReceitas : "Nenhuma receita"});
 
         }
         //Limpa a JTable (Grid)

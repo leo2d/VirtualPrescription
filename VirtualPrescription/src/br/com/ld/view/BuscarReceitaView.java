@@ -46,10 +46,10 @@ public class BuscarReceitaView extends javax.swing.JDialog {
         PesquisaReceitaInput = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         PesquisaReceitaComboBox = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
+        filtroLabel = new javax.swing.JLabel();
         NumeroInput = new javax.swing.JFormattedTextField();
         PesquisarReceitaButton = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        valorFiltroLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelaReceitas = new javax.swing.JTable();
         VoltarParaMainButton = new javax.swing.JButton();
@@ -57,15 +57,20 @@ public class BuscarReceitaView extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                aoAbrirTela(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 51));
 
         PesquisaReceitaComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Codigo receita", "CPF paciente" }));
 
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Selecione o filtro de busca");
+        filtroLabel.setBackground(new java.awt.Color(255, 255, 255));
+        filtroLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        filtroLabel.setForeground(new java.awt.Color(255, 255, 255));
+        filtroLabel.setText("Selecione o filtro de busca");
 
         NumeroInput.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -80,10 +85,10 @@ public class BuscarReceitaView extends javax.swing.JDialog {
             }
         });
 
-        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Digite o valor do filtro ( apenas numeros )");
+        valorFiltroLabel.setBackground(new java.awt.Color(255, 255, 255));
+        valorFiltroLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        valorFiltroLabel.setForeground(new java.awt.Color(255, 255, 255));
+        valorFiltroLabel.setText("Digite o valor do filtro ( apenas numeros )");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -100,9 +105,9 @@ public class BuscarReceitaView extends javax.swing.JDialog {
                         .addComponent(PesquisarReceitaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
-                        .addComponent(jLabel1)
+                        .addComponent(filtroLabel)
                         .addGap(75, 75, 75)
-                        .addComponent(jLabel2)))
+                        .addComponent(valorFiltroLabel)))
                 .addContainerGap(125, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -110,8 +115,8 @@ public class BuscarReceitaView extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                    .addComponent(filtroLabel)
+                    .addComponent(valorFiltroLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(PesquisaReceitaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -202,14 +207,14 @@ public class BuscarReceitaView extends javax.swing.JDialog {
 
     private void PesquisarReceitaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisarReceitaButtonActionPerformed
         BuscaReceitaController brController = BuscaReceitaController.getInstance();
-
+        
         try {
             if (ValidarCampoDeBusca()) {
                 String documento = NumeroInput.getText();
                 receitas = brController.BuscarReceitas(usuario, documento, PesquisaReceitaComboBox.getSelectedItem());
                 RenderizarReceitas();
             }
-
+            
         } catch (ClassNotFoundException | NumberFormatException | SQLException | NullPointerException e) {
             JOptionPane.showMessageDialog(null, "Algo não deu certo. \n" + e.getMessage());
         } catch (CpfNaoPertenceAoUsuarioException ex) {
@@ -219,13 +224,13 @@ public class BuscarReceitaView extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_PesquisarReceitaButtonActionPerformed
-
+    
     private boolean ValidarCampoDeBusca() {
         ValidateScreen.ValidarCampoObrigatorio(NumeroInput, PesquisaReceitaComboBox.getSelectedItem().toString());
-
+        
         return ValidateScreen.isCamposCorretos();
     }
-
+    
     private void RenderizarReceitas() {
         DefaultTableModel modelo = new DefaultTableModel() {
             @Override
@@ -233,18 +238,19 @@ public class BuscarReceitaView extends javax.swing.JDialog {
                 return false;
             }
         };
-
+        
         modelo.addColumn("Codigo");
         modelo.addColumn("Data");
         modelo.addColumn("Status");
         modelo.addColumn("Medico");
         modelo.addColumn("Paciente");
-        modelo.addColumn("Obs");
-
+       // modelo.addColumn("Obs");
+        
         for (Receita r : receitas) {
             // Seta os valores do objeto para a tabela 
             modelo.addRow(new Object[]{r.getId(), FormatFactory.formatDate(r.getConsulta().getData()), r.getStatus(), r.getConsulta().getMedico().getNome(),
-                r.getConsulta().getPaciente().getNome(), r.getObservacoes()});
+                r.getConsulta().getPaciente().getNome()//, r.getObservacoes()
+            });
         }
         //Limpa a JTable (Grid)
         TabelaReceitas.removeAll();
@@ -257,7 +263,7 @@ public class BuscarReceitaView extends javax.swing.JDialog {
         TabelaReceitas.getColumnModel().getColumn(2).setPreferredWidth(100);
         TabelaReceitas.getColumnModel().getColumn(3).setPreferredWidth(210);
         TabelaReceitas.getColumnModel().getColumn(4).setPreferredWidth(210);
-        TabelaReceitas.getColumnModel().getColumn(5).setPreferredWidth(210);
+       // TabelaReceitas.getColumnModel().getColumn(5).setPreferredWidth(210);
     }
 
     private void NumeroInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NumeroInputKeyReleased
@@ -274,13 +280,36 @@ public class BuscarReceitaView extends javax.swing.JDialog {
         rdetalhadaview.setVisible(true);
     }//GEN-LAST:event_VerDetalheReceitaButtonActionPerformed
 
+    private void aoAbrirTela(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_aoAbrirTela
+        if (usuario instanceof Paciente) {
+            BuscaReceitaController brController = BuscaReceitaController.getInstance();
+            
+            try {
+                
+                filtroLabel.setVisible(false);
+                valorFiltroLabel.setVisible(false);
+                NumeroInput.setVisible(false);
+                PesquisarReceitaButton.setVisible(false);
+                receitas = brController.buscarReceitaPorCpfPaciente(usuario.getDocumento());
+                PesquisaReceitaComboBox.setVisible(false);
+                
+                RenderizarReceitas();
+                
+            } catch (ClassNotFoundException | NumberFormatException | SQLException | NullPointerException e) {
+                JOptionPane.showMessageDialog(null, "Algo não deu certo. \n" + e.getMessage());
+            } catch (NenhumaReceitaEncontradaException ex) {
+                JOptionPane.showMessageDialog(null, "Atencao! \n Nenhuma receita encontrada.");
+            }
+        }
+    }//GEN-LAST:event_aoAbrirTela
+    
     public static Receita getReceitaSelecionada() {
-
+        
         return receita;
     }
-
+    
     private void setReceitaSelecionada() {
-
+        
         try {
             int quantidadeLinhasSelecionadas = TabelaReceitas.getSelectedRowCount();
             if (quantidadeLinhasSelecionadas > 1) {
@@ -288,13 +317,13 @@ public class BuscarReceitaView extends javax.swing.JDialog {
             } else if (quantidadeLinhasSelecionadas < 1) {
                 throw new NenhumaLinhaSelecionadaException();
             }
-
+            
             int idReceitaSelecionada = (int) (TabelaReceitas.getValueAt(TabelaReceitas.getSelectedRow(), 0));
-
+            
             receita = receitas.stream()
                     .filter(re -> re.getId() == idReceitaSelecionada)
                     .findFirst().get();
-
+            
         } catch (MaisDeUmaLinhaSelecionadaException ex) {
             JOptionPane.showMessageDialog(null, "Selecione apenas uma receita.");
         } catch (NenhumaLinhaSelecionadaException | NullPointerException e) {
@@ -352,11 +381,11 @@ public class BuscarReceitaView extends javax.swing.JDialog {
     private javax.swing.JTable TabelaReceitas;
     private javax.swing.JButton VerDetalheReceitaButton;
     private javax.swing.JButton VoltarParaMainButton;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel filtroLabel;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel valorFiltroLabel;
     // End of variables declaration//GEN-END:variables
 
 }

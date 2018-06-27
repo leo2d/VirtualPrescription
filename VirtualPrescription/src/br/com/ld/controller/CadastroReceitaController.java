@@ -38,18 +38,14 @@ public class CadastroReceitaController {
 
         ReceitaDAO receitaDAO = new ReceitaDAO();
         receitaDAO.inserir(receita);
-        /*
-        ArrayList<MedicamentoPrescrito> medicamentos = receita.getMedicamentos();
-        receita = receitaDAO.buscarIdUltimaReceitaDaConsulta(receita.getConsulta());
-        receita.setMedicamentos(medicamentos);
-         */
         cadastrarMedicamentosPrescritos(receita);
 
     }
 
-    private void cadastrarMedicamentosPrescritos(Receita receita) throws ClassNotFoundException, SQLException {
+    private void cadastrarMedicamentosPrescritos(Receita receita) throws ClassNotFoundException, SQLException , NullPointerException{
         MedicamentoPrescritoDAO medpsDAO = new MedicamentoPrescritoDAO();
         for (MedicamentoPrescrito m : receita.getMedicamentos()) {
+            m.setReceita(receita);
             medpsDAO.inserir(m);
         }
     }

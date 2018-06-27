@@ -12,6 +12,7 @@ import br.com.ld.model.MedicamentoPrescrito;
 import br.com.ld.model.Receita;
 import br.com.ld.util.FormatFactory;
 import br.com.ld.util.ValidateScreen;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -319,7 +320,18 @@ public class CadastroReceitaView extends javax.swing.JDialog {
     }//GEN-LAST:event_ReceitarMedicamentoButtonActionPerformed
 
     private void SalvarReceitaButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarReceitaButton1ActionPerformed
-        // TODO add your handling code here:
+        try {
+            receita = new Receita(0, consulta, "Valida", null);
+            receita.setMedicamentos(medicamentosPrescritos);
+            CadastroReceitaController cadReceitaController = CadastroReceitaController.getInstance();
+            cadReceitaController.CadastrarReceita(receita);
+
+            JOptionPane.showMessageDialog(null, "Receita cadastrada com sucesso!"
+                    + "\nCodigo da receita: "+receita.getId()+".");
+            DesabilitarCamposCadastroReceita();
+        } catch (ClassNotFoundException | SQLException | NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "ocorreu um erro inesperado" + e.getMessage());
+        }
     }//GEN-LAST:event_SalvarReceitaButton1ActionPerformed
 
     /**
@@ -391,7 +403,7 @@ public class CadastroReceitaView extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void PreenceherCampos() {
-        
+
         DataTextField.setText(FormatFactory.formatDate(consulta.getData()));
         PacienteTextField.setText(consulta.getPaciente().getNome());
         MedicoTextField.setText(consulta.getMedico().getNome());
@@ -427,5 +439,12 @@ public class CadastroReceitaView extends javax.swing.JDialog {
         TabelaMedicamentosPrescritos.getColumnModel().getColumn(0).setPreferredWidth(5);
         TabelaMedicamentosPrescritos.getColumnModel().getColumn(1).setPreferredWidth(95);
 
+    }
+
+    private void DesabilitarCamposCadastroReceita() {
+        SalvarReceitaButton1.setEnabled(false);
+        InstrucoesTextArea.setEnabled(false);
+        MedicamentosComboBox.setEnabled(false);
+        ReceitarMedicamentoButton.setEnabled(false);
     }
 }
