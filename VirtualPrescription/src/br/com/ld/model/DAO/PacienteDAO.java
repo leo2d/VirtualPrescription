@@ -184,4 +184,20 @@ public class PacienteDAO implements IGenericDAO<Paciente, Integer> {
         return paciente;
     }
 
+    public void alterarSenha(Paciente paciente) throws SQLException, SQLException, ClassNotFoundException {
+
+        Connection Conect = ConnectionFactory.getConnection();
+
+        PreparedStatement pst = Conect.prepareStatement(
+                "UPDATE usuario_paciente "
+                + "SET senha_paciente = ? "
+                + "WHERE id_paciente = ? "
+        );
+
+        pst.setString(1, paciente.getSenha());
+        pst.setInt(2, paciente.getId());
+
+        pst.executeUpdate();
+    }
+
 }

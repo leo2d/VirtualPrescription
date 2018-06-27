@@ -38,7 +38,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         buscarReceitaButton = new javax.swing.JButton();
-        SairButton = new javax.swing.JButton();
+        TrocarSenhaButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         DocumentoLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -48,6 +48,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         ConsultasLabel = new javax.swing.JLabel();
         consultaImagem = new javax.swing.JLabel();
+        SairButton1 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 51));
 
@@ -97,10 +98,12 @@ public class MainScreen extends javax.swing.JFrame {
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
-        SairButton.setText("Sair");
-        SairButton.addActionListener(new java.awt.event.ActionListener() {
+        TrocarSenhaButton.setBackground(new java.awt.Color(255, 153, 0));
+        TrocarSenhaButton.setForeground(new java.awt.Color(255, 255, 255));
+        TrocarSenhaButton.setText("Trocar senha");
+        TrocarSenhaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SairButtonActionPerformed(evt);
+                TrocarSenhaButtonActionPerformed(evt);
             }
         });
 
@@ -160,7 +163,7 @@ public class MainScreen extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(57, 57, 57)
                 .addComponent(CadastrarConsultaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                 .addComponent(VisualizarConsultasButton, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(283, 283, 283))
         );
@@ -205,6 +208,15 @@ public class MainScreen extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        SairButton1.setBackground(new java.awt.Color(255, 102, 102));
+        SairButton1.setForeground(new java.awt.Color(255, 255, 255));
+        SairButton1.setText("Sair");
+        SairButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SairButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -212,14 +224,22 @@ public class MainScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(SairButton, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(TrocarSenhaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(524, Short.MAX_VALUE)
+                    .addComponent(SairButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(16, 16, 16)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,9 +252,14 @@ public class MainScreen extends javax.swing.JFrame {
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(SairButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(TrocarSenhaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(385, Short.MAX_VALUE)
+                    .addComponent(SairButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
         );
 
         pack();
@@ -246,7 +271,7 @@ public class MainScreen extends javax.swing.JFrame {
         LoginView loginv = new LoginView(this, true);
         setVisible(false);//isso pode dar muito errado, validar melhor
         loginv.setVisible(true);
- 
+        
         usuario = loginv.getUsuario();
         
         ButtonManager();
@@ -268,9 +293,10 @@ public class MainScreen extends javax.swing.JFrame {
 
     }//GEN-LAST:event_buscarReceitaButtonActionPerformed
 
-    private void SairButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SairButtonActionPerformed
-        System.exit(1);
-    }//GEN-LAST:event_SairButtonActionPerformed
+    private void TrocarSenhaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrocarSenhaButtonActionPerformed
+        TrocarSenhaView trocarSenhaView = new TrocarSenhaView(this, true);
+        trocarSenhaView.setVisible(true);
+    }//GEN-LAST:event_TrocarSenhaButtonActionPerformed
 
     private void VisualizarConsultasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VisualizarConsultasButtonActionPerformed
         BuscarConsultasView bsConsultasView = new BuscarConsultasView(this, true);
@@ -281,6 +307,10 @@ public class MainScreen extends javax.swing.JFrame {
         CadastroConsultaView cadastroConsultaView = new CadastroConsultaView(this, true);
         cadastroConsultaView.setVisible(true);
     }//GEN-LAST:event_CadastrarConsultaButtonActionPerformed
+
+    private void SairButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SairButton1ActionPerformed
+        System.exit(1);
+    }//GEN-LAST:event_SairButton1ActionPerformed
     
     public static Usuario getUsuario() {
         
@@ -326,7 +356,8 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JButton CadastrarConsultaButton;
     private javax.swing.JLabel ConsultasLabel;
     private javax.swing.JLabel DocumentoLabel1;
-    private javax.swing.JButton SairButton;
+    private javax.swing.JButton SairButton1;
+    private javax.swing.JButton TrocarSenhaButton;
     private javax.swing.JButton VisualizarConsultasButton;
     private javax.swing.JButton buscarReceitaButton;
     private javax.swing.JLabel consultaImagem;

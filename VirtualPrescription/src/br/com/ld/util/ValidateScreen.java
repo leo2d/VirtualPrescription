@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -53,6 +54,13 @@ public class ValidateScreen {
                 }
                 fieldsComErro.add(CampoNome);
             }
+        } else if (component instanceof JPasswordField) {
+            if (((JPasswordField) component).getPassword().toString().trim().equals("")) {
+                if (fieldsComErro == null) {
+                    fieldsComErro = new ArrayList<>();
+                }
+                fieldsComErro.add(CampoNome);
+            }
         }
 
     }
@@ -63,7 +71,7 @@ public class ValidateScreen {
         }
 
         ImprimirMensagensDeErro();
-        
+
         return false;
     }
 

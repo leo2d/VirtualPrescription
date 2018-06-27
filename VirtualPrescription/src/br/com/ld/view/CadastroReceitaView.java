@@ -177,6 +177,7 @@ public class CadastroReceitaView extends javax.swing.JDialog {
         SalvarReceitaButton1.setBackground(new java.awt.Color(0, 153, 51));
         SalvarReceitaButton1.setForeground(new java.awt.Color(255, 255, 255));
         SalvarReceitaButton1.setText("Salvar Receita");
+        SalvarReceitaButton1.setEnabled(false);
         SalvarReceitaButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SalvarReceitaButton1ActionPerformed(evt);
@@ -225,9 +226,7 @@ public class CadastroReceitaView extends javax.swing.JDialog {
                                 .addComponent(VoltarParaCadastroConsultaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(137, 137, 137)
-                                .addComponent(SalvarReceitaButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(SalvarReceitaButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel12)))
@@ -315,6 +314,7 @@ public class CadastroReceitaView extends javax.swing.JDialog {
             );
 
             PopularTabelaMedicamentos();
+            SalvarReceitaButton1.setEnabled(true);
             InstrucoesTextArea.setText("");
         }
     }//GEN-LAST:event_ReceitarMedicamentoButtonActionPerformed

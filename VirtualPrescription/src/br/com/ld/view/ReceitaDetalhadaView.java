@@ -10,17 +10,13 @@ import br.com.ld.controller.ReceitaDetalhadaController;
 import br.com.ld.exception.MaisDeUmaLinhaSelecionadaException;
 import br.com.ld.exception.NenhumaLinhaSelecionadaException;
 import br.com.ld.model.Farmacia;
-import br.com.ld.model.Medicamento;
 import br.com.ld.model.MedicamentoPrescrito;
 import br.com.ld.model.Medico;
 import br.com.ld.model.Receita;
 import br.com.ld.model.Usuario;
 import br.com.ld.util.FormatFactory;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JPopupMenu;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -39,9 +35,6 @@ public class ReceitaDetalhadaView extends javax.swing.JDialog {
         CancelarReceitaButton.setVisible(usuario instanceof Medico
                 && usuario.getId() == receita.getConsulta().getMedico().getId());
         GerenciarBotaoDeCancelamento();
-        
-        //ObsLabel.setVisible(false);
-        //ObservacoesTextArea.setVisible(false);
 
         InstrucoesDeVendaLabel.setVisible(usuario instanceof Farmacia);
         VenderMedicamentoButton.setVisible(usuario instanceof Farmacia);
@@ -317,7 +310,7 @@ public class ReceitaDetalhadaView extends javax.swing.JDialog {
         PacienteTextField.setText(receita.getConsulta().getPaciente().getNome());
         MedicoTextField.setText(receita.getConsulta().getMedico().getNome());
         CrmTextField.setText(receita.getConsulta().getMedico().getDocumento());
-       // ObservacoesTextArea.setText(receita.getObservacoes());
+        // ObservacoesTextArea.setText(receita.getObservacoes());
 
         RenderizarMedicamentos();
     }
@@ -393,8 +386,6 @@ public class ReceitaDetalhadaView extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null, "Ocorreu um erro ao cancelar a receita: \n" + e.getMessage());
             }
         }
-
-
     }//GEN-LAST:event_CancelarReceitaButtonActionPerformed
 
     private void VoltarParaBuscaReceitaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarParaBuscaReceitaButtonActionPerformed
@@ -414,6 +405,7 @@ public class ReceitaDetalhadaView extends javax.swing.JDialog {
 
                 detalhadaController.VenderMedicamento(medPrescrito);
                 detalhadaController.MarcarReceitaComoUtilizada(receita);
+
                 PreecherCampos();
                 JOptionPane.showMessageDialog(null, "Medicamento vendido com sucesso!");
             }

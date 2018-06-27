@@ -17,6 +17,7 @@ import java.sql.SQLException;
  * @author Leonardo
  */
 public class FarmaciaDAO {
+
     public Farmacia buscarPorCNPJeSenha(String cnpj, String senha) throws ClassNotFoundException, SQLException {
         Connection Conect = ConnectionFactory.getConnection();
 
@@ -40,6 +41,26 @@ public class FarmaciaDAO {
 
         //Conect.close();
         return farmacia;
+    }
+
+    public void alterar(Farmacia farmacia) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void alterarSenha(Farmacia farmacia) throws SQLException, ClassNotFoundException {
+
+        Connection Conect = ConnectionFactory.getConnection();
+
+        PreparedStatement pst = Conect.prepareStatement(
+                "UPDATE farmacia "
+                + "SET senha_farmacia = ? "
+                + "WHERE id_farmacia = ? "
+        );
+
+        pst.setString(1, farmacia.getSenha());
+        pst.setInt(2, farmacia.getId());
+
+        pst.executeUpdate();
     }
 
 }

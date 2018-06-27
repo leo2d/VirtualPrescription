@@ -9,7 +9,7 @@ package br.com.ld.util;
  *
  * @author Leonardo
  */
-import java.text.DecimalFormat;
+
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
@@ -22,9 +22,4 @@ public class FormatFactory {
         return sdf.format(data);
     }
 
-    public static String formatDecimal(double valor) {
-        DecimalFormat df = new DecimalFormat("#0.00");
-
-        return df.format(valor);
-    }
 }

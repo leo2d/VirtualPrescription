@@ -7,13 +7,10 @@ package br.com.ld.view;
 
 import br.com.ld.exception.NenhumUsuarioEncontradoException;
 import br.com.ld.controller.LoginController;
-import br.com.ld.model.Farmacia;
-import br.com.ld.model.Medico;
-import br.com.ld.model.Paciente;
 import br.com.ld.model.Usuario;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -28,6 +25,14 @@ public class LoginView extends javax.swing.JDialog {
     public LoginView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        SenhaInput.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    Logar();
+                }
+            }
+        });
     }
 
     /**
@@ -58,6 +63,8 @@ public class LoginView extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 51));
 
+        jButton1.setBackground(new java.awt.Color(255, 102, 102));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Sair");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,10 +99,13 @@ public class LoginView extends javax.swing.JDialog {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(SenhaLabel)
                             .addComponent(DocumentoLabel)
@@ -104,16 +114,12 @@ public class LoginView extends javax.swing.JDialog {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(26, 26, 26)
                                 .addComponent(LoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(48, 48, 48))
+                        .addGap(244, 244, 244))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(30, 30, 30)
                 .addComponent(DocumentoLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(DocumentoInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -123,7 +129,7 @@ public class LoginView extends javax.swing.JDialog {
                 .addComponent(SenhaInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addComponent(LoginButton)
-                .addGap(34, 34, 34)
+                .addGap(37, 37, 37)
                 .addComponent(jButton1)
                 .addContainerGap(28, Short.MAX_VALUE))
         );
@@ -176,23 +182,7 @@ public class LoginView extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-/*
-    private Farmacia farmacia = null;
-    private Medico medico = null;
-    private Paciente paciente = null;
 
-    public Medico getMedico() {
-        return this.medico;
-    }
-
-    public Paciente getPaciente() {
-        return this.paciente;
-    }
-
-    public Farmacia getFarmacia() {
-        return this.farmacia;
-    }
-     */
     private void DocumentoInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DocumentoInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_DocumentoInputActionPerformed
@@ -204,6 +194,10 @@ public class LoginView extends javax.swing.JDialog {
     }
 
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
+        Logar();
+    }//GEN-LAST:event_LoginButtonActionPerformed
+
+    private void Logar() {
         try {
             LoginController loginController = LoginController.getInstance();
             String senha = String.valueOf(SenhaInput.getPassword());
@@ -223,9 +217,7 @@ public class LoginView extends javax.swing.JDialog {
         }
 
         setVisible(usuario == null);
-        // setVisible(medico == null && paciente == null &&  farmacia == null);
-    }//GEN-LAST:event_LoginButtonActionPerformed
-
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         System.exit(1);
     }//GEN-LAST:event_jButton1ActionPerformed
