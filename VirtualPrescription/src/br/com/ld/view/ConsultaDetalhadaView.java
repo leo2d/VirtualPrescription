@@ -51,7 +51,7 @@ public class ConsultaDetalhadaView extends javax.swing.JDialog {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        EspeciaTextField = new javax.swing.JTextField();
+        numeroConsultaTextField = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         VoltarParaListaConsultaButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -59,7 +59,7 @@ public class ConsultaDetalhadaView extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         idadePacTextField1 = new javax.swing.JTextField();
-        EspeciaTextField1 = new javax.swing.JTextField();
+        EspeciaTextField = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
         CodigoReceitasTextField = new javax.swing.JTextField();
         codReceitasLabel = new javax.swing.JLabel();
@@ -158,7 +158,7 @@ public class ConsultaDetalhadaView extends javax.swing.JDialog {
         jLabel15.setForeground(new java.awt.Color(0, 153, 51));
         jLabel15.setText("Telefone (Opcional)");
 
-        EspeciaTextField.setEditable(false);
+        numeroConsultaTextField.setEditable(false);
 
         jLabel16.setBackground(new java.awt.Color(255, 255, 255));
         jLabel16.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -209,7 +209,7 @@ public class ConsultaDetalhadaView extends javax.swing.JDialog {
             }
         });
 
-        EspeciaTextField1.setEditable(false);
+        EspeciaTextField.setEditable(false);
 
         jLabel20.setBackground(new java.awt.Color(255, 255, 255));
         jLabel20.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -244,10 +244,10 @@ public class ConsultaDetalhadaView extends javax.swing.JDialog {
                             .addComponent(NomeMedicoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10)
                             .addComponent(jLabel16)
-                            .addComponent(EspeciaTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(EspeciaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(EspeciaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(numeroConsultaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel20))
                                 .addGap(37, 37, 37)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -318,7 +318,7 @@ public class ConsultaDetalhadaView extends javax.swing.JDialog {
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel16)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(EspeciaTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(EspeciaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(17, 17, 17)
@@ -335,7 +335,7 @@ public class ConsultaDetalhadaView extends javax.swing.JDialog {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel20)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(EspeciaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(numeroConsultaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel18)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -434,7 +434,6 @@ public class ConsultaDetalhadaView extends javax.swing.JDialog {
     private javax.swing.JTextField CodigoReceitasTextField;
     private javax.swing.JTextArea DietaTextArea;
     private javax.swing.JTextField EspeciaTextField;
-    private javax.swing.JTextField EspeciaTextField1;
     private javax.swing.JTextArea ExamesTextArea;
     private javax.swing.JTextField NomeMedicoTextField;
     private javax.swing.JTextField NomePacTextField;
@@ -459,6 +458,7 @@ public class ConsultaDetalhadaView extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTextField numeroConsultaTextField;
     private javax.swing.JTextField sexoPacTextField;
     private javax.swing.JTextArea sintomasTextArea;
     // End of variables declaration//GEN-END:variables
@@ -466,7 +466,7 @@ public class ConsultaDetalhadaView extends javax.swing.JDialog {
     private void preencherCampos() {
         NomeMedicoTextField.setText(consulta.getMedico().getNome());
         CRMTextField.setText(consulta.getMedico().getDocumento());
-        EspeciaTextField.setText(consulta.getMedico().getEspecializacao());
+        numeroConsultaTextField.setText(consulta.getMedico().getEspecializacao());
 
         NomePacTextField.setText(consulta.getPaciente().getNome());
         CPFpacienteCadastro.setText(consulta.getPaciente().getDocumento());
@@ -477,6 +477,8 @@ public class ConsultaDetalhadaView extends javax.swing.JDialog {
         sintomasTextArea.setText(consulta.getSintomasPaciente());
         ExamesTextArea.setText(consulta.getExames());
         DietaTextArea.setText(consulta.getDieta());
+
+        numeroConsultaTextField.setText(consulta.getId() + "");
 
         String codigosReceitas = "";
         for (Receita r : consulta.getReceitas()) {
