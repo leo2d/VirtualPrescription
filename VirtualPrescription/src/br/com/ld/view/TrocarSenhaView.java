@@ -8,6 +8,8 @@ package br.com.ld.view;
 import br.com.ld.controller.TrocarSenhaController;
 import br.com.ld.model.Usuario;
 import br.com.ld.util.ValidateScreen;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -23,6 +25,14 @@ public class TrocarSenhaView extends javax.swing.JDialog {
     public TrocarSenhaView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        novaSenhaPasswordField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    SalvarSenha();
+                }
+            }
+        });
     }
 
     /**
@@ -150,22 +160,12 @@ public class TrocarSenhaView extends javax.swing.JDialog {
 
     private Usuario usuario = MainScreen.getUsuario();
     private void VoltarMainjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarMainjButtonActionPerformed
-        setVisible(false);
+        dispose();
     }//GEN-LAST:event_VoltarMainjButtonActionPerformed
 
     private void salvarSenhaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarSenhaButtonActionPerformed
-        if (ValidarCampos() && JOptionPane.showConfirmDialog(null, "Você realmente quer trocar a senha? \n",
-                "Confirmar", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION) {
-            try {
-                TrocarSenhaController senhaController = TrocarSenhaController.getInstance();
-                usuario.setSenha(String.valueOf(novaSenhaPasswordField.getPassword()).trim());
+        SalvarSenha();
 
-                senhaController.TrocarSenha(usuario);
-                salvarSenhaButton.setEnabled(false);
-                JOptionPane.showMessageDialog(null, "Senha alterada com sucesso!");
-            } catch (ClassNotFoundException | SQLException e) {
-            }
-        }
     }//GEN-LAST:event_salvarSenhaButtonActionPerformed
 
     /**
@@ -226,12 +226,27 @@ public class TrocarSenhaView extends javax.swing.JDialog {
         ValidateScreen.ValidarCampoObrigatorio(SenhaAtualPasswordField, "Senha atual");
         ValidateScreen.ValidarCampoObrigatorio(novaSenhaPasswordField, "Nova senha");
         boolean camposPreenchidos = ValidateScreen.isCamposCorretos();
-
-        if (!String.valueOf(SenhaAtualPasswordField.getPassword()).trim().equals(usuario.getSenha())) {
-            senhasBatem = false;
-            JOptionPane.showMessageDialog(null, "A senha digitada é digitada no campo \"Senha atual\" está errada.");
+        if (camposPreenchidos) {
+            if (!String.valueOf(SenhaAtualPasswordField.getPassword()).trim().equals(usuario.getSenha())) {
+                senhasBatem = false;
+                JOptionPane.showMessageDialog(null, "A senha digitada é digitada no campo \"Senha atual\" está errada.");
+            }
         }
-
         return camposPreenchidos && senhasBatem;
+    }
+
+    private void SalvarSenha() {
+        if (ValidarCampos() && JOptionPane.showConfirmDialog(null, "Você realmente quer trocar a senha? \n",
+                "Confirmar", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION) {
+            try {
+                TrocarSenhaController senhaController = TrocarSenhaController.getInstance();
+                usuario.setSenha(String.valueOf(novaSenhaPasswordField.getPassword()).trim());
+
+                senhaController.TrocarSenha(usuario);
+                salvarSenhaButton.setEnabled(false);
+                JOptionPane.showMessageDialog(null, "Senha alterada com sucesso!");
+            } catch (ClassNotFoundException | SQLException e) {
+            }
+        }
     }
 }

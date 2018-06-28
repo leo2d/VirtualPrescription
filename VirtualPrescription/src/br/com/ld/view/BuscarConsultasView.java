@@ -14,6 +14,8 @@ import br.com.ld.model.Receita;
 import br.com.ld.model.Usuario;
 import br.com.ld.util.FormatFactory;
 import br.com.ld.util.ValidateScreen;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -33,6 +35,14 @@ public class BuscarConsultasView extends javax.swing.JDialog {
     public BuscarConsultasView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        CPFpacienteInput.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    BuscarConsultas();
+                }
+            }
+        });
         infoLabel.setVisible(false);
         VerDetalheConsultaButton.setVisible(false);
         HabilitarCamposdeBusca(usuario instanceof Medico);
@@ -224,7 +234,7 @@ public class BuscarConsultasView extends javax.swing.JDialog {
             String codigosReceitas = "";
             for (Receita r : cons.getReceitas()) {
                 if (r.getId() < 1) {
-                    break;   
+                    break;
                 }
                 codigosReceitas += r.getId() + ", ";
             }
@@ -275,18 +285,21 @@ public class BuscarConsultasView extends javax.swing.JDialog {
         }
     }
 
+    private void BuscarConsultas() {
+        if (ValidarCampoDeBusca()) {
+            BuscarConsultas(CPFpacienteInput.getText());
+        }
+    }
     private void CPFpacienteInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CPFpacienteInputKeyReleased
         ValidateScreen.validarNumero(CPFpacienteInput);
     }//GEN-LAST:event_CPFpacienteInputKeyReleased
 
     private void PesquisarConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisarConsultaButtonActionPerformed
-        if (ValidarCampoDeBusca()) {
-            BuscarConsultas(CPFpacienteInput.getText());
-        }
+        BuscarConsultas();
     }//GEN-LAST:event_PesquisarConsultaButtonActionPerformed
 
     private void VoltarParaMainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarParaMainButtonActionPerformed
-        setVisible(false);
+        dispose();
     }//GEN-LAST:event_VoltarParaMainButtonActionPerformed
 
     private void VerDetalheConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerDetalheConsultaButtonActionPerformed
