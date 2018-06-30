@@ -94,8 +94,6 @@ public class ConsultaDAO {
 
         Connection Conect = ConnectionFactory.getConnection();
 
-        // String sql = "SELECT * FROM receita "
-        //        + " WHERE id_receita = ?;";
         String sql
                 = "SELECT * "/*
                 + "FROM receita rec "
@@ -121,7 +119,6 @@ public class ConsultaDAO {
         Consulta consulta = new Consulta(0, paciente, medico, "", "", new Date());;
         Medicamento medicamento = null;
         MedicamentoPrescrito medicamentoPrescrito = null;
-        ArrayList<MedicamentoPrescrito> medicamentos = new ArrayList<MedicamentoPrescrito>();
         ArrayList<Receita> receitasConsulta = new ArrayList<Receita>();
         ArrayList<Receita> receitas = new ArrayList<Receita>();
 

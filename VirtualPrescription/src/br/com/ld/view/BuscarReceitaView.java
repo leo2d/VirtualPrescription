@@ -269,13 +269,16 @@ public class BuscarReceitaView extends javax.swing.JDialog {
     }//GEN-LAST:event_NumeroInputKeyReleased
 
     private void VoltarParaMainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarParaMainButtonActionPerformed
+        receita = null;
         dispose();
     }//GEN-LAST:event_VoltarParaMainButtonActionPerformed
 
     private void VerDetalheReceitaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerDetalheReceitaButtonActionPerformed
         setReceitaSelecionada();
-        ReceitaDetalhadaView rdetalhadaview = new ReceitaDetalhadaView(null, true);
-        rdetalhadaview.setVisible(true);
+        if (receita != null) {
+            ReceitaDetalhadaView rdetalhadaview = new ReceitaDetalhadaView(null, true);
+            rdetalhadaview.setVisible(true);
+        }
     }//GEN-LAST:event_VerDetalheReceitaButtonActionPerformed
 
     private void aoAbrirTela(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_aoAbrirTela

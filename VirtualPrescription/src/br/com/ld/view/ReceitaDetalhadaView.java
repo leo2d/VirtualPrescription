@@ -394,26 +394,8 @@ public class ReceitaDetalhadaView extends javax.swing.JDialog {
 
     private void VenderMedicamentoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VenderMedicamentoButtonActionPerformed
         setMedicamentoSelecionado();
-
-        try {
-            if (medPrescrito.isFoiVendido()) {
-                throw new MedicamentoJaFoiVendidoException();
-            }
-            if (JOptionPane.showConfirmDialog(null, "Você realmente quer vender este medicamento? \n",
-                    "Confirmar", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION) {
-                ReceitaDetalhadaController detalhadaController = ReceitaDetalhadaController.getInstance();
-
-                detalhadaController.VenderMedicamento(medPrescrito);
-                detalhadaController.MarcarReceitaComoUtilizada(receita);
-
-                PreecherCampos();
-                JOptionPane.showMessageDialog(null, "Medicamento vendido com sucesso!");
-            }
-
-        } catch (ClassNotFoundException | SQLException e) {
-            JOptionPane.showMessageDialog(null, "Ocorreu ao realizae a operação: \n" + e.getMessage());
-        } catch (MedicamentoJaFoiVendidoException ex) {
-            JOptionPane.showMessageDialog(null, "O medicamento selecionado já foi vendido!\n");
+        if (medPrescrito != null) {
+            venderMedicamento();
         }
     }//GEN-LAST:event_VenderMedicamentoButtonActionPerformed
 
@@ -482,5 +464,29 @@ public class ReceitaDetalhadaView extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
+    private void venderMedicamento() {
+
+        try {
+            if (medPrescrito.isFoiVendido()) {
+                throw new MedicamentoJaFoiVendidoException();
+            }
+            if (JOptionPane.showConfirmDialog(null, "Você realmente quer vender este medicamento? \n",
+                    "Confirmar", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION) {
+                ReceitaDetalhadaController detalhadaController = ReceitaDetalhadaController.getInstance();
+
+                detalhadaController.VenderMedicamento(medPrescrito);
+                detalhadaController.MarcarReceitaComoUtilizada(receita);
+
+                PreecherCampos();
+                JOptionPane.showMessageDialog(null, "Medicamento vendido com sucesso!");
+            }
+
+        } catch (ClassNotFoundException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu ao realizae a operação: \n" + e.getMessage());
+        } catch (MedicamentoJaFoiVendidoException ex) {
+            JOptionPane.showMessageDialog(null, "O medicamento selecionado já foi vendido!\n");
+        }
+    }
 
 }

@@ -7,6 +7,8 @@ package br.com.ld.view;
 
 import br.com.ld.exception.NenhumaConsultaEncontradaException;
 import br.com.ld.controller.BuscaConsultaController;
+import br.com.ld.exception.MaisDeUmaLinhaSelecionadaException;
+import br.com.ld.exception.NenhumaLinhaSelecionadaException;
 import br.com.ld.model.Consulta;
 import br.com.ld.model.Medico;
 import br.com.ld.model.Paciente;
@@ -43,8 +45,6 @@ public class BuscarConsultasView extends javax.swing.JDialog {
                 }
             }
         });
-        infoLabel.setVisible(false);
-        VerDetalheConsultaButton.setVisible(false);
         HabilitarCamposdeBusca(usuario instanceof Medico);
     }
 
@@ -210,6 +210,11 @@ public class BuscarConsultasView extends javax.swing.JDialog {
 
     private Usuario usuario = MainScreen.getUsuario();
     private ArrayList<Consulta> consultas = new ArrayList<Consulta>();
+    private static Consulta consulta = null;
+
+    public static Consulta getConsulta() {
+        return consulta;
+    }
 
     private void RenderizarConsultas() {
         DefaultTableModel modelo = new DefaultTableModel() {
@@ -219,16 +224,11 @@ public class BuscarConsultasView extends javax.swing.JDialog {
             }
         };
 
-        modelo.addColumn("Codigo");
+        modelo.addColumn("Nº Consulta");
         modelo.addColumn("Data");
         modelo.addColumn("Medico");
         modelo.addColumn("Paciente");
-        modelo.addColumn("Sexo");
-        modelo.addColumn("Idade");
-        modelo.addColumn("Sintomas");
-        modelo.addColumn("Exames");
-        modelo.addColumn("Dieta");
-        modelo.addColumn("Receitas emitidas");
+        modelo.addColumn("Codigos receitas emitidas");
 
         for (Consulta cons : consultas) {
             String codigosReceitas = "";
@@ -238,10 +238,12 @@ public class BuscarConsultasView extends javax.swing.JDialog {
                 }
                 codigosReceitas += r.getId() + ", ";
             }
+
+            codigosReceitas = codigosReceitas.replaceFirst(", $", "");
+
             // Seta os valores do objeto para a tabela 
             modelo.addRow(new Object[]{cons.getId(), FormatFactory.formatDate(cons.getData()), cons.getMedico().getNome(),
-                cons.getPaciente().getNome(), cons.getPaciente().getSexo(), cons.getPaciente().getIdade(), cons.getSintomasPaciente(),
-                cons.getExames(), cons.getDieta(), !codigosReceitas.isEmpty() ? codigosReceitas : "Nenhuma receita"});
+                cons.getPaciente().getNome(), !codigosReceitas.isEmpty() ? codigosReceitas : "Nenhuma receita"});
 
         }
         //Limpa a JTable (Grid)
@@ -250,16 +252,12 @@ public class BuscarConsultasView extends javax.swing.JDialog {
         TabelaConsultas.setModel(modelo);
 
         //Ajusta o tamanho das colunas
-        TabelaConsultas.getColumnModel().getColumn(0).setPreferredWidth(15);
-        TabelaConsultas.getColumnModel().getColumn(1).setPreferredWidth(25);
+        TabelaConsultas.getColumnModel().getColumn(0).setPreferredWidth(20);
+        TabelaConsultas.getColumnModel().getColumn(1).setPreferredWidth(30);
         TabelaConsultas.getColumnModel().getColumn(2).setPreferredWidth(150);
         TabelaConsultas.getColumnModel().getColumn(3).setPreferredWidth(150);
-        TabelaConsultas.getColumnModel().getColumn(4).setPreferredWidth(8);
-        TabelaConsultas.getColumnModel().getColumn(5).setPreferredWidth(8);
-        TabelaConsultas.getColumnModel().getColumn(6).setPreferredWidth(200);
-        TabelaConsultas.getColumnModel().getColumn(7).setPreferredWidth(150);
-        TabelaConsultas.getColumnModel().getColumn(8).setPreferredWidth(200);
-        TabelaConsultas.getColumnModel().getColumn(9).setPreferredWidth(90);
+        TabelaConsultas.getColumnModel().getColumn(4).setPreferredWidth(80);
+
     }
 
     private boolean ValidarCampoDeBusca() {
@@ -290,20 +288,50 @@ public class BuscarConsultasView extends javax.swing.JDialog {
             BuscarConsultas(CPFpacienteInput.getText());
         }
     }
+
     private void CPFpacienteInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CPFpacienteInputKeyReleased
         ValidateScreen.validarNumero(CPFpacienteInput);
     }//GEN-LAST:event_CPFpacienteInputKeyReleased
+
+    private Consulta setConsultaSelecionada() {
+        try {
+            int quantidadeLinhasSelecionadas = TabelaConsultas.getSelectedRowCount();
+            if (quantidadeLinhasSelecionadas > 1) {
+                throw new MaisDeUmaLinhaSelecionadaException();
+            } else if (quantidadeLinhasSelecionadas < 1) {
+                throw new NenhumaLinhaSelecionadaException();
+            }
+
+            final int idConsultaSelecionada = (int) (TabelaConsultas.getValueAt(TabelaConsultas.getSelectedRow(), 0));
+
+            consulta = consultas.stream()
+                    .filter(re -> re.getId() == idConsultaSelecionada)
+                    .findFirst().get();
+
+        } catch (MaisDeUmaLinhaSelecionadaException ex) {
+            JOptionPane.showMessageDialog(null, "Selecione apenas uma receita.");
+        } catch (NenhumaLinhaSelecionadaException | NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Selecione uma receita para ver os detalhes.");
+        }
+
+        return consulta;
+    }
 
     private void PesquisarConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisarConsultaButtonActionPerformed
         BuscarConsultas();
     }//GEN-LAST:event_PesquisarConsultaButtonActionPerformed
 
     private void VoltarParaMainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarParaMainButtonActionPerformed
+        consulta = null;
         dispose();
     }//GEN-LAST:event_VoltarParaMainButtonActionPerformed
 
     private void VerDetalheConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerDetalheConsultaButtonActionPerformed
-
+        setConsultaSelecionada();
+        if (consulta != null) {
+            ConsultaDetalhadaView cdv = new ConsultaDetalhadaView(null, true);
+            cdv.setVisible(true);
+        }
     }//GEN-LAST:event_VerDetalheConsultaButtonActionPerformed
 
     private void aoAbrir(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_aoAbrir
