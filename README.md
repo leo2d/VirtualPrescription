@@ -19,7 +19,7 @@ Vou deixar esse código aqui para comparar minha evolução pessoal. Se você ti
 
 
 # Build and Test
-1.	Config the FormatFactory to connect on your DB
+1.	Config the ConnectionFactory to connect on your DB
 2.  Insert new users and logins in your DB
 3.	Enjoy
 
