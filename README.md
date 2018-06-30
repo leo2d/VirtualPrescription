@@ -1,20 +1,26 @@
 # Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+This is a project for my OOP-2 college assignment.
+Its a software thats permites a doctor to create new patient, register medical appointment and prescriptions. The software also allow drugstores see the prescriptions and sell medicaments. The patient also can acess the software, him see all of your prescriptions and appointment history. 
+
+I will leave this code here for compare my personal evolution. If you have a question, sugestion or you want to contribute, please, stay free.
+
+[PT-BR]
+Este é um projeto que fiz para o meu trabalho na faculdade de OO 2.
+É um software que permite ao médico criar um novo paciente, registrar consultas médicas e receitas. O software também permite que as farmácias vejam as receitas e vendam medicamentos. O paciente também pode acessar o software, ele pode ver todas as suas receitas e histórico de consultas.
+
+Vou deixar esse código aqui para comparar minha evolução pessoal. Se você tiver uma pergunta, sugestão ou quiser contribuir, por favor, fique à vontade.
+
+
 
 # Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+1.	Fork or clone this project
+2.	Download the DB (https://goo.gl/NSxgAj)
+
+
 
 # Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+1.	Config the FormatFactory to connect on your DB
+2.  Insert new users and logins in your DB
+3.	Enjoy
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://www.visualstudio.com/en-us/docs/git/create-a-readme). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
