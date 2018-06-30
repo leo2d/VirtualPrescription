@@ -31,8 +31,6 @@ public class ReceitaDAO {
 
         Connection Conect = ConnectionFactory.getConnection();
 
-        // String sql = "SELECT * FROM receita "
-        //        + " WHERE id_receita = ?;";
         String sql = "SELECT * "
                 + "FROM receita rec "
                 + "INNER JOIN consulta con ON con.id_consulta = rec.id_consulta_receita "
@@ -51,7 +49,6 @@ public class ReceitaDAO {
         Consulta consulta = null;
         Medicamento medicamento = null;
         MedicamentoPrescrito medicamentoPrescrito = null;
-        ArrayList<MedicamentoPrescrito> medicamentos = new ArrayList<MedicamentoPrescrito>();
         ArrayList<Receita> receitas = new ArrayList<Receita>();
 
         Receita receita = null;
@@ -86,8 +83,6 @@ public class ReceitaDAO {
 
         Connection Conect = ConnectionFactory.getConnection();
 
-        // String sql = "SELECT * FROM receita "
-        //        + " WHERE id_receita = ?;";
         String sql = "SELECT * "
                 + "FROM receita rec "
                 + "INNER JOIN consulta con ON con.id_consulta = rec.id_consulta_receita "
@@ -108,7 +103,6 @@ public class ReceitaDAO {
         Consulta consulta = null;
         Medicamento medicamento = null;
         MedicamentoPrescrito medicamentoPrescrito = null;
-        ArrayList<MedicamentoPrescrito> medicamentos = new ArrayList<MedicamentoPrescrito>();
         ArrayList<Receita> receitas = new ArrayList<Receita>();
 
         Receita receita = null;
@@ -143,8 +137,6 @@ public class ReceitaDAO {
 
         Connection Conect = ConnectionFactory.getConnection();
 
-        // String sql = "SELECT * FROM receita "
-        //        + " WHERE id_receita = ?;";
         String sql = "SELECT * "
                 + "FROM receita rec "
                 + "INNER JOIN consulta con ON con.id_consulta = rec.id_consulta_receita "
@@ -163,19 +155,18 @@ public class ReceitaDAO {
         Consulta consulta = new Consulta(-99, paciente, medico, "", "", new Date());;
         Medicamento medicamento = null;
         MedicamentoPrescrito medicamentoPrescrito = null;
-        ArrayList<MedicamentoPrescrito> medicamentos = new ArrayList<MedicamentoPrescrito>();
-        ArrayList<Receita> receitasConsulta = new ArrayList<Receita>();
         ArrayList<Receita> receitas = new ArrayList<Receita>();
 
         Receita receita = null;
 
         ResultSet rs = pst.executeQuery();
 
-        int idReceitaAnterior = -99;
-
         while (rs.next()) {
 
-            if (rs.getInt("id_receita") != idReceitaAnterior) {
+            int idReceitaAtual = rs.getInt("id_receita");
+            boolean temNaLista = receitas.stream().anyMatch(r -> r.getId() == idReceitaAtual);
+
+            if (!temNaLista) {
                 if (paciente == null) {
                     paciente = new Paciente(rs.getInt("id_paciente"), rs.getString("nome_paciente"),
                             rs.getInt("idade_paciente"), rs.getString("sexo_paciente"), rs.getString("telefone_paciente"), rs.getString("senha_paciente"), rs.getString("cpf_paciente"));
@@ -204,7 +195,6 @@ public class ReceitaDAO {
             medicamentoPrescrito = new MedicamentoPrescrito(rs.getInt("id_associacao_medicamento_receita"), rs.getString("instrucoes_medicamento_prescrito"), rs.getBoolean("foi_vendido"), medicamento, receita);
             receita.addMedicamento(medicamentoPrescrito);
 
-            idReceitaAnterior = rs.getInt("id_receita");
         }
 
         return receitas;

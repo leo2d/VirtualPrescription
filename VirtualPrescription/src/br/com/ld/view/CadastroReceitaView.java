@@ -299,7 +299,7 @@ public class CadastroReceitaView extends javax.swing.JDialog {
     }
 
     private void VoltarParaCadastroConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarParaCadastroConsultaButtonActionPerformed
-        setVisible(false);
+        dispose();
     }//GEN-LAST:event_VoltarParaCadastroConsultaButtonActionPerformed
 
     private void ReceitarMedicamentoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReceitarMedicamentoButtonActionPerformed

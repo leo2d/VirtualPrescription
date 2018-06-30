@@ -15,6 +15,8 @@ import br.com.ld.model.Receita;
 import br.com.ld.model.Usuario;
 import br.com.ld.util.FormatFactory;
 import br.com.ld.util.ValidateScreen;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -32,6 +34,14 @@ public class BuscarReceitaView extends javax.swing.JDialog {
     public BuscarReceitaView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        NumeroInput.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    BuscarReceitas();
+                }
+            }
+        });
     }
 
     /**
@@ -209,31 +219,16 @@ public class BuscarReceitaView extends javax.swing.JDialog {
     private ArrayList<Receita> receitas = new ArrayList<Receita>();
 
     private void PesquisarReceitaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisarReceitaButtonActionPerformed
-        BuscaReceitaController brController = BuscaReceitaController.getInstance();
-        
-        try {
-            if (ValidarCampoDeBusca()) {
-                String documento = NumeroInput.getText();
-                receitas = brController.BuscarReceitas(usuario, documento, PesquisaReceitaComboBox.getSelectedItem());
-                RenderizarReceitas();
-            }
-            
-        } catch (ClassNotFoundException | NumberFormatException | SQLException | NullPointerException e) {
-            JOptionPane.showMessageDialog(null, "Algo não deu certo. \n" + e.getMessage());
-        } catch (CpfNaoPertenceAoUsuarioException ex) {
-            JOptionPane.showMessageDialog(null, "Este CPF nao pertence ao paciente logado!" + ex.getMessage());
-        } catch (NenhumaReceitaEncontradaException ex) {
-            JOptionPane.showMessageDialog(null, "Atencao! \n Nenhuma receita encontrada.");
-        }
+        BuscarReceitas();
 
     }//GEN-LAST:event_PesquisarReceitaButtonActionPerformed
-    
+
     private boolean ValidarCampoDeBusca() {
         ValidateScreen.ValidarCampoObrigatorio(NumeroInput, PesquisaReceitaComboBox.getSelectedItem().toString());
-        
+
         return ValidateScreen.isCamposCorretos();
     }
-    
+
     private void RenderizarReceitas() {
         DefaultTableModel modelo = new DefaultTableModel() {
             @Override
@@ -241,14 +236,14 @@ public class BuscarReceitaView extends javax.swing.JDialog {
                 return false;
             }
         };
-        
+
         modelo.addColumn("Codigo");
         modelo.addColumn("Data");
         modelo.addColumn("Status");
         modelo.addColumn("Medico");
         modelo.addColumn("Paciente");
-       // modelo.addColumn("Obs");
-        
+        // modelo.addColumn("Obs");
+
         for (Receita r : receitas) {
             // Seta os valores do objeto para a tabela 
             modelo.addRow(new Object[]{r.getId(), FormatFactory.formatDate(r.getConsulta().getData()), r.getStatus(), r.getConsulta().getMedico().getNome(),
@@ -266,7 +261,7 @@ public class BuscarReceitaView extends javax.swing.JDialog {
         TabelaReceitas.getColumnModel().getColumn(2).setPreferredWidth(100);
         TabelaReceitas.getColumnModel().getColumn(3).setPreferredWidth(210);
         TabelaReceitas.getColumnModel().getColumn(4).setPreferredWidth(210);
-       // TabelaReceitas.getColumnModel().getColumn(5).setPreferredWidth(210);
+        // TabelaReceitas.getColumnModel().getColumn(5).setPreferredWidth(210);
     }
 
     private void NumeroInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NumeroInputKeyReleased
@@ -274,7 +269,7 @@ public class BuscarReceitaView extends javax.swing.JDialog {
     }//GEN-LAST:event_NumeroInputKeyReleased
 
     private void VoltarParaMainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarParaMainButtonActionPerformed
-        setVisible(false);
+        dispose();
     }//GEN-LAST:event_VoltarParaMainButtonActionPerformed
 
     private void VerDetalheReceitaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerDetalheReceitaButtonActionPerformed
@@ -286,18 +281,18 @@ public class BuscarReceitaView extends javax.swing.JDialog {
     private void aoAbrirTela(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_aoAbrirTela
         if (usuario instanceof Paciente) {
             BuscaReceitaController brController = BuscaReceitaController.getInstance();
-            
+
             try {
-                
+
                 filtroLabel.setVisible(false);
                 valorFiltroLabel.setVisible(false);
                 NumeroInput.setVisible(false);
                 PesquisarReceitaButton.setVisible(false);
                 receitas = brController.buscarReceitaPorCpfPaciente(usuario.getDocumento());
                 PesquisaReceitaComboBox.setVisible(false);
-                
+
                 RenderizarReceitas();
-                
+
             } catch (ClassNotFoundException | NumberFormatException | SQLException | NullPointerException e) {
                 JOptionPane.showMessageDialog(null, "Algo não deu certo. \n" + e.getMessage());
             } catch (NenhumaReceitaEncontradaException ex) {
@@ -305,14 +300,14 @@ public class BuscarReceitaView extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_aoAbrirTela
-    
+
     public static Receita getReceitaSelecionada() {
-        
+
         return receita;
     }
-    
+
     private void setReceitaSelecionada() {
-        
+
         try {
             int quantidadeLinhasSelecionadas = TabelaReceitas.getSelectedRowCount();
             if (quantidadeLinhasSelecionadas > 1) {
@@ -320,13 +315,13 @@ public class BuscarReceitaView extends javax.swing.JDialog {
             } else if (quantidadeLinhasSelecionadas < 1) {
                 throw new NenhumaLinhaSelecionadaException();
             }
-            
+
             int idReceitaSelecionada = (int) (TabelaReceitas.getValueAt(TabelaReceitas.getSelectedRow(), 0));
-            
+
             receita = receitas.stream()
                     .filter(re -> re.getId() == idReceitaSelecionada)
                     .findFirst().get();
-            
+
         } catch (MaisDeUmaLinhaSelecionadaException ex) {
             JOptionPane.showMessageDialog(null, "Selecione apenas uma receita.");
         } catch (NenhumaLinhaSelecionadaException | NullPointerException e) {
@@ -390,5 +385,24 @@ public class BuscarReceitaView extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel valorFiltroLabel;
     // End of variables declaration//GEN-END:variables
+
+    private void BuscarReceitas() {
+        BuscaReceitaController brController = BuscaReceitaController.getInstance();
+
+        try {
+            if (ValidarCampoDeBusca()) {
+                String documento = NumeroInput.getText();
+                receitas = brController.BuscarReceitas(usuario, documento, PesquisaReceitaComboBox.getSelectedItem());
+                RenderizarReceitas();
+            }
+
+        } catch (ClassNotFoundException | NumberFormatException | SQLException | NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Algo não deu certo. \n" + e.getMessage());
+        } catch (CpfNaoPertenceAoUsuarioException ex) {
+            JOptionPane.showMessageDialog(null, "Este CPF nao pertence ao paciente logado!" + ex.getMessage());
+        } catch (NenhumaReceitaEncontradaException ex) {
+            JOptionPane.showMessageDialog(null, "Atencao! \n Nenhuma receita encontrada.");
+        }
+    }
 
 }

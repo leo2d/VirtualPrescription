@@ -389,7 +389,7 @@ public class ReceitaDetalhadaView extends javax.swing.JDialog {
     }//GEN-LAST:event_CancelarReceitaButtonActionPerformed
 
     private void VoltarParaBuscaReceitaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarParaBuscaReceitaButtonActionPerformed
-        setVisible(false);
+        dispose();
     }//GEN-LAST:event_VoltarParaBuscaReceitaButtonActionPerformed
 
     private void VenderMedicamentoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VenderMedicamentoButtonActionPerformed

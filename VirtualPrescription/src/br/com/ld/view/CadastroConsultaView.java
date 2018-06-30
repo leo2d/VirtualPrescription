@@ -15,6 +15,8 @@ import br.com.ld.model.Receita;
 import br.com.ld.model.Usuario;
 import br.com.ld.util.ValidateScreen;
 import java.awt.Component;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,6 +35,15 @@ public class CadastroConsultaView extends javax.swing.JDialog {
     public CadastroConsultaView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        CPFpacienteInput.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    BuscarPaciente();
+                }
+            }
+        });
+
         CadastrarReceitaButton.setToolTipText("Primeiro salve a consulta.");
         SalvarConsultaButton.setToolTipText("Primeiro selecione um pacietne.");
         ativarCamposConsulta(false);
@@ -452,25 +463,37 @@ public class CadastroConsultaView extends javax.swing.JDialog {
 
     private void PesquisarPacienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisarPacienteButtonActionPerformed
 
-        try {
-            CadastroConsultaController cadsController = CadastroConsultaController.getInstance();
-            paciente = cadsController.buscarPacientePorCpf(CPFpacienteInput.getText());
-            if (paciente == null) {
-                throw new NenhumUsuarioEncontradoException();
-            }
-            PreencherCamposPaciente();
-            desabilitarEdicaoCamposPaciente();
-            CadastrarPacienteButton1.setEnabled(false);
-            limparCamposReceita();
-            ativarCamposConsulta(true);
-        } catch (ClassNotFoundException | SQLException e) {
-        } catch (NenhumUsuarioEncontradoException ex) {
-            JOptionPane.showMessageDialog(null, "Nenhum paciente encontrado com estes dados.");
-        }
+        BuscarPaciente();
+
     }//GEN-LAST:event_PesquisarPacienteButtonActionPerformed
+    private boolean ValidarCampoCpf() {
+        ValidateScreen.ValidarCampoObrigatorio(CPFpacienteInput, "CPF do Paciente");
+        return ValidateScreen.isCamposCorretos();
+    }
+
+    private void BuscarPaciente() {
+        if (ValidarCampoCpf()) {
+            try {
+                CadastroConsultaController cadsController = CadastroConsultaController.getInstance();
+                paciente = cadsController.buscarPacientePorCpf(CPFpacienteInput.getText());
+                if (paciente == null) {
+                    throw new NenhumUsuarioEncontradoException();
+                }
+                PreencherCamposPaciente();
+                desabilitarEdicaoCamposPaciente();
+                CadastrarPacienteButton1.setEnabled(false);
+                limparCamposReceita();
+                ativarCamposConsulta(true);
+            } catch (ClassNotFoundException | SQLException e) {
+            } catch (NenhumUsuarioEncontradoException ex) {
+                JOptionPane.showMessageDialog(null, "Nenhum paciente encontrado com estes dados.");
+            }
+        }
+
+    }
 
     private void VoltarParaMainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarParaMainButtonActionPerformed
-        setVisible(false);
+        dispose();
     }//GEN-LAST:event_VoltarParaMainButtonActionPerformed
 
     private void SalvarConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarConsultaButtonActionPerformed
